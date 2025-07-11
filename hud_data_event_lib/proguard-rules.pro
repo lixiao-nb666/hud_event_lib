@@ -42,3 +42,5 @@
 -keep public interface com.nrmyw.hud_data_event_lib.HudEventImp{
     *(...);
 }
+
+-keep class com.nrmyw.hud_data_event_lib.*
