@@ -73,7 +73,7 @@ public class HudEventService extends BaseService implements HudEventImp {
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
             byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END);
             BleEventSubscriptionSubject.getInstance().sendImageIndexCmd(endInfoBean.getIndex(),endBytes);
-            HudEvent.getInstance().showImage();
+            showImage();
 
         }
     };
@@ -93,7 +93,7 @@ public class HudEventService extends BaseService implements HudEventImp {
                         if(!canSendTime){
                             return;
                         }
-                        HudEvent.getInstance().sendTime();
+                        sendTime();
                         long nowTime=System.currentTimeMillis();
                         Date date = new Date(nowTime);
                         int needS=60-date.getSeconds();
