@@ -24,12 +24,12 @@ public class HudEventManager {
 
     public void init(Context context){
         hudEventServiceDao=new HudEventServiceDao(context);
-        hudEventServiceDao.startService();
+        hudEventServiceDao.startServiceIsBind();
     }
 
     public void close(){
         if(null!=hudEventServiceDao){
-            hudEventServiceDao.stopService();
+            hudEventServiceDao.stopServiceIsBind();
             hudEventServiceDao=null;
         }
     }

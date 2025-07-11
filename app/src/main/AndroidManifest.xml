@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
+        android:name=".app.MyApp"
         tools:targetApi="31" >
 
         <activity
@@ -24,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service android:name="com.nrmyw.hud_data_event_lib.service.HudEventService"
+            android:exported="true"/>
 
     </application>
 </manifest>

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+
 import com.nrmyw.ble_event_lib.bean.BleSendImageEndInfoBean;
 import com.nrmyw.ble_event_lib.bean.BleSendImageStartInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
@@ -113,6 +115,7 @@ public class HudEventService extends BaseService implements HudEventImp {
 
     @Override
     public void init() {
+        Log.i("kankanqidongmei","kankanqidongmei111");
         BleStatuEventSubscriptionSubject.getInstance().attach(bleStatuEventObserver);
     }
 

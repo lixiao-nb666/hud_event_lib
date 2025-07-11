@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nrmyw.hud_data_event.R;
+import com.nrmyw.hud_data_event_lib.HudEventManager;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.bt_cmd:
 //                    T800SendUtil.sendTime();
+                    HudEventManager.getInstance().getHudEvent().sendTime();
                     break;
                 case R.id.bt_image:
 //                    T800SendUtil.sendImage(null,null);
