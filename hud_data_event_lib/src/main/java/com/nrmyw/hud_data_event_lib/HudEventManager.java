@@ -2,6 +2,7 @@ package com.nrmyw.hud_data_event_lib;
 
 import android.content.Context;
 
+import com.nrmyw.hud_data_event_lib.service.HudEventService;
 import com.nrmyw.hud_data_event_lib.service.HudEventServiceDao;
 
 public class HudEventManager {
@@ -37,7 +38,7 @@ public class HudEventManager {
     public HudEventImp getHudEvent(){
         try {
             if(null!=hudEventServiceDao){
-                return (HudEventImp) hudEventServiceDao.getService();
+                return (HudEventService) hudEventServiceDao.getService();
             }
         }catch (Exception e){}
         return null;
