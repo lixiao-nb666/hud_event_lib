@@ -43,4 +43,4 @@
     *(...);
 }
 
--keep class com.nrmyw.hud_data_event_lib.*
+-flattenpackagehierarchy 'com.nrmyw.hud_data_event_lib'
