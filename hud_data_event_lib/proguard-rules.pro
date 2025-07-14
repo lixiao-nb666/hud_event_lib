@@ -42,7 +42,7 @@
 -keep public interface com.nrmyw.hud_data_event_lib.HudEventImp{
     *(...);
 }
--keep public interface com.nrmyw.hud_data_event_lib.HudEvent{
+-keep public class com.nrmyw.hud_data_event_lib.HudEvent{
     *(...);
 }
 -keep public interface com.nrmyw.hud_data_event_lib.HudCmdListen{

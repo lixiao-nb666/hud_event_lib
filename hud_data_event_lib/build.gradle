@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 32
-
-
     }
 
 
@@ -36,8 +34,6 @@ android {
 }
 
 dependencies {
-
     implementation 'com.github.lixiao-nb666:hud_data_lib:1.0.3'
     implementation 'com.github.lixiao-nb666:ble_event:1.0.7'
-
 }
