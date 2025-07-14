@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
+import com.nrmyw.hud_data_event_lib.HudCmdListen;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudCmdSendDataUtil;
@@ -26,16 +27,18 @@ public class HudSendManager {
         return sendManager;
     }
 
-//    private BleCmdSendListen sendListen;
-//    public void setListen(BleCmdSendListen sendListen){
-//        this.sendListen=sendListen;
-//    }
+    private HudCmdListen hudCmdListen;
+    public void setListen(HudCmdListen hudCmdListen){
+        this.hudCmdListen=hudCmdListen;
+    }
 
 
     public void sendCmdByte(byte[]bytes){
-//        if(null!=sendListen){
-//            sendListen.nowSendCmd(bytes);
-//        }
+        if(null!=hudCmdListen){
+            hudCmdListen.getCmd(bytes);
+        }else {
+
+        }
         BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
@@ -43,10 +46,12 @@ public class HudSendManager {
 //        CmdType.useObjectSSetBody(objects);
 //        useObjectSSetBody(hudCmdType,objects);
 ////        BleEventSubscriptionSubject.getInstance().sendCmd(CmdType.getAllByte());
-//        if(null!=sendListen){
-//            sendListen.nowSendCmd(CmdType.getAllByte());
-//        }
-        BleEventSubscriptionSubject.getInstance().sendCmd(getAllByte(hudCmdType,objects));
+        byte[] bytes=getAllByte(hudCmdType,objects);
+        if(null!=hudCmdListen){
+           hudCmdListen.getCmd(bytes);
+        }else {
+            BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
+        }
     }
 
     public void sendBitmap(Bitmap bitmap){
@@ -79,7 +84,6 @@ public class HudSendManager {
             case SPEEDING:
                 body = HudCmdSendDataUtil.getSpeeding(objects);
                 break;
-
             case INTERVAL_SPEED:
                 body = HudCmdSendDataUtil.getIntervalSpeed(objects);
                 break;

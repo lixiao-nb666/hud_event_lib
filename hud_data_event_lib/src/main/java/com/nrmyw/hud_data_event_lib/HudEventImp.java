@@ -19,6 +19,7 @@ public interface HudEventImp {
     public  void sendBytes(byte[]bytes);
 
     public void sendTime();
+
     public void sendNowSpeed(int nowSpeed);
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
