@@ -9,24 +9,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nrmyw.hud_data_event.R;
-import com.nrmyw.hud_data_event_lib.HudEventManager;
+
 
 
 public class MainActivity extends AppCompatActivity {
-//    private T800SendManager.Listen t800SendManagerListen=new T800SendManager.Listen() {
-//        @Override
-//        public void nowSendCmd(byte[] bytes) {
-//            String ss=BleByteUtil.parseByte2HexStr(bytes);
-//            tv.setText(ss);
-//        }
-//
-//        @Override
-//        public void sendImage(Bitmap bitmap, BitmapQualityType qualityType) {
-//            tv.setText("处理图片:"+(bitmap==null)+"处理图片质量"+(qualityType==null));
-//        }
-//    };
+
     private TextView tv;
-    private Button cmdBT,imageBT;
+    private Button sendTimeBT,sendSpeedBT;
     private View.OnClickListener onClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -34,12 +23,11 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             switch (v.getId()){
-                case R.id.bt_cmd:
-//                    T800SendUtil.sendTime();
-                    HudEventManager.getInstance().getHudEvent().sendTime();
+                case R.id.bt_send_time:
+//                    HudEvent.getInstance().sendTime();
                     break;
-                case R.id.bt_image:
-//                    T800SendUtil.sendImage(null,null);
+                case R.id.bt_send_speed:
+//                    HudEvent.getInstance().sendNowSpeed(165);
                     break;
             }
         }
@@ -50,11 +38,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tv=findViewById(R.id.tv);
-        cmdBT=findViewById(R.id.bt_cmd);
-        imageBT=findViewById(R.id.bt_image);
-        cmdBT.setOnClickListener(onClickListener);
-        imageBT.setOnClickListener(onClickListener);
-//        T800SendManager.getInstance().setListen(t800SendManagerListen);
-
+        sendTimeBT=findViewById(R.id.bt_send_time);
+        sendSpeedBT=findViewById(R.id.bt_send_speed);
+        sendTimeBT.setOnClickListener(onClickListener);
+        sendSpeedBT.setOnClickListener(onClickListener);
     }
 }

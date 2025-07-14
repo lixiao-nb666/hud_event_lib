@@ -17,16 +17,16 @@
 
 
     <Button
-        android:id="@+id/bt_cmd"
+        android:id="@+id/bt_send_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="蓝牙连接"/>
+        android:text="send time"/>
 
     <Button
-        android:id="@+id/bt_image"
+        android:id="@+id/bt_send_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="去蓝牙测试页面"/>
+        android:text="send speed"/>
 
 
 

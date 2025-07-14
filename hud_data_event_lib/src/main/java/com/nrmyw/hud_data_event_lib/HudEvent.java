@@ -36,6 +36,9 @@ public class HudEvent implements HudEventImp {
 
     private HudEvent(){}
 
+    public void addListen(HudCmdListen hudCmdListen){
+        HudSendManager.getInstance().setListen(hudCmdListen);
+    }
 
     @Override
     public void sendBytes(byte[] bytes) {
