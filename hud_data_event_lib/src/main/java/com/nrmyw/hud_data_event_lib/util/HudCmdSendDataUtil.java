@@ -2,6 +2,7 @@ package com.nrmyw.hud_data_event_lib.util;
 
 
 
+import com.nrmyw.ble_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudStatuType;
@@ -349,7 +350,7 @@ public class HudCmdSendDataUtil {
         int h= (int) objects[1];
         byte[] hBs=BleByteUtil.intToByteArray32only2(h);
         int size= (int) objects[2];
-        byte[] sizeBs=BleByteUtil.intToByteArray32(size);
+        byte[] sizeBs= BleByteUtil.intToByteArray32(size);
         HudSendImageType sendImageType= (HudSendImageType) objects[3];
         byte[]bytes=new byte[9];
         bytes[0]=wBs[0];
