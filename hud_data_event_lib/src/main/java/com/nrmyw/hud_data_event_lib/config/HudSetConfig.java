@@ -7,7 +7,7 @@ public class HudSetConfig {
     private static HudSetConfig hudSetConfig;
     private int imageMaxW=200;
     private int imageMaxH=260;
-    private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.LOW;
+    private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
     private HudSetConfig(){}
 
@@ -22,13 +22,9 @@ public class HudSetConfig {
         return hudSetConfig;
     }
 
-    public static HudSetConfig getHudSetConfig() {
-        return hudSetConfig;
-    }
 
-    public static void setHudSetConfig(HudSetConfig hudSetConfig) {
-        HudSetConfig.hudSetConfig = hudSetConfig;
-    }
+
+
 
     public int getImageMaxW() {
         return imageMaxW;

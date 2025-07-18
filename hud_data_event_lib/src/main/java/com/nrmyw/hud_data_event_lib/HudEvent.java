@@ -277,16 +277,16 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setShowImageMaxW(int maxShowW) {
-        HudSetConfig.getHudSetConfig().setImageMaxW(maxShowW);
+        HudSetConfig.getInstance().setImageMaxW(maxShowW);
     }
 
     @Override
     public void setShowImageMaxH(int maxShowH) {
-        HudSetConfig.getHudSetConfig().setImageMaxH(maxShowH);
+        HudSetConfig.getInstance().setImageMaxH(maxShowH);
     }
 
     @Override
     public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType) {
-        HudSetConfig.getHudSetConfig().setBleSendBitmapQualityType(bitmapQualityType);
+        HudSetConfig.getInstance().setBleSendBitmapQualityType(bitmapQualityType);
     }
 }
