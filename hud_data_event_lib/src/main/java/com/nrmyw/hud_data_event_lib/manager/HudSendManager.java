@@ -6,7 +6,6 @@ import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.HudCmdListen;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
-import com.nrmyw.hud_data_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudCmdSendDataUtil;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 
