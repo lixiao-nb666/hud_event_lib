@@ -17,6 +17,7 @@ import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
 import com.nrmyw.hud_data_lib.type.time.HudTimeType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
+import com.nrmyw.hud_data_lib.type.type.HudStyleType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 
 import java.nio.charset.StandardCharsets;
@@ -406,6 +407,16 @@ public class HudCmdSendDataUtil {
         HudStatuType statuType = (HudStatuType) objects[0];
         return new byte[]{
                 statuType.getType()
+        };
+    }
+
+    public static byte[] getStyle(Object... objects) {
+        if (null == objects || objects.length < 1) {
+            return null;
+        }
+        HudStyleType styleType = (HudStyleType) objects[0];
+        return new byte[]{
+                styleType.getType()
         };
     }
 

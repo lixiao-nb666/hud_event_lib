@@ -17,6 +17,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
+import com.nrmyw.hud_data_lib.type.type.HudStyleType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 
 public class HudEvent implements HudEventImp {
@@ -61,9 +62,15 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendSpeedShow(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType) {
+    public void sendSpeeding(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType) {
         HudSendManager.getInstance().sendCmd(HudCmdType.SPEEDING,speedingShowType,speedingShowBJType);
     }
+
+    @Override
+    public void setSpeedingBj(HudStyleType styleType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_SPEEDING_BJ,styleType);
+    }
+
 
     @Override
     public void sendIntervalSpeed(int intervalSpeed, int interval, int averageSpeed, int timeHours, int timeMin) {
@@ -138,6 +145,11 @@ public class HudEvent implements HudEventImp {
     @Override
     public void sendTrunType(HudTurnType type1, int distance1, HudTurnType type2, int distance2) {
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,type2,distance2);
+    }
+
+    @Override
+    public void setTrunBj(HudStyleType styleType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_LANE_BJ,styleType);
     }
 
     @Override
@@ -233,6 +245,11 @@ public class HudEvent implements HudEventImp {
     @Override
     public void sendYellowStatuStr(String yellowStatuStr) {
         HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU_STR,yellowStatuStr);
+    }
+
+    @Override
+    public void setYellowStatuBj(HudStyleType hudStyleType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_YELLOW_STATU_BJ,hudStyleType);
     }
 
     @Override

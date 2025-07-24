@@ -142,6 +142,11 @@ public class HudSendManager {
             case SET_DAYLIGHTING_SHOW_STATU:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
+            case SET_SPEEDING_BJ:
+            case SET_LANE_BJ:
+            case SET_YELLOW_STATU_BJ:
+                body=HudCmdSendDataUtil.getStyle(objects);
+                break;
         }
         return body;
     }

@@ -11,6 +11,7 @@ import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
 import com.nrmyw.hud_data_lib.type.time.HudTimeType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
+import com.nrmyw.hud_data_lib.type.type.HudStyleType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 
 public interface HudEventImp {
@@ -24,7 +25,9 @@ public interface HudEventImp {
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
 
-    public void sendSpeedShow(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType);
+    public void sendSpeeding(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType);
+
+    public void setSpeedingBj(HudStyleType styleType);
 
     public void sendIntervalSpeed(int intervalSpeed,int interval ,int averageSpeed,int timeHours,int timeMin);
 
@@ -56,6 +59,7 @@ public interface HudEventImp {
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean, int selectLane);
     public void sendTrunType(HudTurnType type1	, int distance1);
     public void sendTrunType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
+    public void setTrunBj(HudStyleType styleType);
 
     public void sendNextLaneName(String laneName);
 
@@ -94,6 +98,8 @@ public interface HudEventImp {
     public void hideYellowStatu();
 
     public void sendYellowStatuStr(String yellowStatuStr);
+
+    public void setYellowStatuBj(HudStyleType hudStyleType);
 
     public void iconFlicherOpen();
 
