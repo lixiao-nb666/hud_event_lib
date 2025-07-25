@@ -101,6 +101,10 @@ public class HudSendManager {
             case TURN_TYPE:
                 body = HudCmdSendDataUtil.getTrunType(objects);
                 break;
+            case SET_TURN_BJ:
+                body =HudCmdSendDataUtil.getTurnBjStyle(objects);
+                break;
+
             case Next_LANE_NAME:
             case YELLOW_STATU_STR:
             case WARNING_POINT_1_T_STR:
@@ -137,16 +141,14 @@ public class HudSendManager {
                 body = HudCmdSendDataUtil.getFactroySet();
                 break;
             case YELLOW_STATU:
+                body=HudCmdSendDataUtil.getYellowStatu(objects);
+                break;
             case ICON_FLICKER:
             case SET_DEVICE_SOUND_STATU:
             case SET_DAYLIGHTING_SHOW_STATU:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
-            case SET_SPEEDING_BJ:
-            case SET_LANE_BJ:
-            case SET_YELLOW_STATU_BJ:
-                body=HudCmdSendDataUtil.getStyle(objects);
-                break;
+
         }
         return body;
     }

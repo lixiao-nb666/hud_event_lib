@@ -8,17 +8,19 @@ import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
-import com.nrmyw.hud_data_lib.type.HudStatuType;
+
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
-import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
-import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
+
+import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
-import com.nrmyw.hud_data_lib.type.type.HudStyleType;
+import com.nrmyw.hud_data_lib.type.type.HudStatuType;
+
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
+import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
 public class HudEvent implements HudEventImp {
     private static HudEvent hudEvent;
@@ -62,14 +64,13 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendSpeeding(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SPEEDING,speedingShowType,speedingShowBJType);
+    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudStatuType speedingShowBJType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SPEEDING,textColorStyle,speedingShowBJType);
     }
 
-    @Override
-    public void setSpeedingBj(HudStyleType styleType) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SET_SPEEDING_BJ,styleType);
-    }
+
+
+
 
 
     @Override
@@ -148,9 +149,11 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void setTrunBj(HudStyleType styleType) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SET_LANE_BJ,styleType);
+    public void setTrunBj(HudTurnType turnType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_TURN_BJ,turnType);
     }
+
+
 
     @Override
     public void sendNextLaneName(String laneName) {
@@ -233,24 +236,18 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void showYellowStatu() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, HudStatuType.OPEN);
+    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType);
     }
 
-    @Override
-    public void hideYellowStatu() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, HudStatuType.CLOSE);
-    }
+
+
 
     @Override
     public void sendYellowStatuStr(String yellowStatuStr) {
         HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU_STR,yellowStatuStr);
     }
 
-    @Override
-    public void setYellowStatuBj(HudStyleType hudStyleType) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SET_YELLOW_STATU_BJ,hudStyleType);
-    }
 
     @Override
     public void iconFlicherOpen() {

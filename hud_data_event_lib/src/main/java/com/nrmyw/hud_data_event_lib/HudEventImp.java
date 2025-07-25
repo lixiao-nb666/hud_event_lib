@@ -7,12 +7,15 @@ import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
-import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
-import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
-import com.nrmyw.hud_data_lib.type.time.HudTimeType;
+
+
+
+import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
-import com.nrmyw.hud_data_lib.type.type.HudStyleType;
+import com.nrmyw.hud_data_lib.type.type.HudStatuType;
+
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
+import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
 public interface HudEventImp {
 
@@ -25,9 +28,9 @@ public interface HudEventImp {
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
 
-    public void sendSpeeding(HudSpeedingShowType speedingShowType, HudSpeedingShowBJType speedingShowBJType);
+    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudStatuType speedingShowBJType);
 
-    public void setSpeedingBj(HudStyleType styleType);
+
 
     public void sendIntervalSpeed(int intervalSpeed,int interval ,int averageSpeed,int timeHours,int timeMin);
 
@@ -59,7 +62,7 @@ public interface HudEventImp {
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean, int selectLane);
     public void sendTrunType(HudTurnType type1	, int distance1);
     public void sendTrunType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
-    public void setTrunBj(HudStyleType styleType);
+    public void setTrunBj(HudTurnType turnType);
 
     public void sendNextLaneName(String laneName);
 
@@ -93,13 +96,13 @@ public interface HudEventImp {
 
     public void hideImage();
 
-    public void showYellowStatu();
+    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
 
-    public void hideYellowStatu();
+
 
     public void sendYellowStatuStr(String yellowStatuStr);
 
-    public void setYellowStatuBj(HudStyleType hudStyleType);
+
 
     public void iconFlicherOpen();
 

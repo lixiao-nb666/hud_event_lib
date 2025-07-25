@@ -5,7 +5,7 @@ package com.nrmyw.hud_data_event_lib.util;
 import com.nrmyw.ble_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
-import com.nrmyw.hud_data_lib.type.HudStatuType;
+
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -13,12 +13,16 @@ import com.nrmyw.hud_data_lib.type.lane.HudLaneType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
+
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
-import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowType;
+import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.time.HudTimeType;
+import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
-import com.nrmyw.hud_data_lib.type.type.HudStyleType;
+
+import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
+import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
 import java.nio.charset.StandardCharsets;
 
@@ -58,7 +62,7 @@ public class HudCmdSendDataUtil {
         if(null==objects||objects.length<2){
             return null;
         }
-        HudSpeedingShowType speedingShowType= (HudSpeedingShowType) objects[0];
+        HudSpeedingTextType speedingShowType= (HudSpeedingTextType) objects[0];
         HudSpeedingShowBJType speedingShowBJType= (HudSpeedingShowBJType) objects[1];
         return new byte[]{
                 speedingShowType.getType(),
@@ -376,6 +380,16 @@ public class HudCmdSendDataUtil {
         };
     }
 
+    public static byte[] getYellowStatu(Object... objects) {
+        if (null == objects || objects.length < 1) {
+            return null;
+        }
+        HudYellowStatuBjType statuType = (HudYellowStatuBjType) objects[0];
+        return new byte[]{
+                statuType.getType()
+        };
+    }
+
 
 
 
@@ -410,11 +424,11 @@ public class HudCmdSendDataUtil {
         };
     }
 
-    public static byte[] getStyle(Object... objects) {
+    public static byte[] getTurnBjStyle(Object... objects) {
         if (null == objects || objects.length < 1) {
             return null;
         }
-        HudStyleType styleType = (HudStyleType) objects[0];
+        HudTurnBjType styleType = (HudTurnBjType) objects[0];
         return new byte[]{
                 styleType.getType()
         };
