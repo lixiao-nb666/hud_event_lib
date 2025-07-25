@@ -9,7 +9,7 @@ import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 
-
+import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
@@ -28,7 +28,7 @@ public interface HudEventImp {
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
 
-    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudStatuType speedingShowBJType);
+    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudSpeedingShowBJType speedingShowBJType);
 
 
 
