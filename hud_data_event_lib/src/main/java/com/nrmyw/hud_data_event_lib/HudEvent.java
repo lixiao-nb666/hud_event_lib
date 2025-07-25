@@ -17,6 +17,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
+import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 
@@ -136,19 +137,21 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendTrunType(HudTurnType type1, int distance1) {
+    public void sendTurnType(HudTurnType type1, int distance1) {
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,HudTurnType.none,0);
     }
 
     @Override
-    public void sendTrunType(HudTurnType type1, int distance1, HudTurnType type2, int distance2) {
+    public void sendTurnType(HudTurnType type1, int distance1, HudTurnType type2, int distance2) {
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,type2,distance2);
     }
 
     @Override
-    public void setTrunBj(HudTurnType turnType) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SET_TURN_BJ,turnType);
+    public void setTurnBj(HudTurnBjType turnBj) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_TURN_BJ,turnBj);
     }
+
+
 
 
 

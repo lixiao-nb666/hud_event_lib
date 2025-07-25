@@ -11,6 +11,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
+import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 
@@ -60,9 +61,9 @@ public interface HudEventImp {
     public void sendLaneInformation(HudLaneCountBean laneCountBean);
 
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean, int selectLane);
-    public void sendTrunType(HudTurnType type1	, int distance1);
-    public void sendTrunType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
-    public void setTrunBj(HudTurnType turnType);
+    public void sendTurnType(HudTurnType type1	, int distance1);
+    public void sendTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
+    public void setTurnBj(HudTurnBjType turnBj);
 
     public void sendNextLaneName(String laneName);
 
