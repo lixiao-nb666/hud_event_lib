@@ -104,9 +104,9 @@ public class HudSendManager {
             case SET_TURN_BJ:
                 body =HudCmdSendDataUtil.getTurnBjStyle(objects);
                 break;
-
             case Next_LANE_NAME:
             case YELLOW_STATU_STR:
+            case REACH_STR:
             case WARNING_POINT_1_T_STR:
             case WARNING_POINT_1_B_STR:
             case WARNING_POINT_2_T_STR:
