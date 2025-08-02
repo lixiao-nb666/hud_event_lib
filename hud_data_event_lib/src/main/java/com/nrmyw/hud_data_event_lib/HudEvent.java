@@ -221,8 +221,8 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendImage(Bitmap bitmap) {
-        HudSendManager.getInstance().sendBitmap(bitmap);
+    public void sendImage(Bitmap bitmap,int type) {
+        HudSendManager.getInstance().sendBitmap(bitmap,type);
     }
 
     @Override

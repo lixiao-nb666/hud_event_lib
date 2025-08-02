@@ -91,7 +91,7 @@ public interface HudEventImp {
 
     public void queSound();
 
-    public void sendImage(Bitmap bitmap);
+    public void sendImage(Bitmap bitmap,int type);
 
     public void showImage();
 

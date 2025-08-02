@@ -55,8 +55,9 @@ public class HudSendManager {
         }
     }
 
-    public void sendBitmap(Bitmap bitmap){
+    public void sendBitmap(Bitmap bitmap,int type){
         BleSendImageInfoBean bleSendImageInfoBean=new BleSendImageInfoBean();
+        bleSendImageInfoBean.setType(type);
         bleSendImageInfoBean.setMaxW(HudSetConfig.getInstance().getImageMaxW());
         bleSendImageInfoBean.setMaxH(HudSetConfig.getInstance().getImageMaxH());
         bleSendImageInfoBean.setBitmap(bitmap);
