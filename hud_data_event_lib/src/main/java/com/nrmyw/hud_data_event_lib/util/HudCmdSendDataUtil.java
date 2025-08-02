@@ -357,7 +357,7 @@ public class HudCmdSendDataUtil {
         int size= (int) objects[2];
         byte[] sizeBs= BleByteUtil.intToByteArray32(size);
         HudSendImageType sendImageType= (HudSendImageType) objects[3];
-        int imageShowType= (int) objects[5];
+        int imageShowType= (int) objects[4];
         byte[]bytes=new byte[10];
         bytes[0]=wBs[0];
         bytes[1]=wBs[1];
