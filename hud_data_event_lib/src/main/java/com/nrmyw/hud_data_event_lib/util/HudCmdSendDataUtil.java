@@ -347,7 +347,7 @@ public class HudCmdSendDataUtil {
     }
 
     public static byte[] getReadySendImage(Object... objects) {
-        if (null == objects || objects.length < 4) {
+        if (null == objects || objects.length < 5) {
             return null;
         }
         int w= (int) objects[0];
@@ -357,7 +357,8 @@ public class HudCmdSendDataUtil {
         int size= (int) objects[2];
         byte[] sizeBs= BleByteUtil.intToByteArray32(size);
         HudSendImageType sendImageType= (HudSendImageType) objects[3];
-        byte[]bytes=new byte[9];
+        int imageShowType= (int) objects[5];
+        byte[]bytes=new byte[10];
         bytes[0]=wBs[0];
         bytes[1]=wBs[1];
         bytes[2]=hBs[0];
@@ -367,6 +368,7 @@ public class HudCmdSendDataUtil {
         bytes[6]=sizeBs[2];
         bytes[7]=sizeBs[3];
         bytes[8]=sendImageType.getType();
+        bytes[9]=(byte)(imageShowType & 0xFF);
         return bytes;
     }
 
