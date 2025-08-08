@@ -37,7 +37,7 @@ public interface HudEventImp {
 
     public void sendWarningPoint(HudWarningPointType type1	, int distance1);
 
-    public void sendWarningPoint(HudWarningPointType type1	,int distance1,HudWarningPointType type2	,int distance2);
+    public void sendWarningPoint(HudWarningPointType type1	,int distance1,HudWarningPointType type2,int distance2);
 
     public void sendBigWarningPoint(HudWarningPointType type1	, int distance1);
 
@@ -60,7 +60,7 @@ public interface HudEventImp {
 
     public void sendLaneInformation(HudLaneCountBean laneCountBean);
 
-    public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean, int selectLane);
+    public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean);
     public void sendTurnType(HudTurnType type1	, int distance1);
     public void sendTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
     public void setTurnBj(HudTurnBjType turnBj);

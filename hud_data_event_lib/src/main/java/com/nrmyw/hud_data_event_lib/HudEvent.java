@@ -132,8 +132,8 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean, int selectLane) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.HI_PASS,laneHiPassCountBean,selectLane);
+    public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.HI_PASS,laneHiPassCountBean,laneHiPassCountBean.getIndex());
     }
 
     @Override
