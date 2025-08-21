@@ -4,8 +4,7 @@ import android.graphics.Bitmap;
 
 import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
-import com.nrmyw.ble_event_lib.util.BleByteUtil;
-import com.nrmyw.hud_data_event_lib.HudCmdListen;
+
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudCmdSendDataUtil;
@@ -28,18 +27,18 @@ public class HudSendManager {
         return sendManager;
     }
 
-    private HudCmdListen hudCmdListen;
-    public void setListen(HudCmdListen hudCmdListen){
-        this.hudCmdListen=hudCmdListen;
-    }
+//    private HudCmdListen hudCmdListen;
+//    public void setListen(HudCmdListen hudCmdListen){
+//        this.hudCmdListen=hudCmdListen;
+//    }
 
 
     public void sendCmdByte(byte[]bytes){
-        if(null!=hudCmdListen){
-            hudCmdListen.getCmd(bytes);
-        }else {
-
-        }
+//        if(null!=hudCmdListen){
+//            hudCmdListen.getCmd(bytes);
+//        }else {
+//
+//        }
         BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
@@ -48,11 +47,12 @@ public class HudSendManager {
 //        useObjectSSetBody(hudCmdType,objects);
 ////        BleEventSubscriptionSubject.getInstance().sendCmd(CmdType.getAllByte());
         byte[] bytes=getAllByte(hudCmdType,objects);
-        if(null!=hudCmdListen){
-           hudCmdListen.getCmd(bytes);
-        }else {
-            BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
-        }
+//        if(null!=hudCmdListen){
+//           hudCmdListen.getCmd(bytes);
+//        }else {
+//
+//        }
+        BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
     public void sendBitmap(Bitmap bitmap,int type){
@@ -112,6 +112,8 @@ public class HudSendManager {
             case WARNING_POINT_1_B_STR:
             case WARNING_POINT_2_T_STR:
             case WARNING_POINT_2_B_STR:
+            case SET_BLE_NAME:
+            case SET_TWS_NAME:
                 body = HudCmdSendDataUtil.getStr(objects);
                 break;
             case NOW_LANE_STR:
@@ -147,6 +149,9 @@ public class HudSendManager {
             case ICON_FLICKER:
             case SET_DEVICE_SOUND_STATU:
             case SET_DAYLIGHTING_SHOW_STATU:
+                body = HudCmdSendDataUtil.getStatu(objects);
+                break;
+            case SET_UI:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
 

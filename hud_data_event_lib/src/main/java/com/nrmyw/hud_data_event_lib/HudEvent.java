@@ -12,6 +12,7 @@ import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
@@ -21,6 +22,7 @@ import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 
+import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
@@ -41,9 +43,9 @@ public class HudEvent implements HudEventImp {
 
     private HudEvent(){}
 
-    public void addListen(HudCmdListen hudCmdListen){
-        HudSendManager.getInstance().setListen(hudCmdListen);
-    }
+//    public void addListen(HudCmdListen hudCmdListen){
+//        HudSendManager.getInstance().setListen(hudCmdListen);
+//    }
 
     @Override
     public void sendBytes(byte[] bytes) {
@@ -112,9 +114,11 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendReachInfo(int distance, int hours, int minutes) {
-        HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes);
+    public void sendReachInfo(int distance, int hours, int minutes, HudReachType reachType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes,reachType);
     }
+
+
 
     @Override
     public void sendReachInfo(String reachInfoStr) {
@@ -302,5 +306,20 @@ public class HudEvent implements HudEventImp {
     @Override
     public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType) {
         HudSetConfig.getInstance().setBleSendBitmapQualityType(bitmapQualityType);
+    }
+
+    @Override
+    public void setBleName(String bleName) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_BLE_NAME,bleName);
+    }
+
+    @Override
+    public void setTwsName(String twsName) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_TWS_NAME,twsName);
+    }
+
+    @Override
+    public void setUiType(HudUiType uiType) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_UI,uiType);
     }
 }

@@ -6,6 +6,7 @@ import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 
@@ -15,6 +16,7 @@ import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 
+import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
@@ -50,7 +52,7 @@ public interface HudEventImp {
     public void sendWarningPoint2BodyStr(String str);
 
 
-    public void sendReachInfo(int distance	,int hours, int	minutes);
+    public void sendReachInfo(int distance	, int hours, int	minutes, HudReachType reachType);
 
 //    public void sendReachInfo(int distance	, int hours, int	minutes	, HudTimeType type);
 
@@ -61,6 +63,7 @@ public interface HudEventImp {
     public void sendLaneInformation(HudLaneCountBean laneCountBean);
 
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean);
+
     public void sendTurnType(HudTurnType type1	, int distance1);
     public void sendTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
     public void setTurnBj(HudTurnBjType turnBj);
@@ -126,5 +129,11 @@ public interface HudEventImp {
     public void setShowImageMaxH(int  maxShowH);
 
     public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType);
+
+    public void setBleName(String bleName);
+
+    public void setTwsName(String twsName);
+
+    public void setUiType(HudUiType uiType);
 
 }

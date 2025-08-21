@@ -11,16 +11,18 @@ import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
-import com.nrmyw.hud_data_lib.type.time.HudTimeType;
+
 import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
+import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
@@ -129,12 +131,12 @@ public class HudCmdSendDataUtil {
             return null;
         }
         byte[] bytes=null;
-        HudTimeType type=null;
+        HudReachType type=null;
         if(objects.length==3){
             bytes=new byte[5];
         }else {
             bytes=new byte[6];
-            type= (HudTimeType) objects[3];
+            type= (HudReachType) objects[3];
             bytes[5]= type.getType();
         }
         int distance= (int) objects[0];
@@ -423,6 +425,17 @@ public class HudCmdSendDataUtil {
         HudStatuType statuType = (HudStatuType) objects[0];
         return new byte[]{
                 statuType.getType()
+        };
+    }
+
+
+    public static byte[] getUI(Object... objects) {
+        if (null == objects || objects.length < 1) {
+            return null;
+        }
+        HudUiType uiType = (HudUiType) objects[0];
+        return new byte[]{
+                uiType.getType()
         };
     }
 

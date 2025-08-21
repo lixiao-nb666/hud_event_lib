@@ -93,7 +93,7 @@ public class HudEventService extends BaseService {
     };
 
 
-    public HudEvent getHudEvent(){
+    private HudEvent getHudEvent(){
         return HudEvent.getInstance();
     }
 

@@ -36,13 +36,7 @@ public class HudEventManager {
 
 
     public HudEventImp getHudEvent(){
-        try {
-            if(null!=hudEventServiceDao){
-                HudEventService hudEventService= (HudEventService) hudEventServiceDao.getService();
-               return hudEventService.getHudEvent();
-            }
-        }catch (Exception e){}
-        return null;
+        return  HudEvent.getInstance();
     }
 
 
