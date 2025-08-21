@@ -1,15 +1,18 @@
 package com.nrmyw.hud_data_event_lib;
 
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
+import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
@@ -49,6 +52,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendBytes(byte[] bytes) {
+        if(null==bytes||bytes.length==0){
+            return;
+        }
         HudSendManager.getInstance().sendCmdByte(bytes);
     }
 
@@ -59,62 +65,100 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendNowSpeed(int nowSpeed) {
+        nowSpeed= HudSendDataCheckUtil.getSpeed(nowSpeed);
         HudSendManager.getInstance().sendCmd(HudCmdType.SPEED,nowSpeed);
     }
 
     @Override
     public void sendNowSpeed(int nowSpeed, int limitedSpeed1, int limitedSpeed2) {
+        nowSpeed= HudSendDataCheckUtil.getSpeed(nowSpeed);
+        limitedSpeed1= HudSendDataCheckUtil.getSpeed(limitedSpeed1);
+        limitedSpeed2= HudSendDataCheckUtil.getSpeed(limitedSpeed2);
         HudSendManager.getInstance().sendCmd(HudCmdType.SPEED,nowSpeed,limitedSpeed1,limitedSpeed2);
     }
 
     @Override
     public void sendSpeeding(HudSpeedingTextType textColorStyle, HudSpeedingShowBJType speedingShowBJType) {
+        if(null==textColorStyle||null==speedingShowBJType){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SPEEDING,textColorStyle,speedingShowBJType);
     }
 
 
     @Override
     public void sendIntervalSpeed(int intervalSpeed, int interval, int averageSpeed, int timeHours, int timeMin) {
+        intervalSpeed= HudSendDataCheckUtil.getSpeed(intervalSpeed);
+        averageSpeed= HudSendDataCheckUtil.getSpeed(averageSpeed);
+        timeHours= HudSendDataCheckUtil.getSpeed(timeHours);
+        timeMin= HudSendDataCheckUtil.getSpeed(timeMin);
         HudSendManager.getInstance().sendCmd(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin);
     }
 
     @Override
     public void sendWarningPoint(HudWarningPointType type1, int distance1) {
+        if(null==type1){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1);
     }
 
     @Override
     public void sendWarningPoint(HudWarningPointType type1, int distance1, HudWarningPointType type2, int distance2) {
+        if(null==type1||null==type2){
+            return;
+        }
+
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
     }
 
     @Override
     public void sendBigWarningPoint(HudWarningPointType type1, int distance1) {
+        if(null==type1){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
     }
 
     @Override
     public void sendWarningPoint1TitleStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_1_T_STR,str);
     }
 
     @Override
     public void sendWarningPoint1BodyStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_1_B_STR,str);
     }
 
     @Override
     public void sendWarningPoint2TitleStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_2_T_STR,str);
     }
 
     @Override
     public void sendWarningPoint2BodyStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_2_B_STR,str);
     }
 
     @Override
     public void sendReachInfo(int distance, int hours, int minutes, HudReachType reachType) {
+        if(null==reachType){
+            return;
+        }
+        hours= HudSendDataCheckUtil.getSpeed(hours);
+        minutes= HudSendDataCheckUtil.getSpeed(minutes);
         HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes,reachType);
     }
 
@@ -122,6 +166,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendReachInfo(String reachInfoStr) {
+        if(TextUtils.isEmpty(reachInfoStr)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.REACH_STR,reachInfoStr);
     }
 
@@ -132,26 +179,41 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendLaneInformation(HudLaneCountBean laneCountBean) {
+        if(null==laneCountBean||null==laneCountBean.getLaneList()||laneCountBean.getLaneList().size()==0){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,laneCountBean);
     }
 
     @Override
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean) {
+        if(null==laneHiPassCountBean||null==laneHiPassCountBean.getLaneList()||laneHiPassCountBean.getLaneList().size()==0){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.HI_PASS,laneHiPassCountBean,laneHiPassCountBean.getIndex());
     }
 
     @Override
     public void sendTurnType(HudTurnType type1, int distance1) {
+        if(null==type1){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,HudTurnType.none,0);
     }
 
     @Override
     public void sendTurnType(HudTurnType type1, int distance1, HudTurnType type2, int distance2) {
+        if(null==type1||null==type2){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,type2,distance2);
     }
 
     @Override
     public void setTurnBj(HudTurnBjType turnBj) {
+        if(null==turnBj){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_TURN_BJ,turnBj);
     }
 
@@ -161,21 +223,31 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendNextLaneName(String laneName) {
+        if(TextUtils.isEmpty(laneName)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.Next_LANE_NAME,laneName);
     }
 
     @Override
     public void sendNowLaneStr(HudNowLaneStrType nowLaneStrType, String laneName) {
+        if(null==nowLaneStrType||TextUtils.isEmpty(laneName)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.NOW_LANE_STR,nowLaneStrType,laneName);
     }
 
     @Override
     public void sendGpsStatu(HudGpsStatuType gpsStatuType) {
+        if(null==gpsStatuType){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.GPS,gpsStatuType);
     }
 
     @Override
     public void setGpsSpeed(int gpsSpeed) {
+        gpsSpeed=HudSendDataCheckUtil.getGpsSpeed(gpsSpeed);
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_GPS_SPEED,gpsSpeed);
     }
 
@@ -191,6 +263,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendBrightnessHand(int v) {
+        v=HudSendDataCheckUtil.getBrightnessV(v);
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BRIGHTNESS, HudBrightnessMoldType.HAND,v);
     }
 
@@ -206,6 +279,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void rewriteSN(String sn) {
+        if(TextUtils.isEmpty(sn)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.REWRITE_SN,sn);
     }
 
@@ -216,6 +292,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setSound(int v) {
+        v=HudSendDataCheckUtil.getSoundV(v);
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_SOUND,v);
     }
 
@@ -225,9 +302,22 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void sendImage(Bitmap bitmap,int type) {
-        HudSendManager.getInstance().sendBitmap(bitmap,type);
+    public void sendImage(Bitmap bitmap) {
+        if(null==bitmap||bitmap.isRecycled()){
+            return;
+        }
+        HudSendManager.getInstance().sendBitmap(bitmap,0);
     }
+
+    @Override
+    public void sendImage(Bitmap bitmap, HudImageType hudImageType) {
+        if(null==bitmap||bitmap.isRecycled()||null==hudImageType){
+            return;
+        }
+        HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+    }
+
+
 
     @Override
     public void showImage() {
@@ -241,6 +331,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
+        if(null==hudYellowStatuBjType){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType);
     }
 
@@ -249,6 +342,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendYellowStatuStr(String yellowStatuStr) {
+        if(TextUtils.isEmpty(yellowStatuStr)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU_STR,yellowStatuStr);
     }
 
@@ -305,21 +401,33 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType) {
+        if(null==bitmapQualityType){
+            return;
+        }
         HudSetConfig.getInstance().setBleSendBitmapQualityType(bitmapQualityType);
     }
 
     @Override
     public void setBleName(String bleName) {
+        if(TextUtils.isEmpty(bleName)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BLE_NAME,bleName);
     }
 
     @Override
     public void setTwsName(String twsName) {
+        if(TextUtils.isEmpty(twsName)){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_TWS_NAME,twsName);
     }
 
     @Override
     public void setUiType(HudUiType uiType) {
+        if(null==uiType){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_UI,uiType);
     }
 }

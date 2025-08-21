@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
+import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
@@ -94,7 +95,9 @@ public interface HudEventImp {
 
     public void queSound();
 
-    public void sendImage(Bitmap bitmap,int type);
+    public void sendImage(Bitmap bitmap);
+
+    public void sendImage(Bitmap bitmap, HudImageType hudImageType);
 
     public void showImage();
 
