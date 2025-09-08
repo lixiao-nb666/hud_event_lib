@@ -45,7 +45,7 @@
 -keep public class com.nrmyw.hud_data_event_lib.HudEvent{
     *(...);
 }
--keep public interface com.nrmyw.hud_data_event_lib.config.HudSetConfig{
+-keep public class com.nrmyw.hud_data_event_lib.config.HudSetConfig{
     *(...);
 }
 -flattenpackagehierarchy 'com.nrmyw.hud_data_event_lib'
