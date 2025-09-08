@@ -104,15 +104,13 @@ public interface HudEventImp {
 
     public void showImage();
 
-    public void hideImage( HudImageType hudImageType);
+    public void hideImage( );
+
+    public void hideProgressBar();
 
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
 
-
-
     public void sendYellowStatuStr(String yellowStatuStr);
-
-
 
     public void iconFlicherOpen();
 

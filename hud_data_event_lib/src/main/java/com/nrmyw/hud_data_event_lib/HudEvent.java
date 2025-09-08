@@ -330,16 +330,16 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void hideImage(HudImageType hudImageType) {
-        switch (hudImageType){
-            case IMAGE:
-                HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
-                break;
-            case PROGRESS_BAR:
-                HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
-                break;
-        }
+    public void hideImage() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
     }
+
+    @Override
+    public void hideProgressBar() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
+    }
+
+
 
 
 
