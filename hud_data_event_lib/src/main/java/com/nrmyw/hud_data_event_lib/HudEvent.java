@@ -96,6 +96,11 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void hideIntervalSpeed() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
+    }
+
+    @Override
     public void sendWarningPoint(HudWarningPointType type1, int distance1) {
         if(null==type1){
             return;
@@ -325,9 +330,18 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void hideImage() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
+    public void hideImage(HudImageType hudImageType) {
+        switch (hudImageType){
+            case IMAGE:
+                HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
+                break;
+            case PROGRESS_BAR:
+                HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
+                break;
+        }
     }
+
+
 
     @Override
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {

@@ -38,6 +38,9 @@ public interface HudEventImp {
 
     public void sendIntervalSpeed(int intervalSpeed,int interval ,int averageSpeed,int timeHours,int timeMin);
 
+    public void hideIntervalSpeed();
+
+
     public void sendWarningPoint(HudWarningPointType type1	, int distance1);
 
     public void sendWarningPoint(HudWarningPointType type1	,int distance1,HudWarningPointType type2,int distance2);
@@ -101,7 +104,7 @@ public interface HudEventImp {
 
     public void showImage();
 
-    public void hideImage();
+    public void hideImage( HudImageType hudImageType);
 
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
 
