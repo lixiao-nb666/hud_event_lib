@@ -405,23 +405,23 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_DAYLIGHTING_SHOW_STATU, HudStatuType.CLOSE);
     }
 
-    @Override
-    public void setShowImageMaxW(int maxShowW) {
-        HudSetConfig.getInstance().setImageMaxW(maxShowW);
-    }
-
-    @Override
-    public void setShowImageMaxH(int maxShowH) {
-        HudSetConfig.getInstance().setImageMaxH(maxShowH);
-    }
-
-    @Override
-    public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType) {
-        if(null==bitmapQualityType){
-            return;
-        }
-        HudSetConfig.getInstance().setBleSendBitmapQualityType(bitmapQualityType);
-    }
+//    @Override
+//    public void setShowImageMaxW(int maxShowW) {
+//        HudSetConfig.getInstance().setImageMaxW(maxShowW);
+//    }
+//
+//    @Override
+//    public void setShowImageMaxH(int maxShowH) {
+//        HudSetConfig.getInstance().setImageMaxH(maxShowH);
+//    }
+//
+//    @Override
+//    public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType) {
+//        if(null==bitmapQualityType){
+//            return;
+//        }
+//        HudSetConfig.getInstance().setBleSendBitmapQualityType(bitmapQualityType);
+//    }
 
     @Override
     public void setBleName(String bleName) {

@@ -53,6 +53,9 @@ public class HudSetConfig {
     }
 
     public void setBleSendBitmapQualityType(BleSendBitmapQualityType bleSendBitmapQualityType) {
+        if(null==bleSendBitmapQualityType){
+            return;
+        }
         this.bleSendBitmapQualityType = bleSendBitmapQualityType;
     }
 

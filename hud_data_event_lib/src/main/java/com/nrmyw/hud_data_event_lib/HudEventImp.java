@@ -29,7 +29,6 @@ public interface HudEventImp {
     public void sendTime();
 
 
-
     public void sendNowSpeed(int nowSpeed);
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
@@ -130,11 +129,7 @@ public interface HudEventImp {
 
     public void daylightingStatuClose();
 
-    public void setShowImageMaxW(int maxShowW);
 
-    public void setShowImageMaxH(int  maxShowH);
-
-    public void setShowImageBitmapQualityType(BleSendBitmapQualityType bitmapQualityType);
 
     public void setBleName(String bleName);
 
