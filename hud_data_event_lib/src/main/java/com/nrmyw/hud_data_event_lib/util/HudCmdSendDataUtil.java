@@ -3,6 +3,7 @@ package com.nrmyw.hud_data_event_lib.util;
 
 
 import com.nrmyw.ble_event_lib.util.BleByteUtil;
+import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 
@@ -33,6 +34,7 @@ public class HudCmdSendDataUtil {
 
     public static byte[] getTime(){
         int timeStamp = (int)(System.currentTimeMillis()/1000);
+        timeStamp+= HudSetConfig.getInstance().getTimeDifference();
         byte[] byteTimeStamp = BleByteUtil.intToByteArray32(timeStamp);
         return byteTimeStamp;
     }

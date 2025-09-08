@@ -63,6 +63,8 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.TIME);
     }
 
+
+
     @Override
     public void sendNowSpeed(int nowSpeed) {
         nowSpeed= HudSendDataCheckUtil.getSpeed(nowSpeed);
