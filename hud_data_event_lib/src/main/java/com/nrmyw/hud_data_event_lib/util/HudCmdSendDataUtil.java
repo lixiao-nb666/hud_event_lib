@@ -19,6 +19,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 
+import com.nrmyw.hud_data_lib.type.speed.SpeedType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 
@@ -62,6 +63,37 @@ public class HudCmdSendDataUtil {
         return null;
     }
 
+
+    public static byte[] getWpLimitedSpeed(Object... objects){
+        if(null==objects||objects.length==0){
+            return null;
+        }
+        if (objects.length==2){
+            int limitedSpeed1=(int) objects[0];
+            int limitedSpeed2=(int) objects[1];
+            return new byte[]{
+                    BleByteUtil.intToByteArray32only1(limitedSpeed1)[0],
+                    BleByteUtil.intToByteArray32only1(limitedSpeed2)[0]
+            };
+        }
+        return null;
+    }
+
+    public static byte[] getSendSpeed(Object... objects){
+        if(null==objects||objects.length==0){
+            return null;
+        }
+        if(objects.length==2){
+            int nowSpeed= (int) objects[0];
+            SpeedType speedType= (SpeedType) objects[1];
+            return new byte[]{
+                    (byte)(nowSpeed & 0xFF),
+                    speedType.getType()
+            };
+        }
+        return null;
+    }
+
     public static byte[] getSpeeding(Object... objects){
         if(null==objects||objects.length<2){
             return null;
@@ -99,7 +131,6 @@ public class HudCmdSendDataUtil {
         if(null==objects||objects.length<2){
             return null;
         }
-
         HudWarningPointType type1	= (HudWarningPointType) objects[0];
         int distance1= (int) objects[1];
         byte[] distance1bytes=BleByteUtil.intToByteArray32only3(distance1);

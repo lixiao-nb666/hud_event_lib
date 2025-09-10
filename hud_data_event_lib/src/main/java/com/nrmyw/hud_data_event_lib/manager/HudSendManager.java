@@ -83,11 +83,17 @@ public class HudSendManager {
             case SPEED:
                 body = HudCmdSendDataUtil.getSpeed(objects);
                 break;
+            case SEND_SPEED:
+                body = HudCmdSendDataUtil.getSendSpeed(objects);
+                break;
             case SPEEDING:
                 body = HudCmdSendDataUtil.getSpeeding(objects);
                 break;
             case INTERVAL_SPEED:
                 body = HudCmdSendDataUtil.getIntervalSpeed(objects);
+                break;
+            case SEND_WARNING_POINT_SPEED:
+                body = HudCmdSendDataUtil.getWpLimitedSpeed(objects);
                 break;
             case WARNING_POINT:
             case BIG_WARNING_POINT:

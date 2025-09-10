@@ -21,6 +21,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
+import com.nrmyw.hud_data_lib.type.speed.SpeedType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
@@ -80,6 +81,17 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void sendNowSpeed(int nowSpeed, SpeedType speedType) {
+        nowSpeed= HudSendDataCheckUtil.getSpeed(nowSpeed);
+        if(null==speedType){
+            HudSendManager.getInstance().sendCmd(HudCmdType.SPEED,nowSpeed);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.SEND_SPEED,nowSpeed,speedType);
+        }
+
+    }
+
+    @Override
     public void sendSpeeding(HudSpeedingTextType textColorStyle, HudSpeedingShowBJType speedingShowBJType) {
         if(null==textColorStyle||null==speedingShowBJType){
             return;
@@ -100,6 +112,11 @@ public class HudEvent implements HudEventImp {
     @Override
     public void hideIntervalSpeed() {
         HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
+    }
+
+    @Override
+    public void sendWarningPointLimitedSpeed(int limitedSpeed1, int limitedSpeed2) {
+
     }
 
     @Override

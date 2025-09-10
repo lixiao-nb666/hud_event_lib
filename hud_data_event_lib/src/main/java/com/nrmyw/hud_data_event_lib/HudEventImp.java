@@ -13,6 +13,7 @@ import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
+import com.nrmyw.hud_data_lib.type.speed.SpeedType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
@@ -33,14 +34,17 @@ public interface HudEventImp {
 
     public void sendNowSpeed(int nowSpeed,int limitedSpeed1 ,int limitedSpeed2);
 
-    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudSpeedingShowBJType speedingShowBJType);
+    public void sendNowSpeed(int nowSpeed, SpeedType speedType);
 
+
+    public void sendSpeeding(HudSpeedingTextType textColorStyle, HudSpeedingShowBJType speedingShowBJType);
 
 
     public void sendIntervalSpeed(int intervalSpeed,int interval ,int averageSpeed,int timeHours,int timeMin);
 
     public void hideIntervalSpeed();
 
+    public void sendWarningPointLimitedSpeed(int limitedSpeed1 ,int limitedSpeed2);
 
     public void sendWarningPoint(HudWarningPointType type1	, int distance1);
 
