@@ -2,15 +2,11 @@ package com.nrmyw.hud_data_event_lib;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
-
-import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
-import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
-
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -18,14 +14,12 @@ import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
-
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.speed.SpeedType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnBjType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
 import com.nrmyw.hud_data_lib.type.type.HudStatuType;
-
 import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
@@ -88,7 +82,6 @@ public class HudEvent implements HudEventImp {
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.SEND_SPEED,nowSpeed,speedType);
         }
-
     }
 
     @Override
@@ -116,7 +109,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendWarningPointLimitedSpeed(int limitedSpeed1, int limitedSpeed2) {
-
+        limitedSpeed1= HudSendDataCheckUtil.getSpeed(limitedSpeed1);
+        limitedSpeed2= HudSendDataCheckUtil.getSpeed(limitedSpeed2);
+        HudSendManager.getInstance().sendCmd(HudCmdType.SEND_WARNING_POINT_SPEED,limitedSpeed1,limitedSpeed2);
     }
 
     @Override
@@ -205,6 +200,12 @@ public class HudEvent implements HudEventImp {
     public void sendLaneInformation(HudLaneCountBean laneCountBean) {
         if(null==laneCountBean||null==laneCountBean.getLaneList()||laneCountBean.getLaneList().size()==0){
             return;
+        }
+        if(laneCountBean.getLeftIndex()>4){
+            laneCountBean.setLeftIndex(4);
+        }
+        if(laneCountBean.getRightIndex()>4){
+            laneCountBean.setRightIndex(4);
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,laneCountBean);
     }

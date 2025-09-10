@@ -223,13 +223,15 @@ public class HudCmdSendDataUtil {
 
     private static byte[] getDefLaneInfo(HudLaneCountBean laneCountBean){
         int count=laneCountBean.getLaneList().size();
-        byte[] bytes=new byte[2+count];
+        byte[] bytes=new byte[4+count];
         bytes[0]=HudLaneInformationType.DEF.getType();
         bytes[1]=(byte)(count & 0xFF);
         for(int i=0;i<laneCountBean.getLaneList().size();i++) {
             HudLaneType laneType = laneCountBean.getLaneList().get(i);
             bytes[2 + i] = laneType.getType();
         }
+        bytes[bytes.length-2]=   (byte) (laneCountBean.getLeftIndex()& 0xFF);
+        bytes[bytes.length-1]=   (byte) (laneCountBean.getRightIndex()& 0xFF);
         return bytes;
     }
 
