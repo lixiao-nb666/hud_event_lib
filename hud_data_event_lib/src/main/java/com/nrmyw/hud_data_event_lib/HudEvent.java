@@ -201,12 +201,6 @@ public class HudEvent implements HudEventImp {
         if(null==laneCountBean||null==laneCountBean.getLaneList()||laneCountBean.getLaneList().size()==0){
             return;
         }
-        if(laneCountBean.getLeftIndex()>4){
-            laneCountBean.setLeftIndex(4);
-        }
-        if(laneCountBean.getRightIndex()>4){
-            laneCountBean.setRightIndex(4);
-        }
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,laneCountBean);
     }
 
