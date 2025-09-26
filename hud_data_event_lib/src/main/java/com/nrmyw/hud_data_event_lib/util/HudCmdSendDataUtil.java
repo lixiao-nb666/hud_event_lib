@@ -230,8 +230,9 @@ public class HudCmdSendDataUtil {
             HudLaneType laneType = laneCountBean.getLaneList().get(i);
             bytes[2 + i] = laneType.getType();
         }
-        bytes[bytes.length-2]=   (byte) (laneCountBean.getLeftIndex()& 0xFF);
-        bytes[bytes.length-1]=   (byte) (laneCountBean.getRightIndex()& 0xFF);
+        bytes[bytes.length-2]= (byte) (laneCountBean.getRightIndex()& 0xFF);
+        bytes[bytes.length-1]= (byte) (laneCountBean.getLeftIndex()& 0xFF);
+
         return bytes;
     }
 
