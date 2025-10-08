@@ -11,6 +11,7 @@ import com.nrmyw.ble_event_lib.statu.BleStatu;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventObserver;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.base.BaseService;
+import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
@@ -37,12 +38,17 @@ public class HudEventService extends BaseService {
                     canSendTime=false;
                     break;
                 case SEND_IMAGE_START:
+                    HudImageManeger.getInstance().setSendImageStatu(true);
                     doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_END:
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
+                    HudImageManeger.getInstance().setSendImageStatu(false);
                     break;
                 case RUN_ERR:
+                    break;
+                case SENDING_DATA:
+                    HudImageManeger.getInstance().checkToSend();
                     break;
                 case RETRUN_BYTES:
                     byte[] retrunBytes= (byte[]) objects[0];

@@ -2,6 +2,8 @@ package com.nrmyw.hud_data_event_lib;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+
+import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
@@ -325,7 +327,8 @@ public class HudEvent implements HudEventImp {
         if(null==bitmap||bitmap.isRecycled()){
             return;
         }
-        HudSendManager.getInstance().sendBitmap(bitmap,0);
+        HudImageManeger.getInstance().send(HudImageType.IMAGE,bitmap);
+//        HudSendManager.getInstance().sendBitmap(bitmap,0);
     }
 
     @Override
@@ -333,7 +336,8 @@ public class HudEvent implements HudEventImp {
         if(null==bitmap||bitmap.isRecycled()||null==hudImageType){
             return;
         }
-        HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+//        HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+        HudImageManeger.getInstance().send(hudImageType,bitmap);
     }
 
 
@@ -345,12 +349,12 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void hideImage() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
+        HudImageManeger.getInstance().cancelImage(HudImageType.IMAGE);
     }
 
     @Override
     public void hideProgressBar() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
+        HudImageManeger.getInstance().cancelImage(HudImageType.PROGRESS_BAR);
     }
 
 
