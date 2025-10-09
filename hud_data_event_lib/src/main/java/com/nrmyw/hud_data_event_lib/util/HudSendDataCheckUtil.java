@@ -12,6 +12,16 @@ public class HudSendDataCheckUtil {
         }
     }
 
+    public static int getDis(int  dis){
+        if(dis<0){
+            return 0;
+        }else if(dis>99900){
+            return 99900;
+        }else {
+            return dis;
+        }
+    }
+
     public static int getGpsSpeed(int nowGpsSpeed){
         if(nowGpsSpeed<0){
             return 0;

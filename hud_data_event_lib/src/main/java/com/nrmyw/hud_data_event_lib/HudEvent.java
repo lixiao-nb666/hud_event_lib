@@ -98,6 +98,7 @@ public class HudEvent implements HudEventImp {
     @Override
     public void sendIntervalSpeed(int intervalSpeed, int interval, int averageSpeed, int timeHours, int timeMin) {
         intervalSpeed= HudSendDataCheckUtil.getSpeed(intervalSpeed);
+        interval=HudSendDataCheckUtil.getDis(interval);
         averageSpeed= HudSendDataCheckUtil.getSpeed(averageSpeed);
         timeHours= HudSendDataCheckUtil.getSpeed(timeHours);
         timeMin= HudSendDataCheckUtil.getSpeed(timeMin);
@@ -121,6 +122,7 @@ public class HudEvent implements HudEventImp {
         if(null==type1){
             return;
         }
+        distance1=HudSendDataCheckUtil.getDis(distance1);
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1);
     }
 
@@ -129,7 +131,8 @@ public class HudEvent implements HudEventImp {
         if(null==type1||null==type2){
             return;
         }
-
+        distance1=HudSendDataCheckUtil.getDis(distance1);
+        distance2=HudSendDataCheckUtil.getDis(distance2);
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
     }
 
@@ -138,6 +141,7 @@ public class HudEvent implements HudEventImp {
         if(null==type1){
             return;
         }
+        distance1=HudSendDataCheckUtil.getDis(distance1);
         HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
     }
 
@@ -178,6 +182,7 @@ public class HudEvent implements HudEventImp {
         if(null==reachType){
             return;
         }
+        distance=HudSendDataCheckUtil.getDis(distance);
         hours= HudSendDataCheckUtil.getSpeed(hours);
         minutes= HudSendDataCheckUtil.getSpeed(minutes);
         HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes,reachType);
@@ -219,6 +224,7 @@ public class HudEvent implements HudEventImp {
         if(null==type1){
             return;
         }
+        distance1=HudSendDataCheckUtil.getDis(distance1);
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,HudTurnType.none,0);
     }
 
@@ -227,6 +233,8 @@ public class HudEvent implements HudEventImp {
         if(null==type1||null==type2){
             return;
         }
+        distance1=HudSendDataCheckUtil.getDis(distance1);
+        distance2=HudSendDataCheckUtil.getDis(distance2);
         HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,type2,distance2);
     }
 
