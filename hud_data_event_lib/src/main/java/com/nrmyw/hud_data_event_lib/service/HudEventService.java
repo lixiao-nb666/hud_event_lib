@@ -67,7 +67,7 @@ public class HudEventService extends BaseService {
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
             byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
             BleEventSubscriptionSubject.getInstance().sendImageIndexCmd(endInfoBean.getIndex(),endBytes);
-            if(endInfoBean.getType()==0){
+            if(endInfoBean.getType()==0&&HudImageManeger.getInstance().checkImageCanShow()){
                 getHudEvent().showImage();
             }
 

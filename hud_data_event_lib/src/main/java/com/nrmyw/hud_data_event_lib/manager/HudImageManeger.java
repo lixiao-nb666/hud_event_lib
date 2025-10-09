@@ -47,6 +47,9 @@ public class HudImageManeger {
         if(null==hudImageType||null==bitmap||bitmap.isRecycled()){
             return;
         }
+        if(hudImageType==HudImageType.IMAGE){
+            imageCanshow=true;
+        }
         Log.i("kankanshibushijinlaile","kankanshibushijinlaile:22");
         long nowTime=System.currentTimeMillis();
         if(nowSendImageIng&&nowTime-lastSendOverTime>3000){
@@ -58,7 +61,7 @@ public class HudImageManeger {
                 addToMap(hudImageType,bitmap);
             }
         }else {
-            Log.i("kankanshibushijinlaile","kankanshibushijinlaile:33");
+            Log.i("kankanshibushijinlaile","kankanshibushijinlaile:44");
             HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
         }
 
@@ -79,6 +82,7 @@ public class HudImageManeger {
     }
 
     public void checkToSend(){
+        Log.i("kankanshibushijinlaile","kankanshibushijinlaile:66");
         if(null==bitmapMap||bitmapMap.isEmpty()){
             return;
         }
@@ -89,6 +93,7 @@ public class HudImageManeger {
             }else {
                 Bitmap bitmap=bitmapMap.get(hudImageType);
                 if(null!=bitmap&&!bitmap.isRecycled()){
+                    Log.i("kankanshibushijinlaile","kankanshibushijinlaile:55");
                     HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
                 }
                 bitmapMap.clear();
@@ -104,13 +109,17 @@ public class HudImageManeger {
 //            return false;
 //        }
 //    }
-
+    private boolean imageCanshow;
+    public boolean checkImageCanShow(){
+        return imageCanshow;
+    }
     public void cancelImage(HudImageType hudImageType){
         if(null==hudImageType){
             hudImageType=HudImageType.IMAGE;
         }
         switch (hudImageType){
             case IMAGE:
+                imageCanshow=false;
                 HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
                 break;
             case PROGRESS_BAR:
