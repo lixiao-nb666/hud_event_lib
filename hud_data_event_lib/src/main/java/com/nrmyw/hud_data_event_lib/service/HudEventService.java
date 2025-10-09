@@ -38,17 +38,19 @@ public class HudEventService extends BaseService {
                     canSendTime=false;
                     break;
                 case SEND_IMAGE_START:
-                    HudImageManeger.getInstance().setSendImageStatu(true);
+                    HudImageManeger.getInstance().setSendImageIsStart(true);
                     doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_END:
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
-                    HudImageManeger.getInstance().setSendImageStatu(false);
+                    HudImageManeger.getInstance().setSendImageIsStart(false);
+                    handler.removeMessages(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal());
+                    handler.sendEmptyMessageDelayed(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal(),168);
                     break;
                 case RUN_ERR:
                     break;
                 case SENDING_DATA:
-                    HudImageManeger.getInstance().checkToSend();
+
                     break;
                 case RETRUN_BYTES:
                     byte[] retrunBytes= (byte[]) objects[0];
@@ -92,6 +94,9 @@ public class HudEventService extends BaseService {
                         Date date = new Date(nowTime);
                         int needS=60-date.getSeconds();
                         handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),needS*1000);
+                        break;
+                    case CHECK_IMAGE_SEND:
+                        HudImageManeger.getInstance().checkToSend();
                         break;
                 }
             }catch (Exception e){}
