@@ -2,7 +2,7 @@ package com.nrmyw.hud_data_event_lib;
 
 import android.graphics.Bitmap;
 
-import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
+
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
