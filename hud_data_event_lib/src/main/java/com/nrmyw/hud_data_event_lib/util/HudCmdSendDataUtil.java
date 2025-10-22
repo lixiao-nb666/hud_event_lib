@@ -7,6 +7,7 @@ import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 
+import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -482,6 +483,20 @@ public class HudCmdSendDataUtil {
         HudTurnBjType styleType = (HudTurnBjType) objects[0];
         return new byte[]{
                 styleType.getType()
+        };
+    }
+
+    public static byte[] getDisplayRect(Object... objects) {
+        if (null == objects || objects.length < 2) {
+            return null;
+        }
+        HudSetDisplayDirectionType  directionType = (HudSetDisplayDirectionType) objects[0];
+        int v=(int)objects[1];
+        byte[] vBs=BleByteUtil.intToByteArray32only2(v);
+        return new byte[]{
+                directionType.getType(),
+                vBs[0],
+                vBs[1],
         };
     }
 

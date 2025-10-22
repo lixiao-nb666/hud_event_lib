@@ -57,4 +57,15 @@ public class HudSendDataCheckUtil {
     }
 
 
+    public static int getDisplayRectV(int nowDisplayV){
+        if(nowDisplayV<0){
+            return 0;
+        }else if(nowDisplayV>60){
+            return 60;
+        }else {
+            return nowDisplayV;
+        }
+    }
+
+
 }

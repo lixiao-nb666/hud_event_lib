@@ -9,6 +9,7 @@ import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
+import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -469,5 +470,16 @@ public class HudEvent implements HudEventImp {
             return;
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_UI,uiType);
+    }
+
+    @Override
+    public void initDisplayRect(){
+        setDisplayRect(HudSetDisplayDirectionType.TOP,0);
+    }
+
+    @Override
+    public void setDisplayRect(HudSetDisplayDirectionType setDisplayDirectionType, int value){
+        value=HudSendDataCheckUtil.getDisplayRectV(value);
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_DISPLAY_RECT_SIZE,setDisplayDirectionType,value);
     }
 }

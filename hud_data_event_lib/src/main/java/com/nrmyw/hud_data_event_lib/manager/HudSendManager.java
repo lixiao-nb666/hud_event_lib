@@ -158,7 +158,10 @@ public class HudSendManager {
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
             case SET_UI:
-                body = HudCmdSendDataUtil.getStatu(objects);
+                body = HudCmdSendDataUtil.getUI(objects);
+                break;
+            case SET_DISPLAY_RECT_SIZE:
+                body = HudCmdSendDataUtil.getDisplayRect(objects);
                 break;
 
         }

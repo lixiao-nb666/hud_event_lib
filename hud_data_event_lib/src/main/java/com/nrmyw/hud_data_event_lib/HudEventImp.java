@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
+import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
@@ -140,5 +141,11 @@ public interface HudEventImp {
     public void setTwsName(String twsName);
 
     public void setUiType(HudUiType uiType);
+
+    public void initDisplayRect();
+
+    public void setDisplayRect(HudSetDisplayDirectionType setDisplayDirectionType,int value);
+
+
 
 }
