@@ -184,8 +184,8 @@ public class HudEvent implements HudEventImp {
             return;
         }
         distance=HudSendDataCheckUtil.getDis(distance);
-        hours= HudSendDataCheckUtil.getSpeed(hours);
-        minutes= HudSendDataCheckUtil.getSpeed(minutes);
+        hours= HudSendDataCheckUtil.getTimeH(hours);
+        minutes= HudSendDataCheckUtil.getTimeM(minutes);
         HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes,reachType);
     }
 

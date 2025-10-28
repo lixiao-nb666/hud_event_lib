@@ -56,6 +56,26 @@ public class HudSendDataCheckUtil {
         }
     }
 
+    public static int getTimeH(int h){
+        if(h<0){
+            return 0;
+        }else if(h>99) {
+            return 99;
+        }else {
+            return h;
+        }
+    }
+
+    public static int getTimeM(int m){
+        if(m<0){
+            return 0;
+        }else if(m>59) {
+            return 59;
+        }else {
+            return m;
+        }
+    }
+
 
     public static int getDisplayRectV(int nowDisplayV){
         if(nowDisplayV<0){
