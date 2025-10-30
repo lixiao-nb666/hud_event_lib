@@ -3,6 +3,7 @@ package com.nrmyw.hud_data_event.activity;
 import android.media.MediaParser;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.newbee.ble_lib.NewBeeBleManager;
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_event.R;
 import com.nrmyw.hud_data_event_lib.HudEventManager;
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         sendTimeBT.setOnClickListener(onClickListener);
         sendSpeedBT.setOnClickListener(onClickListener);
         Log.i("kankanshibushikong","kankanshibushikong"+(null==HudEventManager.getInstance().getHudEvent()));
-
+        NewBeeBleManager.getInstance().nowGetAllPermissions();
     }
+
+
 }

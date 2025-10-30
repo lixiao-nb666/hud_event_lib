@@ -1,5 +1,6 @@
 package com.nrmyw.hud_data_event_lib;
 
+import android.app.Notification;
 import android.content.Context;
 
 import com.nrmyw.hud_data_event_lib.service.HudEventService;
@@ -40,5 +41,23 @@ public class HudEventManager {
     }
 
 
-
+//    private Notification notification;
+//
+//    public void setNotification(Notification notification){
+//        this.notification=notification;
+//    }
+//
+//    public Notification getNotification(){
+//        return notification;
+//    }
+//
+//    private int notificationId;
+//
+//    public int getNotificationId() {
+//        return notificationId;
+//    }
+//
+//    public void setNotificationId(int notificationId) {
+//        this.notificationId = notificationId;
+//    }
 }
