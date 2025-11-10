@@ -23,6 +23,8 @@ import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
+import java.security.PublicKey;
+
 public interface HudEventImp {
 
 

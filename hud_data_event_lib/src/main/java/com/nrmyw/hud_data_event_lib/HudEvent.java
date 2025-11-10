@@ -27,6 +27,8 @@ import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
+import java.nio.charset.StandardCharsets;
+
 public class HudEvent implements HudEventImp {
     private static HudEvent hudEvent;
 
@@ -453,6 +455,9 @@ public class HudEvent implements HudEventImp {
         if(TextUtils.isEmpty(bleName)){
             return;
         }
+        if(bleName.length()>29){
+            bleName=bleName.substring(0,29);
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BLE_NAME,bleName);
     }
 
@@ -460,6 +465,9 @@ public class HudEvent implements HudEventImp {
     public void setTwsName(String twsName) {
         if(TextUtils.isEmpty(twsName)){
             return;
+        }
+        if(twsName.length()>29){
+            twsName=twsName.substring(0,29);
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_TWS_NAME,twsName);
     }
