@@ -78,6 +78,11 @@ public interface HudEventImp {
 
     public void sendTurnType(HudTurnType type1	, int distance1);
     public void sendTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
+
+    public void showBigTurnType();
+
+    public void hideBigTurnType();
+
     public void setTurnBj(HudTurnBjType turnBj);
 
     public void sendNextLaneName(String laneName);

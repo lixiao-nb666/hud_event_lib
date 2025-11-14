@@ -155,6 +155,7 @@ public class HudSendManager {
             case ICON_FLICKER:
             case SET_DEVICE_SOUND_STATU:
             case SET_DAYLIGHTING_SHOW_STATU:
+            case SET_BIG_TURN_TYPE_HIDE_AND_SHOW:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
             case SET_UI:
@@ -163,7 +164,6 @@ public class HudSendManager {
             case SET_DISPLAY_RECT_SIZE:
                 body = HudCmdSendDataUtil.getDisplayRect(objects);
                 break;
-
         }
         return body;
     }
