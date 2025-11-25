@@ -8,6 +8,8 @@ public class HudSetConfig {
     private int imageMaxW=200;
     private int imageMaxH=260;
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
+
+    private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
     private long timeDifference;
     private HudSetConfig(){}
 
@@ -59,12 +61,25 @@ public class HudSetConfig {
         this.bleSendBitmapQualityType = bleSendBitmapQualityType;
     }
 
+    public BleSendBitmapQualityType getBleSendProgressQualityType() {
+        return bleSendProgressQualityType;
+    }
+
+    public void setBleSendProgressQualityType(BleSendBitmapQualityType bleSendProgressQualityType) {
+        if(null==bleSendProgressQualityType){
+            return;
+        }
+        this.bleSendProgressQualityType = bleSendProgressQualityType;
+    }
+
     @Override
     public String toString() {
         return "HudSetConfig{" +
                 "imageMaxW=" + imageMaxW +
                 ", imageMaxH=" + imageMaxH +
                 ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
+                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
+                ", timeDifference=" + timeDifference +
                 '}';
     }
 }
