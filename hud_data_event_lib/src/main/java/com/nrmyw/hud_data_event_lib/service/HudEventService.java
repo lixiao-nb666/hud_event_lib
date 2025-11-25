@@ -47,6 +47,9 @@ public class HudEventService extends BaseService {
                     doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_END:
+
+                    break;
+                case SEND_IMAGE_DATA_END:
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
                     HudImageManeger.getInstance().setSendImageIsStart(false);
                     handler.removeMessages(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal());

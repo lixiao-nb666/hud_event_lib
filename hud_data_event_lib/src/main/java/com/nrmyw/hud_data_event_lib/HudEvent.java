@@ -349,7 +349,7 @@ public class HudEvent implements HudEventImp {
             return;
         }
         HudImageManeger.getInstance().send(HudImageType.IMAGE,bitmap);
-//        HudSendManager.getInstance().sendBitmap(bitmap,0);
+
     }
 
     @Override
@@ -357,7 +357,7 @@ public class HudEvent implements HudEventImp {
         if(null==bitmap||bitmap.isRecycled()||null==hudImageType){
             return;
         }
-//        HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+
         HudImageManeger.getInstance().send(hudImageType,bitmap);
     }
 
