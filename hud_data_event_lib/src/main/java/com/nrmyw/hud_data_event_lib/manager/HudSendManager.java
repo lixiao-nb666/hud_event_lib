@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
+import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudCmdSendDataUtil;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
+import com.nrmyw.hud_data_lib.type.image.HudImageType;
 
 public class HudSendManager {
 
@@ -55,13 +57,22 @@ public class HudSendManager {
         BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
-    public void sendBitmap(Bitmap bitmap,int type){
+    public void sendBitmap(Bitmap bitmap, HudImageType imageType){
         BleSendImageInfoBean bleSendImageInfoBean=new BleSendImageInfoBean();
-        bleSendImageInfoBean.setType(type);
+        bleSendImageInfoBean.setType(imageType.getType());
         bleSendImageInfoBean.setMaxW(HudSetConfig.getInstance().getImageMaxW());
         bleSendImageInfoBean.setMaxH(HudSetConfig.getInstance().getImageMaxH());
         bleSendImageInfoBean.setBitmap(bitmap);
-        bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendBitmapQualityType());
+        switch (imageType){
+            case PROGRESS_BAR:
+                bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendProgressQualityType());
+                break;
+            default:
+                bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendBitmapQualityType());
+                break;
+        }
+
+
         BleEventSubscriptionSubject.getInstance().sendImage(bleSendImageInfoBean);
 //        if(null!=sendListen){
 //            sendListen.sendImage(bitmap,qualityType);

@@ -62,7 +62,7 @@ public class HudImageManeger {
             }
         }else {
             Log.i("kankanshibushijinlaile","kankanshibushijinlaile:44");
-            HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+            HudSendManager.getInstance().sendBitmap(bitmap,hudImageType);
         }
 
 //        if(!nowSendImageIng&&checkNowCanSend()){
@@ -94,7 +94,7 @@ public class HudImageManeger {
                 Bitmap bitmap=bitmapMap.get(hudImageType);
                 if(null!=bitmap&&!bitmap.isRecycled()){
                     Log.i("kankanshibushijinlaile","kankanshibushijinlaile:55");
-                    HudSendManager.getInstance().sendBitmap(bitmap,hudImageType.getType());
+                    HudSendManager.getInstance().sendBitmap(bitmap,hudImageType);
                 }
                 bitmapMap.clear();
                 return;
