@@ -208,17 +208,7 @@ public class HudCmdSendDataUtil {
 
     private static byte[] hideLane(){
         return new byte[]{
-                HudLaneInformationType.HIDE.getType(),
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
-                (byte)0x00,
+                HudLaneInformationType.HIDE.getType()
         };
     }
 
@@ -240,15 +230,15 @@ public class HudCmdSendDataUtil {
     private static byte[] getHiPassLaneInfo(HudLaneHiPassCountBean laneHiPassCountBean,int line){
         int byteL;
         if(autoGetHipassL){
-            byteL=laneHiPassCountBean.getLaneList().size()+4;
+            byteL=laneHiPassCountBean.getLaneList().size()+2;
         }else {
             byteL =12;
         }
         byte[] bytes=new byte[byteL];
         bytes[0]=HudLaneInformationType.HI_PASS.getType();
-        int count=laneHiPassCountBean.getLaneList().size()+1;
+        int count=laneHiPassCountBean.getLaneList().size();
         bytes[1]=(byte)(count & 0xFF);
-        bytes[byteL-1]=(byte)(line & 0xFF);
+
         for(int i=0;i<count;i++){
             if(i<laneHiPassCountBean.getLaneList().size()){
                 int needType=laneHiPassCountBean.getLaneList().get(i);
@@ -263,6 +253,7 @@ public class HudCmdSendDataUtil {
                 bytes[2+i]=(byte)0x00;
             }
         }
+//        bytes[byteL-1]=(byte)(line & 0xFF);
         return bytes;
     }
 

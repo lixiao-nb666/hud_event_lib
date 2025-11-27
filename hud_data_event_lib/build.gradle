@@ -35,6 +35,6 @@ android {
 
 dependencies {
     implementation 'com.github.lixiao-nb666:hud_data_lib:1.0.20'
-    implementation 'com.github.lixiao-nb666:ble_event:1.0.24'
+    implementation 'com.github.lixiao-nb666:ble_event:1.0.25'
 
 }

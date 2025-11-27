@@ -77,7 +77,6 @@ public class HudEventService extends BaseService {
             if(endInfoBean.getType()==0&&HudImageManeger.getInstance().checkImageCanShow()){
                 getHudEvent().showImage();
             }
-
         }
     };
 
