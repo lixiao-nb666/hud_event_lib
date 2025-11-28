@@ -76,6 +76,8 @@ public interface HudEventImp {
 
     public void sendLaneInformation(HudLaneCountBean laneCountBean);
 
+    public void sendLaneInformationShowInMiddle(HudLaneCountBean laneCountBean);
+
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean);
 
     public void sendTurnType(HudTurnType type1	, int distance1);

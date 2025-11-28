@@ -13,6 +13,7 @@ import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
+import com.nrmyw.hud_data_lib.type.lane.HudLaneType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
@@ -217,6 +218,31 @@ public class HudEvent implements HudEventImp {
             return;
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,laneCountBean);
+    }
+
+    @Override
+    public void sendLaneInformationShowInMiddle(HudLaneCountBean laneCountBean) {
+        if(null==laneCountBean||null==laneCountBean.getLaneList()||laneCountBean.getLaneList().size()==0){
+            return;
+        }
+        if(laneCountBean.getLaneList().size()>8){
+            HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,laneCountBean);
+            return;
+        }
+        int count=laneCountBean.getLaneList().size();
+
+            int qNumb=10-count;
+           int firstAdd=qNumb/2;
+           int endAdd=qNumb-firstAdd;
+
+        HudLaneCountBean sendLaneCountBean=new HudLaneCountBean();
+
+        sendLaneCountBean.addByNumbUseNone(firstAdd);
+        for(HudLaneType laneType:laneCountBean.getLaneList()){
+            sendLaneCountBean.add(laneType);
+        }
+        sendLaneCountBean.addByNumbUseNone(endAdd);
+        HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION,HudLaneInformationType.DEF,sendLaneCountBean);
     }
 
     @Override
