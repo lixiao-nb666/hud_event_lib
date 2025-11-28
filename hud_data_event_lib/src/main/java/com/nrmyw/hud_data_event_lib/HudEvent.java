@@ -202,6 +202,11 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void hideReach() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,0,0,0,HudReachType.HIDE);
+    }
+
+    @Override
     public void sendLaneHide() {
         HudSendManager.getInstance().sendCmd(HudCmdType.LANE_INFORMATION, HudLaneInformationType.HIDE);
     }

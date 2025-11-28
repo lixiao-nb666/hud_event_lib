@@ -70,6 +70,8 @@ public interface HudEventImp {
 
     public void sendReachInfo(String reachInfoStr);
 
+    public void hideReach();
+
     public void sendLaneHide();
 
     public void sendLaneInformation(HudLaneCountBean laneCountBean);
