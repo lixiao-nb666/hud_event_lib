@@ -102,7 +102,7 @@ public interface HudEventImp {
 
     public void sendBrightnessHand(int v);
 
-
+    public void sendBrightnessHandDebug(int v);
     public void queBrightness();
 
     public void queSN();
@@ -134,6 +134,10 @@ public interface HudEventImp {
     public void iconFlicherClose();
 
     public void factorySet();
+
+    public void reboot();
+
+    public void setOtaMustHaveFilePermission(String otaFilePath);
 
     public void deviceSoundOpen();
 

@@ -36,7 +36,15 @@ public class HudBleByteUtil {
 
 
 
-
+    public static byte[] startOTA(){
+        byte[]bytes=new byte[5];
+        bytes[0]=(byte)0xA5;
+        bytes[1]=(byte)0x5A;
+        bytes[2]= (byte)0x00;
+        bytes[3]= (byte)0x05;
+        bytes[4] = (byte)0xA0;
+        return bytes;
+    }
 
 
 

@@ -3,8 +3,11 @@ package com.nrmyw.hud_data_event_lib;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
+import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
@@ -341,6 +344,16 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void sendBrightnessHandDebug(int v) {
+        if(v<11){
+            v=11;
+        }if(v>14){
+            v=14;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.SET_BRIGHTNESS, HudBrightnessMoldType.HAND,v);
+    }
+
+    @Override
     public void queBrightness() {
         HudSendManager.getInstance().sendCmd(HudCmdType.QUERY_BRIGHTNESS);
     }
@@ -446,6 +459,19 @@ public class HudEvent implements HudEventImp {
     @Override
     public void factorySet() {
         HudSendManager.getInstance().sendCmd(HudCmdType.FACTORY_SET);
+    }
+
+    @Override
+    public void reboot() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.REBOOT);
+    }
+
+    @Override
+    public void setOtaMustHaveFilePermission(String otaFilePath) {
+        BleEventSubscriptionSubject.getInstance().sendCmd(HudBleByteUtil.startOTA());
+        BleSendOtaInfoBean otaInfoBean=new BleSendOtaInfoBean();
+        otaInfoBean.setFilePath(otaFilePath);
+        BleEventSubscriptionSubject.getInstance().sendOta(otaInfoBean);
     }
 
     @Override

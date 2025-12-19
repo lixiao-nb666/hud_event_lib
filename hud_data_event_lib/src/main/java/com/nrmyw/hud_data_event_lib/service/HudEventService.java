@@ -44,7 +44,7 @@ public class HudEventService extends BaseService {
                     break;
                 case SEND_IMAGE_START:
                     HudImageManeger.getInstance().setSendImageIsStart(true);
-                    doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
+//                    doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_END:
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
@@ -68,12 +68,12 @@ public class HudEventService extends BaseService {
 
         private void doSendImageStartThing(BleSendImageStartInfoBean startInfoBean){
             byte[] startBytes= HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,startInfoBean.getW(),startInfoBean.getH(),startInfoBean.getSize(), HudSendImageType.START,startInfoBean.getType());
-            BleEventSubscriptionSubject.getInstance().sendImageIndexCmd(0,startBytes);
+            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(0,startBytes);
         }
 
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
-            byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
-            BleEventSubscriptionSubject.getInstance().sendImageIndexCmd(endInfoBean.getIndex(),endBytes);
+//            byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
+//            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),endBytes);
             if(endInfoBean.getType()==0&&HudImageManeger.getInstance().checkImageCanShow()){
                 getHudEvent().showImage();
             }
