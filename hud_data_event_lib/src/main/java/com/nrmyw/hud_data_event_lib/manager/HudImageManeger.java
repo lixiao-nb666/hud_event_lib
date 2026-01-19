@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
@@ -120,7 +121,8 @@ public class HudImageManeger {
         switch (hudImageType){
             case IMAGE:
                 imageCanshow=false;
-                HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
+                HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+                BleEventSubscriptionSubject.getInstance().clearIndexMsg();
                 break;
             case PROGRESS_BAR:
                 HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );

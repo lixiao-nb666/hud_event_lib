@@ -21,6 +21,7 @@ import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
+import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import java.util.Date;
 
@@ -50,6 +51,7 @@ public class HudEventService extends BaseService {
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_DATA_END:
+
                     HudImageManeger.getInstance().setSendImageIsStart(false);
                     handler.removeMessages(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal());
                     handler.sendEmptyMessageDelayed(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal(),168);
@@ -74,10 +76,18 @@ public class HudEventService extends BaseService {
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
 //            byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
 //            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),endBytes);
-            if(endInfoBean.getType()==0&&HudImageManeger.getInstance().checkImageCanShow()){
-                getHudEvent().showImage();
-            }
+            if(endInfoBean.getType()==0)
+                if(HudImageManeger.getInstance().checkImageCanShow()){
+                    byte[] showBytes=HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
+                    BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),showBytes);
+                }else {
+                    byte[] hideBytes=HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
+                    BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),hideBytes);
+                }
+
         }
+
+
     };
 
 
