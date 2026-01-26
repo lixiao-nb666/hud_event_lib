@@ -502,4 +502,27 @@ public class HudCmdSendDataUtil {
     }
 
 
+    public static byte[] getNotifiction(Object... objects) {
+        if (null == objects || objects.length < 4) {
+            return null;
+        }
+        String str1= (String) objects[0];
+        int numb1= (int) objects[1];
+        String str2= (String) objects[2];
+        int numb2= (int) objects[3];
+
+        byte[] str1Bytes=str1.getBytes(StandardCharsets.UTF_8);
+        byte[] str1LByte=new byte[]{
+                (byte)(str1Bytes.length & 0xFF)
+        };
+        byte[] numb1Bytes=BleByteUtil.intToByteArray32only3(numb1);
+        byte[] str2Bytes=str2.getBytes(StandardCharsets.UTF_8);
+        byte[] str2LByte=new byte[]{
+                (byte)(str2Bytes.length & 0xFF)
+        };
+        byte[] num2Bytes=BleByteUtil.intToByteArray32only3(numb2);
+       return BleByteUtil.addToNewBytes(str1LByte,str1Bytes,numb1Bytes,str1LByte,str2Bytes,num2Bytes);
+    }
+
+
 }

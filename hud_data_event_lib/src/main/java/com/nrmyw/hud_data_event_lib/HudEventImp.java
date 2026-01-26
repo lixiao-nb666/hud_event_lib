@@ -176,6 +176,10 @@ public interface HudEventImp {
 
     public void setDisplayRect(HudSetDisplayDirectionType setDisplayDirectionType,int value);
 
+    public void notifictionMsg(String notifictionStr1,int interval1);
 
 
+    public void notifictionMsg(String notifictionStr1,int interval1,String notifictionStr2,int interval2);
+
+    public void notifictionMsgHide();
 }

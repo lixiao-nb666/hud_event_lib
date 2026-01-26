@@ -177,6 +177,9 @@ public class HudSendManager {
             case SET_DISPLAY_RECT_SIZE:
                 body = HudCmdSendDataUtil.getDisplayRect(objects);
                 break;
+            case NOTIFICATION:
+                body =HudCmdSendDataUtil.getNotifiction(objects);
+                break;
         }
         return body;
     }

@@ -638,4 +638,25 @@ public class HudEvent implements HudEventImp {
         value=HudSendDataCheckUtil.getDisplayRectV(value);
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_DISPLAY_RECT_SIZE,setDisplayDirectionType,value);
     }
+
+    @Override
+    public void notifictionMsg(String notifictionStr1, int interval1) {
+        if(TextUtils.isEmpty(notifictionStr1)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0);
+    }
+
+    @Override
+    public void notifictionMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2) {
+        if(TextUtils.isEmpty(notifictionStr1)||TextUtils.isEmpty(notifictionStr2)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
+    }
+
+    @Override
+    public void notifictionMsgHide() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+    }
 }
