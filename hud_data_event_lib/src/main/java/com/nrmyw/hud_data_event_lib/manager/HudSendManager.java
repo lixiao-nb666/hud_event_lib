@@ -114,9 +114,11 @@ public class HudSendManager {
                 body = HudCmdSendDataUtil.getReachInfo(objects);
                 break;
             case LANE_INFORMATION:
+            case NEW_LANE_INFORMATION:
                 body = HudCmdSendDataUtil.getLaneInformation(objects);
                 break;
             case TURN_TYPE:
+            case NEW_TURN_TYPE:
                 body = HudCmdSendDataUtil.getTrunType(objects);
                 break;
             case SET_TURN_BJ:

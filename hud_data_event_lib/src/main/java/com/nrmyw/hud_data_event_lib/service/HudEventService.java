@@ -77,7 +77,7 @@ public class HudEventService extends BaseService {
 //            byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
 //            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),endBytes);
 
-            if(endInfoBean.getType()==0) {
+            if(endInfoBean.getType()==0&&endInfoBean.getIndex()>0) {
                 byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
                 BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
 

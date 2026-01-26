@@ -80,8 +80,21 @@ public interface HudEventImp {
 
     public void sendLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean);
 
+
+    public void sendTurnLaneHide();
+
+    public void sendTurnLaneInformation(HudLaneCountBean laneCountBean);
+
+    public void sendTurnLaneInformationShowInMiddle(HudLaneCountBean laneCountBean);
+
+    public void sendTurnLaneHiPass(HudLaneHiPassCountBean laneHiPassCountBean);
+
     public void sendTurnType(HudTurnType type1	, int distance1);
     public void sendTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
+
+    public void sendNewTurnType(HudTurnType type1	, int distance1);
+
+    public void sendNewTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
 
     public void showBigTurnType();
 
@@ -126,6 +139,8 @@ public interface HudEventImp {
     public void hideProgressBar();
 
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
+
+    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1,HudYellowStatuBjType hudYellowStatuBjType2);
 
     public void sendYellowStatuStr(String yellowStatuStr);
 
