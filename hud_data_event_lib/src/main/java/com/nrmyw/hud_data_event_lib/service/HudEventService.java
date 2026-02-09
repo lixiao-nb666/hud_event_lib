@@ -17,7 +17,9 @@ import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 
 import com.nrmyw.hud_data_event_lib.base.BaseService;
 
+import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.HudTimeManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
@@ -26,8 +28,34 @@ import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import java.util.Date;
 
 public class HudEventService extends BaseService {
-//    private BluetoothGattServiceDao bluetoothGattServiceDao;
-    private boolean canSendTime;
+
+    private HudImageManeger.Listen imageListen=new HudImageManeger.Listen() {
+        @Override
+        public void nowCanShowImage() {
+            handler.removeMessages(HudEventServiceMsgType.HIDE_IMAGE.ordinal());
+        }
+
+        @Override
+        public void nowMustSetImageHide() {
+            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IMAGE.ordinal(),1000);
+        }
+    };
+
+    private HudTimeManager.Listen timeListen=new HudTimeManager.Listen() {
+        @Override
+        public void initTime() {
+            handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
+            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),1000);
+        }
+
+        @Override
+        public void stopTime() {
+            handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
+        }
+    };
+
+
+
     private BleStatuEventObserver bleStatuEventObserver=new BleStatuEventObserver() {
         @Override
         public void sendBleStatu(BleStatu bleStatu, Object... objects) {
@@ -37,11 +65,10 @@ public class HudEventService extends BaseService {
 
                     break;
                 case CONNECTED:
-                    canSendTime=true;
-                    initTime();
+                    HudTimeManager.getInstance().setTimeStart(true);
                     break;
                 case DISCONNECTED:
-                    canSendTime=false;
+                    HudTimeManager.getInstance().setTimeStart(false);
                     break;
                 case SEND_IMAGE_START:
 //                    HudImageManeger.getInstance().setSendImageIsStart(true);
@@ -51,10 +78,9 @@ public class HudEventService extends BaseService {
                     doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
                     break;
                 case SEND_IMAGE_DATA_END:
-
-//                    HudImageManeger.getInstance().setSendImageIsStart(false);
-//                    handler.removeMessages(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal());
-//                    handler.sendEmptyMessageDelayed(HudEventServiceMsgType.CHECK_IMAGE_SEND.ordinal(),168);
+                    if(!HudImageManeger.getInstance().isImageCanShow()){
+                        HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+                    }
                     break;
                 case RUN_ERR:
                     break;
@@ -78,15 +104,10 @@ public class HudEventService extends BaseService {
 //            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),endBytes);
 
             if(endInfoBean.getType()==0&&endInfoBean.getIndex()>0) {
-                byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
-                BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
-
-//                if(HudImageManeger.getInstance().checkImageCanShow()){
-//
-//                }else {
-//                    byte[] hideBytes=HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.HIDE);
-//                    BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),hideBytes);
-//                }
+                if(HudImageManeger.getInstance().isImageCanShow()){
+                    byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
+                    BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
+                }
             }
         }
 
@@ -104,8 +125,9 @@ public class HudEventService extends BaseService {
                 HudEventServiceMsgType msgType=HudEventServiceMsgType.values()[msg.what];
                 switch (msgType){
                     case SEND_TIME:
+
                         handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
-                        if(!canSendTime){
+                        if(!HudTimeManager.getInstance().getTimeIsStart()){
                             return;
                         }
                         getHudEvent().sendTime();
@@ -114,8 +136,15 @@ public class HudEventService extends BaseService {
                         int needS=60-date.getSeconds();
                         handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),needS*1000);
                         break;
-                    case CHECK_IMAGE_SEND:
-//                        HudImageManeger.getInstance().checkToSend();
+                    case HIDE_IMAGE:
+                        if(HudImageManeger.getInstance().isImageCanShow()){
+                            return;
+                        }
+                        Log.i("kaishiyincangtupian","kaishiyincangtupian");
+                        HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+                        if(HudImageManeger.getInstance().getHideNumb()>0){
+                            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IMAGE.ordinal(),1000);
+                        }
                         break;
                 }
             }catch (Exception e){}
@@ -127,16 +156,14 @@ public class HudEventService extends BaseService {
         return HudEvent.getInstance();
     }
 
-    private void initTime(){
-        handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
-        handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),1000);
-    }
 
 
 
     @Override
     public void init() {
         BleStatuEventSubscriptionSubject.getInstance().attach(bleStatuEventObserver);
+        HudTimeManager.getInstance().setListen(timeListen);
+        HudImageManeger.getInstance().setListen(imageListen);
     }
 
     @Override

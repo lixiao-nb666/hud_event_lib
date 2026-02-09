@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
+import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
@@ -457,8 +458,7 @@ public class HudEvent implements HudEventImp {
         if(null==bitmap||bitmap.isRecycled()){
             return;
         }
-//        HudImageManeger.getInstance().send(HudImageType.IMAGE,bitmap);
-        HudSendManager.getInstance().sendBitmap(bitmap,HudImageType.IMAGE);
+        sendImage(bitmap,HudImageType.IMAGE);
     }
 
     @Override
@@ -471,6 +471,7 @@ public class HudEvent implements HudEventImp {
 //        }
         if(hudImageType==HudImageType.IMAGE){
             BleEventSubscriptionSubject.getInstance().clearIndexMsg();
+            HudImageManeger.getInstance().setImageCanShow(true);
         }
         HudSendManager.getInstance().sendBitmap(bitmap,hudImageType);
 //        HudImageManeger.getInstance().send(hudImageType,bitmap);
@@ -480,20 +481,22 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void showImage() {
+        HudImageManeger.getInstance().setImageCanShow(true);
         HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
     }
 
     @Override
     public void hideImage() {
-//        HudImageManeger.getInstance().cancelImage(HudImageType.IMAGE);
         BleEventSubscriptionSubject.getInstance().clearIndexMsg();
+        HudImageManeger.getInstance().setImageCanShow(false);
         HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+
 
     }
 
     @Override
     public void hideProgressBar() {
-//        HudImageManeger.getInstance().cancelImage(HudImageType.PROGRESS_BAR);
+
         HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
     }
 
@@ -644,6 +647,7 @@ public class HudEvent implements HudEventImp {
         if(TextUtils.isEmpty(notifictionStr1)){
             return;
         }
+        interval1=HudSendDataCheckUtil.getDis(interval1);
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0);
     }
 
@@ -652,6 +656,8 @@ public class HudEvent implements HudEventImp {
         if(TextUtils.isEmpty(notifictionStr1)||TextUtils.isEmpty(notifictionStr2)){
             return;
         }
+        interval1=HudSendDataCheckUtil.getDis(interval1);
+        interval2=HudSendDataCheckUtil.getDis(interval2);
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
     }
 
