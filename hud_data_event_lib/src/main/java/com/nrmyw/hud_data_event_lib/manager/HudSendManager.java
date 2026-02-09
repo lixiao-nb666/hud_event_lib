@@ -60,14 +60,16 @@ public class HudSendManager {
     public void sendBitmap(Bitmap bitmap, HudImageType imageType){
         BleSendImageInfoBean bleSendImageInfoBean=new BleSendImageInfoBean();
         bleSendImageInfoBean.setType(imageType.getType());
-        bleSendImageInfoBean.setMaxW(HudSetConfig.getInstance().getImageMaxW());
-        bleSendImageInfoBean.setMaxH(HudSetConfig.getInstance().getImageMaxH());
         bleSendImageInfoBean.setBitmap(bitmap);
         switch (imageType){
             case PROGRESS_BAR:
+                bleSendImageInfoBean.setMaxW(HudSetConfig.getInstance().getProgressMaxW());
+                bleSendImageInfoBean.setMaxH(HudSetConfig.getInstance().getProgressMaxH());
                 bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendProgressQualityType());
                 break;
             default:
+                bleSendImageInfoBean.setMaxW(HudSetConfig.getInstance().getImageMaxW());
+                bleSendImageInfoBean.setMaxH(HudSetConfig.getInstance().getImageMaxH());
                 bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendBitmapQualityType());
                 break;
         }

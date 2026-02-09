@@ -7,6 +7,10 @@ public class HudSetConfig {
     private static HudSetConfig hudSetConfig;
     private int imageMaxW=200;
     private int imageMaxH=260;
+
+    private int progressMaxW=22;
+    private int progressMaxH=260;
+
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
     private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
@@ -70,6 +74,22 @@ public class HudSetConfig {
             return;
         }
         this.bleSendProgressQualityType = bleSendProgressQualityType;
+    }
+
+    public int getProgressMaxW() {
+        return progressMaxW;
+    }
+
+    public void setProgressMaxW(int progressMaxW) {
+        this.progressMaxW = progressMaxW;
+    }
+
+    public int getProgressMaxH() {
+        return progressMaxH;
+    }
+
+    public void setProgressMaxH(int progressMaxH) {
+        this.progressMaxH = progressMaxH;
     }
 
     @Override
