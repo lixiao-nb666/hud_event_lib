@@ -9,6 +9,7 @@ import android.util.Log;
 
 
 import com.nrmyw.ble_event_lib.bean.BleSendImageEndInfoBean;
+import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.bean.BleSendImageStartInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.ble_event_lib.statu.BleStatu;
@@ -18,6 +19,7 @@ import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.base.BaseService;
 
 import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
+import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.HudTimeManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
@@ -59,39 +61,45 @@ public class HudEventService extends BaseService {
     private BleStatuEventObserver bleStatuEventObserver=new BleStatuEventObserver() {
         @Override
         public void sendBleStatu(BleStatu bleStatu, Object... objects) {
-            Log.i("lookStatu","kankanshibushikong:"+bleStatu);
-            switch (bleStatu){
-                case CONNECTING:
+            try {
+                switch (bleStatu){
+                    case CONNECTING:
 
-                    break;
-                case CONNECTED:
-                    HudTimeManager.getInstance().setTimeStart(true);
-                    break;
-                case DISCONNECTED:
-                    HudTimeManager.getInstance().setTimeStart(false);
-                    break;
-                case SEND_IMAGE_START:
+                        break;
+                    case CONNECTED:
+                        HudTimeManager.getInstance().setTimeStart(true);
+                        break;
+                    case DISCONNECTED:
+                        HudTimeManager.getInstance().setTimeStart(false);
+                        break;
+                    case SEND_IMAGE_START:
 //                    HudImageManeger.getInstance().setSendImageIsStart(true);
 //                    doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
-                    break;
-                case SEND_IMAGE_END:
-                    doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
-                    break;
-                case SEND_IMAGE_DATA_END:
-                    if(!HudImageManeger.getInstance().isImageCanShow()){
-                        HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
-                    }
-                    break;
-                case RUN_ERR:
-                    break;
-                case SENDING_DATA:
+                        break;
+                    case SEND_IMAGE_END:
+                        doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
+                        break;
+                    case SEND_IMAGE_DATA_END:
+                        if(!HudImageManeger.getInstance().isImageCanShow()){
+                            HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+                        }
+                        HudSendImageManager.getInstance().nowReSend();
+                        break;
+                    case RUN_ERR:
+                        break;
+                    case SENDING_DATA:
 
-                    break;
-                case RETRUN_BYTES:
-                    byte[] retrunBytes= (byte[]) objects[0];
-                    HudCmdRetrunDataUtil.doVue(retrunBytes);
-                    break;
-            }
+                        break;
+                    case RETRUN_BYTES:
+                        byte[] retrunBytes= (byte[]) objects[0];
+                        HudCmdRetrunDataUtil.doVue(retrunBytes);
+                        break;
+                    case SEND_IMAGE_ERR_ISRUN:
+                        HudSendImageManager.getInstance().setReSendImage((BleSendImageInfoBean)objects[0]);
+                        break;
+                }
+            }catch (Exception e){}
+
         }
 
         private void doSendImageStartThing(BleSendImageStartInfoBean startInfoBean){
@@ -102,7 +110,7 @@ public class HudEventService extends BaseService {
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
 //            byte[] endBytes=HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,endInfoBean.getW(),endInfoBean.getH(),endInfoBean.getSize(), HudSendImageType.END,endInfoBean.getType());
 //            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(),endBytes);
-
+            HudSendImageManager.getInstance().setImageType(endInfoBean.getType());
             if(endInfoBean.getType()==0&&endInfoBean.getIndex()>0) {
                 if(HudImageManeger.getInstance().isImageCanShow()){
                     byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);

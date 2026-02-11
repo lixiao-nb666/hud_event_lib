@@ -93,21 +93,7 @@ public class HudSetConfig {
     }
 
 
-    public String getHudT700UpdateUrl(boolean isDebug){
-        if(isDebug){
-            return "https://hud-map.oss-cn-hongkong.aliyuncs.com/update/hut_700_gui_3_debug";
-        }else {
-            return "https://hud-map.oss-cn-hongkong.aliyuncs.com/update/hut_700_gui_3";
-        }
-    }
 
-    public String getHudT900UpdateUrl(boolean isDebug){
-        if(isDebug){
-            return "https://hud-map.oss-cn-hongkong.aliyuncs.com/update/hut_900_gui_1_debug";
-        }else {
-            return "https://hud-map.oss-cn-hongkong.aliyuncs.com/update/hut_900_gui_1";
-        }
-    }
 
 
     @Override

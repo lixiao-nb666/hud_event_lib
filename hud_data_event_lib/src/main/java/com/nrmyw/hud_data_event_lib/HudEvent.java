@@ -7,6 +7,7 @@ import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
 import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
+import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
@@ -481,23 +482,19 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void showImage() {
+
         HudImageManeger.getInstance().setImageCanShow(true);
         HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
     }
 
     @Override
     public void hideImage() {
-        BleEventSubscriptionSubject.getInstance().clearIndexMsg();
-        HudImageManeger.getInstance().setImageCanShow(false);
-        HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
-
-
+        HudSendImageManager.getInstance().hideImage();
     }
 
     @Override
     public void hideProgressBar() {
-
-        HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_PROGRESS_BAR );
+        HudSendImageManager.getInstance().hideProgressBar();
     }
 
 
