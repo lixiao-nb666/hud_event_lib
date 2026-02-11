@@ -80,9 +80,15 @@ public class HudSendImageManager {
     private void  checkImageTypeIsSameAndDoClear(HudImageType nowImageType){
 
         if(null!=hudImageType&&hudImageType==nowImageType){
-            BleEventSubscriptionSubject.getInstance().clearIndexMsg();
+            if(isSending){
+                Log.i("chongxinfasongle","chongxinfasong:11");
+                BleEventSubscriptionSubject.getInstance().clearIndexMsg();
+            }
         }
     }
 
-
+    private boolean isSending;
+    public void setIsSend(boolean isSend){
+        this.isSending=isSend;
+    }
 }
