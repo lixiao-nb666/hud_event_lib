@@ -665,6 +665,9 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setLuminancePercent(int lowV, int hightV) {
+        if(lowV>=hightV){
+            return;
+        }
         lowV=HudSendDataCheckUtil.getLuminancePercentV(lowV);
         hightV=HudSendDataCheckUtil.getLuminancePercentV(hightV);
         HudSendManager.getInstance().sendCmd(HudCmdType.LUMINANCE_PERCENT,lowV,hightV);

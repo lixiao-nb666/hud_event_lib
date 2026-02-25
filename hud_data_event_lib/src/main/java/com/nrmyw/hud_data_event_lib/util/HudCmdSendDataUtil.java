@@ -525,4 +525,16 @@ public class HudCmdSendDataUtil {
     }
 
 
+    public static byte[] getLuminancePercentV(Object... objects) {
+        if (null == objects || objects.length != 2) {
+            return null;
+        }
+        int lowV= (int) objects[0];
+        int hightV= (int) objects[1];
+        return new byte[]{
+                (byte)(lowV & 0xFF),
+                (byte)(hightV & 0xFF)
+        };
+    }
+
 }

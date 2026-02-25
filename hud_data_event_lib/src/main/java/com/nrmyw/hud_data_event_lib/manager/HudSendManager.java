@@ -182,6 +182,10 @@ public class HudSendManager {
             case NOTIFICATION:
                 body =HudCmdSendDataUtil.getNotifiction(objects);
                 break;
+            case LUMINANCE_PERCENT:
+                body =HudCmdSendDataUtil.getLuminancePercentV(objects);
+                break;
+
         }
         return body;
     }
