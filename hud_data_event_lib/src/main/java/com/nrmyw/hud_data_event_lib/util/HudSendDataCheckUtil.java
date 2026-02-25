@@ -87,5 +87,15 @@ public class HudSendDataCheckUtil {
         }
     }
 
+    public static int getLuminancePercentV(int luminanceV){
+        if(luminanceV<=0){
+            return 1;
+        }else if(luminanceV>100){
+            return 100;
+        }else {
+            return luminanceV;
+        }
+    }
+
 
 }

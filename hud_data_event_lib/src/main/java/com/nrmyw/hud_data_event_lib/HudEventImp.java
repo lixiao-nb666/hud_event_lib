@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
+import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
@@ -182,4 +183,6 @@ public interface HudEventImp {
     public void notifictionMsg(String notifictionStr1,int interval1,String notifictionStr2,int interval2);
 
     public void notifictionMsgHide();
+
+    public void setLuminancePercent(int lowV,int hightV);
 }

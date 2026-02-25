@@ -662,4 +662,13 @@ public class HudEvent implements HudEventImp {
     public void notifictionMsgHide() {
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
     }
+
+    @Override
+    public void setLuminancePercent(int lowV, int hightV) {
+        lowV=HudSendDataCheckUtil.getLuminancePercentV(lowV);
+        hightV=HudSendDataCheckUtil.getLuminancePercentV(hightV);
+        HudSendManager.getInstance().sendCmd(HudCmdType.LUMINANCE_PERCENT,lowV,hightV);
+    }
+
+
 }
