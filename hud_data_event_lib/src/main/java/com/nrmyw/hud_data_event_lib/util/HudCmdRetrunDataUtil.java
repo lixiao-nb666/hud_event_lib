@@ -1,6 +1,9 @@
 package com.nrmyw.hud_data_event_lib.util;
 
 
+import android.util.Log;
+
+import com.nrmyw.ble_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_lib.event.retrun.HudRetrunEventSubscriptionSubject;
 import com.nrmyw.hud_data_lib.type.HudCmdRetrunType;
 
@@ -52,11 +55,13 @@ public class HudCmdRetrunDataUtil {
                     break;
                 case GET_SN:
                     String sn= new String(data, StandardCharsets.UTF_8);
-//                    String sn=BleByteUtil.parseByte2HexStr(data);
+//                    String sn= BleByteUtil.parseByte2HexStr(data);
+                    sn=getNoNullString(sn);
                     HudRetrunEventSubscriptionSubject.getInstence().getSN(sn);
                     break;
                 case GET_DEVICE_VERSION:
                     String deviceVersion= new String(data, StandardCharsets.UTF_8);
+                    deviceVersion=getNoNullString(deviceVersion);
                     HudRetrunEventSubscriptionSubject.getInstence().getDeviceVersion(deviceVersion);
                     break;
                 case GET_GPS_SPEED:
@@ -105,5 +110,12 @@ public class HudCmdRetrunDataUtil {
 //                message.obj = SNString;
 //                message.sendToTarget();
 //            }
+    }
+
+    private static String getNoNullString(String def){
+        def=def.replaceAll(" ","");
+        def=def.replaceAll("[^\\u0000-\\uFFFF]", "");
+        def=def.replaceAll("[^\\x20-\\x7e]", "");
+        return def;
     }
 }

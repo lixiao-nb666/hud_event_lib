@@ -2,6 +2,7 @@ package com.nrmyw.hud_data_event_lib;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
@@ -432,6 +433,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void rewriteSN(String sn) {
+        Log.i("looksncode","looksncode:---"+sn);
         if(TextUtils.isEmpty(sn)){
             return;
         }
