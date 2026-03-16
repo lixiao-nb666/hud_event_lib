@@ -1,7 +1,8 @@
 package com.nrmyw.hud_data_event_lib.config;
 
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
-import com.nrmyw.hud_data_event_lib.type.HudDeviceSendDataType;
+import com.nrmyw.hud_data_lib.type.send_data.HudDeviceSendDataType;
+
 
 public class HudSetConfig {
 

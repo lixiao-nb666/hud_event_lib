@@ -48,7 +48,5 @@
 -keep public class com.nrmyw.hud_data_event_lib.config.HudSetConfig{
     *(...);
 }
--keep public class com.nrmyw.hud_data_event_lib.type.HudDeviceSendDataType{
-    *(...);
-}
+
 -flattenpackagehierarchy 'com.nrmyw.hud_data_event_lib'
