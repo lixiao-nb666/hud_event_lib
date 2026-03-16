@@ -155,7 +155,12 @@ public class HudEvent implements HudEventImp {
             return;
         }
         distance1=HudSendDataCheckUtil.getDis(distance1);
-        HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
+        if(HudSetConfig.getInstance().isNeedBigWarningPoint()){
+            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
+        }
+
     }
 
     @Override

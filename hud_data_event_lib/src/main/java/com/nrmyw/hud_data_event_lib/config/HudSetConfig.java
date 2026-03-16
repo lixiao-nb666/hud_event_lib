@@ -16,7 +16,7 @@ public class HudSetConfig {
 
     private boolean autoChangerTrunTypeOldAndNew;
 
-
+    private boolean isNeedBigWarningPoint=true;
 
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
@@ -119,6 +119,14 @@ public class HudSetConfig {
             return;
         }
         this.deviceSendDataType = deviceSendDataType;
+    }
+
+    public boolean isNeedBigWarningPoint() {
+        return isNeedBigWarningPoint;
+    }
+
+    public void setNeedBigWarningPoint(boolean needBigWarningPoint) {
+        isNeedBigWarningPoint = needBigWarningPoint;
     }
 
     @Override
