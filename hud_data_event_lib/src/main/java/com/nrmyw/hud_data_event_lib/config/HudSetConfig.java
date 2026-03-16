@@ -1,15 +1,22 @@
 package com.nrmyw.hud_data_event_lib.config;
 
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
+import com.nrmyw.hud_data_event_lib.type.HudDeviceSendDataType;
 
 public class HudSetConfig {
 
     private static HudSetConfig hudSetConfig;
+
+    private HudDeviceSendDataType deviceSendDataType=HudDeviceSendDataType.T700_GUI3;
     private int imageMaxW=200;
     private int imageMaxH=260;
 
     private int progressMaxW=22;
     private int progressMaxH=260;
+
+    private boolean autoChangerTrunTypeOldAndNew;
+
+
 
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
@@ -92,9 +99,27 @@ public class HudSetConfig {
         this.progressMaxH = progressMaxH;
     }
 
+    public boolean isAutoChangerTrunTypeOldAndNew() {
+        return autoChangerTrunTypeOldAndNew;
+    }
 
+    public void setAutoChangerTrunTypeOldAndNew(boolean autoChangerTrunTypeOldAndNew) {
+        this.autoChangerTrunTypeOldAndNew = autoChangerTrunTypeOldAndNew;
+    }
 
+    public HudDeviceSendDataType getDeviceSendDataType() {
+        if(null==this.deviceSendDataType){
+            this.deviceSendDataType=HudDeviceSendDataType.T700_GUI3;
+        }
+        return deviceSendDataType;
+    }
 
+    public void setDeviceSendDataType(HudDeviceSendDataType deviceSendDataType) {
+        if(null==deviceSendDataType){
+            return;
+        }
+        this.deviceSendDataType = deviceSendDataType;
+    }
 
     @Override
     public String toString() {

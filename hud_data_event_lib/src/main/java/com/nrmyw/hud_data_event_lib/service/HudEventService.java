@@ -16,16 +16,20 @@ import com.nrmyw.ble_event_lib.statu.BleStatu;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventObserver;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 
+import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_event_lib.base.BaseService;
 
+import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.HudTimeManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
+import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import java.util.Date;
 
@@ -58,6 +62,7 @@ public class HudEventService extends BaseService {
 
 
 
+
     private BleStatuEventObserver bleStatuEventObserver=new BleStatuEventObserver() {
         @Override
         public void sendBleStatu(BleStatu bleStatu, Object... objects) {
@@ -75,7 +80,8 @@ public class HudEventService extends BaseService {
                     case SEND_IMAGE_START:
 //                    HudImageManeger.getInstance().setSendImageIsStart(true);
                         HudSendImageManager.getInstance().setIsSend(true);
-                    doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
+                        doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
+
                         break;
                     case SEND_IMAGE_END:
                         doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
@@ -86,6 +92,12 @@ public class HudEventService extends BaseService {
                             HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
                         }
                         HudSendImageManager.getInstance().nowReSend();
+
+                        //如果支持自动控制新旧转向图标需要设置
+                        if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
+                            BleSendImageInfoBean bleSendImageInfoBean = (BleSendImageInfoBean) objects[1];
+                            HudSendTurnTypeManager.getInstance().setImageIsShow(HudImageType.values()[bleSendImageInfoBean.getType()]);
+                        }
                         break;
                     case RUN_ERR:
                         break;
@@ -108,6 +120,9 @@ public class HudEventService extends BaseService {
             HudSendImageManager.getInstance().setImageType(startInfoBean    .getType());
 //            byte[] startBytes= HudSendManager.getInstance().getAllByte(HudCmdType.READY_SEND_IMAGE,startInfoBean.getW(),startInfoBean.getH(),startInfoBean.getSize(), HudSendImageType.START,startInfoBean.getType());
 //            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(0,startBytes);
+
+
+
         }
 
         private void doSendImageEndThing(BleSendImageEndInfoBean endInfoBean){
@@ -120,6 +135,8 @@ public class HudEventService extends BaseService {
                     BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
                 }
             }
+
+
         }
 
 
