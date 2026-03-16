@@ -92,11 +92,9 @@ public class HudEventService extends BaseService {
                             HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
                         }
                         HudSendImageManager.getInstance().nowReSend();
-
                         //如果支持自动控制新旧转向图标需要设置
                         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
-                            BleSendImageInfoBean bleSendImageInfoBean = (BleSendImageInfoBean) objects[1];
-                            HudSendTurnTypeManager.getInstance().setImageIsShow(HudImageType.values()[bleSendImageInfoBean.getType()]);
+                            HudSendTurnTypeManager.getInstance().setImageIsShow();
                         }
                         break;
                     case RUN_ERR:

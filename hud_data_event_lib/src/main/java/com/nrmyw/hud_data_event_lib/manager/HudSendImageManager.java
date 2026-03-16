@@ -64,6 +64,10 @@ public class HudSendImageManager {
         }
     }
 
+    public HudImageType getHudImageType(){
+        return hudImageType;
+    }
+
 
     public void hideImage(){
        checkImageTypeIsSameAndDoClear(HudImageType.IMAGE);

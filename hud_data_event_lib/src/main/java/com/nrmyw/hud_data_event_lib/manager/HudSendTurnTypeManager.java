@@ -27,21 +27,28 @@ public class HudSendTurnTypeManager {
         return hudSendTurnTypeManager;
     }
 
+
+
     boolean imageIsshow;
-    public void setImageIsShow(HudImageType hudImageType){
+    public void setImageIsShow(){
+        HudImageType hudImageType=HudSendImageManager.getInstance().getHudImageType();
+        Log.i("shifouzoulexinde","shifouzoulexinde0:"+imageIsshow);
         if(null==hudImageType){
             return;
         }
         if(hudImageType== HudImageType.IMAGE){
             imageIsshow=true;
         }
+        Log.i("shifouzoulexinde","shifouzoulexinde1:"+imageIsshow);
     }
 
     public void setImageIsHide(){
+        Log.i("shifouzoulexinde","shifouzoulexinde2:"+imageIsshow);
         imageIsshow=false;
     }
 
     public void setTureType(HudTurnType type1, int distance1){
+        Log.i("shifouzoulexinde","shifouzoulexinde3:"+imageIsshow);
         if(imageIsshow){
             HudSendManager.getInstance().sendCmd(HudCmdType.NEW_TURN_TYPE,type1,distance1);
         }else {
@@ -50,7 +57,7 @@ public class HudSendTurnTypeManager {
     }
 
     public void setTureType(HudTurnType type1, int distance1,HudTurnType type2, int distance2){
-        Log.i("shifouzoulexinde","shifouzoulexinde:"+imageIsshow);
+        Log.i("shifouzoulexinde","shifouzoulexinde4:"+imageIsshow);
         if(imageIsshow){
             HudSendManager.getInstance().sendCmd(HudCmdType.NEW_TURN_TYPE,type1,distance1,type2,distance2);
         }else {
