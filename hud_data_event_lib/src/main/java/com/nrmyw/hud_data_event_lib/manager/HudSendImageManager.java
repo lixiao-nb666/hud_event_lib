@@ -70,7 +70,7 @@ public class HudSendImageManager {
 
 
     public void hideImage(){
-       checkImageTypeIsSameAndDoClear(HudImageType.IMAGE);
+        checkImageTypeIsSameAndDoClear(HudImageType.IMAGE);
         HudImageManeger.getInstance().setImageCanShow(false);
         HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
     }

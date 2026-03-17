@@ -1,6 +1,7 @@
 package com.nrmyw.hud_data_event_lib.manager;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
@@ -73,6 +74,9 @@ public class HudSendManager {
                 bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendBitmapQualityType());
                 break;
         }
+
+
+        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------:"+bleSendImageInfoBean);
 
 
         BleEventSubscriptionSubject.getInstance().sendImage(bleSendImageInfoBean);
