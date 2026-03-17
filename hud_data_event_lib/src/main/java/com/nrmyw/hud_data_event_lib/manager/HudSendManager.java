@@ -76,7 +76,7 @@ public class HudSendManager {
         }
 
 
-        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------:"+bleSendImageInfoBean);
+        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------1:"+bleSendImageInfoBean);
 
 
         BleEventSubscriptionSubject.getInstance().sendImage(bleSendImageInfoBean);

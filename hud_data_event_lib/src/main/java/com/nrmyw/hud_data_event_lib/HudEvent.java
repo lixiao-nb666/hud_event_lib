@@ -494,16 +494,22 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendImage(Bitmap bitmap, HudImageType hudImageType) {
-        if(null==bitmap||bitmap.isRecycled()||null==hudImageType){
+        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------2:"+hudImageType);
+        if(null==bitmap||bitmap.isRecycled()){
             return;
+        }
+        if(null==hudImageType){
+            hudImageType=HudImageType.IMAGE;
         }
 //        if(hudImageType==HudImageType.IMAGE){
 //
 //        }
+        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------3:"+hudImageType);
         if(hudImageType==HudImageType.IMAGE){
             BleEventSubscriptionSubject.getInstance().clearIndexMsg();
             HudImageManeger.getInstance().setImageCanShow(true);
         }
+
         HudSendManager.getInstance().sendBitmap(bitmap,hudImageType);
 //        HudImageManeger.getInstance().send(hudImageType,bitmap);
     }
