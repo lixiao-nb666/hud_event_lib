@@ -24,6 +24,7 @@ import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
@@ -699,6 +700,23 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionMsgHide() {
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+    }
+
+    @Override
+    public void notifictionIcon(HudNotificationIconType iconType1, HudNotificationIconType iconType2) {
+        if(null==iconType1){
+            iconType1=HudNotificationIconType.HIDE;
+        }
+        if(null==iconType2){
+            iconType2=HudNotificationIconType.HIDE;
+        }
+
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,iconType1,iconType2);
+    }
+
+    @Override
+    public void notifictionIconHide() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
     }
 
     @Override

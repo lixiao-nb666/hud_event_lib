@@ -74,11 +74,7 @@ public class HudSendManager {
                 bleSendImageInfoBean.setBitmapQualityType(HudSetConfig.getInstance().getBleSendBitmapQualityType());
                 break;
         }
-
-
         Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------1:"+bleSendImageInfoBean);
-
-
         BleEventSubscriptionSubject.getInstance().sendImage(bleSendImageInfoBean);
 //        if(null!=sendListen){
 //            sendListen.sendImage(bitmap,qualityType);
@@ -171,6 +167,7 @@ public class HudSendManager {
             case YELLOW_STATU:
                 body=HudCmdSendDataUtil.getYellowStatu(objects);
                 break;
+
             case ICON_FLICKER:
             case SET_DEVICE_SOUND_STATU:
             case SET_DAYLIGHTING_SHOW_STATU:
@@ -184,7 +181,10 @@ public class HudSendManager {
                 body = HudCmdSendDataUtil.getDisplayRect(objects);
                 break;
             case NOTIFICATION:
-                body =HudCmdSendDataUtil.getNotifiction(objects);
+                body =HudCmdSendDataUtil.getNotification(objects);
+                break;
+            case NOTIFICATION_ICON:
+                body=HudCmdSendDataUtil.getNotificationIcon(objects);
                 break;
             case LUMINANCE_PERCENT:
                 body =HudCmdSendDataUtil.getLuminancePercentV(objects);

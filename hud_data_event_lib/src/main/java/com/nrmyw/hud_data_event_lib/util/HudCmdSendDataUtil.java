@@ -13,6 +13,7 @@ import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
@@ -502,7 +503,7 @@ public class HudCmdSendDataUtil {
     }
 
 
-    public static byte[] getNotifiction(Object... objects) {
+    public static byte[] getNotification(Object... objects) {
         if (null == objects || objects.length < 4) {
             return null;
         }
@@ -522,6 +523,22 @@ public class HudCmdSendDataUtil {
         };
         byte[] num2Bytes=BleByteUtil.intToByteArray32only3(numb2);
        return BleByteUtil.addToNewBytes(str1LByte,str1Bytes,numb1Bytes,str1LByte,str2Bytes,num2Bytes);
+    }
+
+
+    public static byte[] getNotificationIcon(Object... objects) {
+        if (null == objects || objects.length < 2) {
+            return null;
+        }
+        HudNotificationIconType type1= (HudNotificationIconType) objects[0];
+        HudNotificationIconType type2= (HudNotificationIconType) objects[0];
+        return new byte[]{
+                type1.getType(),
+                type2.getType()
+        };
+
+
+
     }
 
 

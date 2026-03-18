@@ -9,6 +9,7 @@ import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
+import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
@@ -183,6 +184,10 @@ public interface HudEventImp {
     public void notifictionMsg(String notifictionStr1,int interval1,String notifictionStr2,int interval2);
 
     public void notifictionMsgHide();
+
+    public void notifictionIcon(HudNotificationIconType iconType1,HudNotificationIconType iconType2);
+
+    public void notifictionIconHide();
 
     public void setLuminancePercent(int lowV,int hightV);
 }
