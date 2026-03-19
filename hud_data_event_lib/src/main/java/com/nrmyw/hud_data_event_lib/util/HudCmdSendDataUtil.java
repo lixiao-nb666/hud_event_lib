@@ -531,7 +531,7 @@ public class HudCmdSendDataUtil {
             return null;
         }
         HudNotificationIconType type1= (HudNotificationIconType) objects[0];
-        HudNotificationIconType type2= (HudNotificationIconType) objects[0];
+        HudNotificationIconType type2= (HudNotificationIconType) objects[1];
         return new byte[]{
                 type1.getType(),
                 type2.getType()
