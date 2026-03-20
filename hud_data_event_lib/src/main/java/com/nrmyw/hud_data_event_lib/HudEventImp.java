@@ -108,6 +108,11 @@ public interface HudEventImp {
 
     public void sendNowLaneStr(HudNowLaneStrType nowLaneStrType, String laneName);
 
+    public void sendTranslationing(String str);
+    public void sendTranslationingResult(String str);
+    public void sendTranslationed(String str);
+    public void sendTranslationedResult(String str);
+
     public void sendGpsStatu(HudGpsStatuType gpsStatuType);
 
     public void setGpsSpeed(int gpsSpeed);

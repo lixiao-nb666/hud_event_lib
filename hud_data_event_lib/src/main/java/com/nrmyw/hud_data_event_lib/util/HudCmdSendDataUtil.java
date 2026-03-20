@@ -537,8 +537,6 @@ public class HudCmdSendDataUtil {
                 type2.getType()
         };
 
-
-
     }
 
 

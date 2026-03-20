@@ -411,6 +411,38 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void sendTranslationing(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONING,str);
+    }
+
+    @Override
+    public void sendTranslationingResult(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONING_RESULT,str);
+    }
+
+    @Override
+    public void sendTranslationed(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONED,str);
+    }
+
+    @Override
+    public void sendTranslationedResult(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONED_RESULT,str);
+    }
+
+    @Override
     public void sendGpsStatu(HudGpsStatuType gpsStatuType) {
         if(null==gpsStatuType){
             return;
