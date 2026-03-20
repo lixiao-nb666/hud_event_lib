@@ -135,6 +135,10 @@ public class HudSendManager {
             case WARNING_POINT_2_B_STR:
             case SET_BLE_NAME:
             case SET_TWS_NAME:
+            case TRANSLATIONING:
+            case TRANSLATIONING_RESULT:
+            case TRANSLATIONED:
+            case TRANSLATIONED_RESULT:
                 body = HudCmdSendDataUtil.getStr(objects);
                 break;
             case NOW_LANE_STR:
