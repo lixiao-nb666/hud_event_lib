@@ -717,7 +717,8 @@ public class HudEvent implements HudEventImp {
             return;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
-        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0);
+        
+        HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
     }
 
     @Override
@@ -727,12 +728,15 @@ public class HudEvent implements HudEventImp {
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
         interval2=HudSendDataCheckUtil.getDis(interval2);
-        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
+        HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
+
     }
 
     @Override
     public void notifictionMsgHide() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+        HudNotifictionManager.getInstance().setMsg("",0,"",0);
+
+
     }
 
     @Override
