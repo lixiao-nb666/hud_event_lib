@@ -10,6 +10,7 @@ import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
+import com.nrmyw.hud_data_event_lib.manager.HudNotifictionManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendTurnTypeManager;
@@ -736,19 +737,12 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionIcon(HudNotificationIconType iconType1, HudNotificationIconType iconType2) {
-        if(null==iconType1){
-            iconType1=HudNotificationIconType.HIDE;
-        }
-        if(null==iconType2){
-            iconType2=HudNotificationIconType.HIDE;
-        }
-
-        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,iconType1,iconType2);
+        HudNotifictionManager.getInstance().setIcon(iconType1,iconType2);
     }
 
     @Override
     public void notifictionIconHide() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
+        HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
     }
 
     @Override
