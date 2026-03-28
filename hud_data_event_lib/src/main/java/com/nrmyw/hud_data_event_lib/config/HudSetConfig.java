@@ -19,6 +19,12 @@ public class HudSetConfig {
 
     private boolean isNeedBigWarningPoint=true;
 
+    private boolean isOneShowBigWarningPoint=false;
+
+    private boolean canNotShowProgress;
+
+
+
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
     private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
@@ -104,6 +110,32 @@ public class HudSetConfig {
         return autoChangerTrunTypeOldAndNew;
     }
 
+    @Override
+    public String toString() {
+        return "HudSetConfig{" +
+                "deviceSendDataType=" + deviceSendDataType +
+                ", imageMaxW=" + imageMaxW +
+                ", imageMaxH=" + imageMaxH +
+                ", progressMaxW=" + progressMaxW +
+                ", progressMaxH=" + progressMaxH +
+                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
+                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
+                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
+                ", canNotShowProgress=" + canNotShowProgress +
+                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
+                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
+                ", timeDifference=" + timeDifference +
+                '}';
+    }
+
+    public boolean isOneShowBigWarningPoint() {
+        return isOneShowBigWarningPoint;
+    }
+
+    public void setOneShowBigWarningPoint(boolean oneShowBigWarningPoint) {
+        isOneShowBigWarningPoint = oneShowBigWarningPoint;
+    }
+
     public void setAutoChangerTrunTypeOldAndNew(boolean autoChangerTrunTypeOldAndNew) {
         this.autoChangerTrunTypeOldAndNew = autoChangerTrunTypeOldAndNew;
     }
@@ -130,14 +162,12 @@ public class HudSetConfig {
         isNeedBigWarningPoint = needBigWarningPoint;
     }
 
-    @Override
-    public String toString() {
-        return "HudSetConfig{" +
-                "imageMaxW=" + imageMaxW +
-                ", imageMaxH=" + imageMaxH +
-                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
-                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
-                ", timeDifference=" + timeDifference +
-                '}';
+    public boolean isCanNotShowProgress() {
+        return canNotShowProgress;
     }
+
+    public void setCanNotShowProgress(boolean canNotShowProgress) {
+        this.canNotShowProgress = canNotShowProgress;
+    }
+
 }

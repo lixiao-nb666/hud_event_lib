@@ -138,7 +138,13 @@ public class HudEvent implements HudEventImp {
             return;
         }
         distance1=HudSendDataCheckUtil.getDis(distance1);
-        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
+        if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
+            //如果能够大图标显示被允许并且，如果能够一个图标显示大图标
+            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
+        }
+
     }
 
     @Override
@@ -148,7 +154,13 @@ public class HudEvent implements HudEventImp {
         }
         distance1=HudSendDataCheckUtil.getDis(distance1);
         distance2=HudSendDataCheckUtil.getDis(distance2);
-        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
+        if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()&&type2==HudWarningPointType.none){
+            //如果能够大图标显示被允许并且，如果能够一个图标显示大图标,并且第二个图标是空或者隐藏
+            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
+        }
+
     }
 
     @Override
@@ -538,6 +550,12 @@ public class HudEvent implements HudEventImp {
 //        if(hudImageType==HudImageType.IMAGE){
 //
 //        }
+        if(HudSetConfig.getInstance().isCanNotShowProgress()&&hudImageType==HudImageType.PROGRESS_BAR){
+            //因为不能显示进度条，所以直接返回了
+            return;
+        }
+
+
         Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------3:"+hudImageType);
         if(hudImageType==HudImageType.IMAGE){
             BleEventSubscriptionSubject.getInstance().clearIndexMsg();
@@ -717,7 +735,6 @@ public class HudEvent implements HudEventImp {
             return;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
-        
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
     }
 
