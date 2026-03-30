@@ -8,6 +8,7 @@ import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 
 import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
+import com.nrmyw.hud_data_lib.type.function.HudFunctionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -18,6 +19,7 @@ import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
+import com.nrmyw.hud_data_lib.type.show_model.HudShowModel;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 
@@ -550,6 +552,43 @@ public class HudCmdSendDataUtil {
                 (byte)(lowV & 0xFF),
                 (byte)(hightV & 0xFF)
         };
+    }
+
+
+    public static byte[] getChangeModle(Object... objects) {
+        if (null == objects || objects.length < 2) {
+            return null;
+        }
+        HudShowModel hudShowModel= (HudShowModel) objects[0];
+        String str= (String) objects[1];
+        byte[] strBytes=str.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes=new byte[strBytes.length+2];
+        bytes[0]=hudShowModel.getType();
+        bytes[1]=(byte)(strBytes.length & 0xFF);
+        for(int i=0;i<strBytes.length;i++){
+            bytes[i+2]=strBytes[i];
+        }
+        return bytes;
+    }
+
+    public static byte[] getFunctionSelect(Object... objects) {
+        if (null == objects || objects.length < 4) {
+            return null;
+        }
+        HudFunctionType nowType= (HudFunctionType) objects[0];
+        HudFunctionType lastType= (HudFunctionType) objects[1];
+        HudFunctionType nextType= (HudFunctionType) objects[2];
+        String str= (String) objects[3];
+        byte[] strBytes=str.getBytes(StandardCharsets.UTF_8);
+        byte[] bytes=new byte[strBytes.length+4];
+        bytes[0]=nowType.getTitle();
+        bytes[1]=lastType.getTitle();
+        bytes[2]=nextType.getTitle();
+        bytes[3]=(byte)(strBytes.length & 0xFF);
+        for(int i=0;i<strBytes.length;i++){
+            bytes[i+4]=strBytes[i];
+        }
+        return bytes;
     }
 
 }

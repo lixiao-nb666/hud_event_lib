@@ -20,6 +20,7 @@ import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
+import com.nrmyw.hud_data_lib.type.function.HudFunctionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudLaneInformationType;
@@ -29,6 +30,7 @@ import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudBrightnessMoldType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
+import com.nrmyw.hud_data_lib.type.show_model.HudShowModel;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.speed.SpeedType;
@@ -456,6 +458,39 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void sendTranslationAtoBName(String aAndBStr) {
+        if(TextUtils.isEmpty(aAndBStr)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATION_A_TO_B_NAME,aAndBStr);
+    }
+
+    @Override
+    public void sendHintBarStr(String hintBarStr) {
+        if(TextUtils.isEmpty(hintBarStr)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.HINT_STR,hintBarStr);
+    }
+
+    @Override
+    public void functionSelect(HudFunctionType nowType, HudFunctionType lastType, HudFunctionType nextType,String nowTypeStr) {
+        if(TextUtils.isEmpty(nowTypeStr)){
+            return;
+        }
+        if(null==nowType){
+            nowType=HudFunctionType.NONE;
+        }
+        if(null==lastType){
+            lastType=HudFunctionType.NONE;
+        }
+        if(null==nextType){
+            nextType=HudFunctionType.NONE;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.FUNCTION_SELECT,nowType,lastType,nextType,nowTypeStr);
+    }
+
+    @Override
     public void sendGpsStatu(HudGpsStatuType gpsStatuType) {
         if(null==gpsStatuType){
             return;
@@ -764,6 +799,32 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionIconHide() {
         HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
+    }
+
+    @Override
+    public void clearNani() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_NAVI);
+    }
+
+    @Override
+    public void hideSpeed() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_SPEED);
+    }
+
+    @Override
+    public void clearAll() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_ALL);
+    }
+
+    @Override
+    public void changeShowModel(HudShowModel hudShowModel, String titleStr) {
+        if(null==hudShowModel){
+            return;
+        }
+        if(TextUtils.isEmpty(titleStr)){
+            titleStr="";
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.CHANGE_MODE,hudShowModel,titleStr);
     }
 
     @Override

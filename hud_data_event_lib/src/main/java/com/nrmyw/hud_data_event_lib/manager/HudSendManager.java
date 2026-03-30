@@ -139,6 +139,8 @@ public class HudSendManager {
             case TRANSLATIONING_RESULT:
             case TRANSLATIONED:
             case TRANSLATIONED_RESULT:
+            case TRANSLATION_A_TO_B_NAME:
+            case HINT_STR:
                 body = HudCmdSendDataUtil.getStr(objects);
                 break;
             case NOW_LANE_STR:
@@ -193,7 +195,12 @@ public class HudSendManager {
             case LUMINANCE_PERCENT:
                 body =HudCmdSendDataUtil.getLuminancePercentV(objects);
                 break;
-
+            case CHANGE_MODE:
+                body =HudCmdSendDataUtil.getChangeModle(objects);
+                break;
+            case FUNCTION_SELECT:
+                body =HudCmdSendDataUtil.getFunctionSelect(objects);
+                break;
         }
         return body;
     }

@@ -7,6 +7,7 @@ import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.display.HudSetDisplayDirectionType;
+import com.nrmyw.hud_data_lib.type.function.HudFunctionType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.lane.HudNowLaneStrType;
 import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
@@ -14,6 +15,7 @@ import com.nrmyw.hud_data_lib.type.reach.HudReachType;
 import com.nrmyw.hud_data_lib.type.set.HudGpsStatuType;
 
 
+import com.nrmyw.hud_data_lib.type.show_model.HudShowModel;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingShowBJType;
 import com.nrmyw.hud_data_lib.type.speed.HudSpeedingTextType;
 import com.nrmyw.hud_data_lib.type.speed.SpeedType;
@@ -108,10 +110,7 @@ public interface HudEventImp {
 
     public void sendNowLaneStr(HudNowLaneStrType nowLaneStrType, String laneName);
 
-    public void sendTranslationing(String str);
-    public void sendTranslationingResult(String str);
-    public void sendTranslationed(String str);
-    public void sendTranslationedResult(String str);
+
 
     public void sendGpsStatu(HudGpsStatuType gpsStatuType);
 
@@ -183,6 +182,7 @@ public interface HudEventImp {
 
     public void setDisplayRect(HudSetDisplayDirectionType setDisplayDirectionType,int value);
 
+    public void setLuminancePercent(int lowV,int hightV);
     public void notifictionMsg(String notifictionStr1,int interval1);
 
 
@@ -194,5 +194,23 @@ public interface HudEventImp {
 
     public void notifictionIconHide();
 
-    public void setLuminancePercent(int lowV,int hightV);
+
+    public void clearNani();
+
+    public void hideSpeed();
+    public void clearAll();
+
+    public void changeShowModel(HudShowModel hudShowModel,String titleStr);
+
+    public void sendTranslationing(String str);
+    public void sendTranslationingResult(String str);
+    public void sendTranslationed(String str);
+    public void sendTranslationedResult(String str);
+
+    public void sendTranslationAtoBName(String aAndBStr);
+
+    public void sendHintBarStr(String hintBarStr);
+
+    public void functionSelect(HudFunctionType nowType,HudFunctionType lastType,HudFunctionType nextType,String nowTypeStr);
+
 }
