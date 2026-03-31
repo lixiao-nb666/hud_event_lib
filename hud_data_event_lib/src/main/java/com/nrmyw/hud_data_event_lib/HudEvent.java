@@ -780,7 +780,7 @@ public class HudEvent implements HudEventImp {
             notifictionStr1="";
             interval1=0;
         }
-        if(TextUtils.isEmpty(notifictionStr2)){
+        if(TextUtils.isEmpty(notifictionStr2)||interval2==0){
             notifictionStr2="";
             interval2=0;
         }
