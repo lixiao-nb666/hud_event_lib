@@ -524,7 +524,7 @@ public class HudCmdSendDataUtil {
                 (byte)(str2Bytes.length & 0xFF)
         };
         byte[] num2Bytes=BleByteUtil.intToByteArray32only3(numb2);
-       return BleByteUtil.addToNewBytes(str1LByte,str1Bytes,numb1Bytes,str1LByte,str2Bytes,num2Bytes);
+       return BleByteUtil.addToNewBytes(str1LByte,str1Bytes,numb1Bytes,str2LByte,str2Bytes,num2Bytes);
     }
 
 
