@@ -766,7 +766,8 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1) {
-        if(TextUtils.isEmpty(notifictionStr1)){
+        if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
+            HudNotifictionManager.getInstance().setMsg("",0,"",0);
             return;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
@@ -775,8 +776,13 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2) {
-        if(TextUtils.isEmpty(notifictionStr1)||TextUtils.isEmpty(notifictionStr2)){
-            return;
+        if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
+            notifictionStr1="";
+            interval1=0;
+        }
+        if(TextUtils.isEmpty(notifictionStr2)){
+            notifictionStr2="";
+            interval2=0;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
         interval2=HudSendDataCheckUtil.getDis(interval2);
