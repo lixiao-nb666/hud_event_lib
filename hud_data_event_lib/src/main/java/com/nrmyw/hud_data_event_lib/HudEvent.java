@@ -124,8 +124,13 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void hideIntervalSpeed() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
+        if(HudSetConfig.getInstance().isHideIntervalSpeedUseWarningPointCmd()){
+            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,HudWarningPointType.none,0);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
+        }
     }
+
 
     @Override
     public void sendWarningPointLimitedSpeed(int limitedSpeed1, int limitedSpeed2) {

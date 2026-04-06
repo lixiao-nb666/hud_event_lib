@@ -23,6 +23,8 @@ public class HudSetConfig {
 
     private boolean canNotShowProgress;
 
+    private boolean hideIntervalSpeedUseWarningPointCmd;
+
 
 
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
@@ -110,24 +112,6 @@ public class HudSetConfig {
         return autoChangerTrunTypeOldAndNew;
     }
 
-    @Override
-    public String toString() {
-        return "HudSetConfig{" +
-                "deviceSendDataType=" + deviceSendDataType +
-                ", imageMaxW=" + imageMaxW +
-                ", imageMaxH=" + imageMaxH +
-                ", progressMaxW=" + progressMaxW +
-                ", progressMaxH=" + progressMaxH +
-                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
-                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
-                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
-                ", canNotShowProgress=" + canNotShowProgress +
-                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
-                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
-                ", timeDifference=" + timeDifference +
-                '}';
-    }
-
     public boolean isOneShowBigWarningPoint() {
         return isOneShowBigWarningPoint;
     }
@@ -170,4 +154,31 @@ public class HudSetConfig {
         this.canNotShowProgress = canNotShowProgress;
     }
 
+
+    public boolean isHideIntervalSpeedUseWarningPointCmd() {
+        return hideIntervalSpeedUseWarningPointCmd;
+    }
+
+    public void setHideIntervalSpeedUseWarningPointCmd(boolean hideIntervalSpeedUseWarningPointCmd) {
+        this.hideIntervalSpeedUseWarningPointCmd = hideIntervalSpeedUseWarningPointCmd;
+    }
+
+    @Override
+    public String toString() {
+        return "HudSetConfig{" +
+                "deviceSendDataType=" + deviceSendDataType +
+                ", imageMaxW=" + imageMaxW +
+                ", imageMaxH=" + imageMaxH +
+                ", progressMaxW=" + progressMaxW +
+                ", progressMaxH=" + progressMaxH +
+                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
+                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
+                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
+                ", canNotShowProgress=" + canNotShowProgress +
+                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
+                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
+                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
+                ", timeDifference=" + timeDifference +
+                '}';
+    }
 }
