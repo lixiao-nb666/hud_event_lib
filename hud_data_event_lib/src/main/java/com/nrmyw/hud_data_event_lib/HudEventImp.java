@@ -195,7 +195,7 @@ public interface HudEventImp {
     public void notifictionIconHide();
 
 
-    public void clearNani();
+    public void clearNavi();
 
     public void hideSpeed();
     public void clearAll();

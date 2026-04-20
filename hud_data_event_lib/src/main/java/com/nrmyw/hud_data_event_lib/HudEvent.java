@@ -812,7 +812,7 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void clearNani() {
+    public void clearNavi() {
         HudSendManager.getInstance().sendCmd(HudCmdType.CLEAR_NAVI);
     }
 
