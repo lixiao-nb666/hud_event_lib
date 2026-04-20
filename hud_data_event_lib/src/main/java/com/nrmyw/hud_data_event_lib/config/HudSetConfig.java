@@ -15,15 +15,18 @@ public class HudSetConfig {
     private int progressMaxW=22;
     private int progressMaxH=260;
 
-    private boolean autoChangerTrunTypeOldAndNew;
-
     private boolean isNeedBigWarningPoint=true;
 
-    private boolean isOneShowBigWarningPoint=false;
+    private boolean autoHideIntervalSpeed=true;
+
+    private boolean autoChangerTrunTypeOldAndNew;
+
+    private boolean isOneShowBigWarningPoint;
 
     private boolean canNotShowProgress;
 
     private boolean hideIntervalSpeedUseWarningPointCmd;
+
 
 
 
@@ -161,6 +164,14 @@ public class HudSetConfig {
 
     public void setHideIntervalSpeedUseWarningPointCmd(boolean hideIntervalSpeedUseWarningPointCmd) {
         this.hideIntervalSpeedUseWarningPointCmd = hideIntervalSpeedUseWarningPointCmd;
+    }
+
+    public boolean isAutoHideIntervalSpeed() {
+        return autoHideIntervalSpeed;
+    }
+
+    public void setAutoHideIntervalSpeed(boolean autoHideIntervalSpeed) {
+        this.autoHideIntervalSpeed = autoHideIntervalSpeed;
     }
 
     @Override

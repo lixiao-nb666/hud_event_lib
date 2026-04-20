@@ -1,7 +1,8 @@
-package com.nrmyw.hud_data_event_lib.manager;
+package com.nrmyw.hud_data_event_lib.manager.notifiction;
 
 import android.text.TextUtils;
 
+import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 

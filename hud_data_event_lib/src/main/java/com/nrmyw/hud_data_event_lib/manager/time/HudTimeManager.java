@@ -1,4 +1,4 @@
-package com.nrmyw.hud_data_event_lib.manager;
+package com.nrmyw.hud_data_event_lib.manager.time;
 
 public class HudTimeManager {
     private static HudTimeManager hudTimeManager;

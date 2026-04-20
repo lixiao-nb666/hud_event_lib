@@ -1,8 +1,9 @@
-package com.nrmyw.hud_data_event_lib.manager;
+package com.nrmyw.hud_data_event_lib.manager.turn;
 
 import android.util.Log;
 
-import com.nrmyw.hud_data_event_lib.HudEventManager;
+import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
@@ -31,7 +32,7 @@ public class HudSendTurnTypeManager {
 
     boolean imageIsshow;
     public void setImageIsShow(){
-        HudImageType hudImageType=HudSendImageManager.getInstance().getHudImageType();
+        HudImageType hudImageType= HudSendImageManager.getInstance().getHudImageType();
         Log.i("shifouzoulexinde","shifouzoulexinde0:"+imageIsshow);
         if(null==hudImageType){
             return;

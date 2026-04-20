@@ -1,10 +1,10 @@
-package com.nrmyw.hud_data_event_lib.manager;
+package com.nrmyw.hud_data_event_lib.manager.image;
 
-import android.media.Image;
 import android.util.Log;
 
 import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
+import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;

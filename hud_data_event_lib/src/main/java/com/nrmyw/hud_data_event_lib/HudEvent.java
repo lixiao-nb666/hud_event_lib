@@ -4,16 +4,16 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
-import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
-import com.nrmyw.hud_data_event_lib.manager.HudNotifictionManager;
-import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
+import com.nrmyw.hud_data_event_lib.manager.image.HudImageManeger;
+import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
+import com.nrmyw.hud_data_event_lib.manager.notifiction.HudNotifictionManager;
+import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
-import com.nrmyw.hud_data_event_lib.manager.HudSendTurnTypeManager;
+import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
@@ -40,8 +40,6 @@ import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
-
-import java.nio.charset.StandardCharsets;
 
 public class HudEvent implements HudEventImp {
     private static HudEvent hudEvent;
@@ -120,14 +118,16 @@ public class HudEvent implements HudEventImp {
         timeHours= HudSendDataCheckUtil.getSpeed(timeHours);
         timeMin= HudSendDataCheckUtil.getSpeed(timeMin);
         HudSendManager.getInstance().sendCmd(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin);
+        if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
+            HudIntervalSpeedManager.getInstance().nowShow();
+        }
     }
 
     @Override
     public void hideIntervalSpeed() {
-        if(HudSetConfig.getInstance().isHideIntervalSpeedUseWarningPointCmd()){
-            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,HudWarningPointType.none,0);
-        }else {
-            HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
+        HudIntervalSpeedManager.getInstance().sendHideCmd();
+        if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
+            HudIntervalSpeedManager.getInstance().nowIsHide();
         }
     }
 
@@ -161,7 +161,7 @@ public class HudEvent implements HudEventImp {
         }
         distance1=HudSendDataCheckUtil.getDis(distance1);
         distance2=HudSendDataCheckUtil.getDis(distance2);
-        if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()&&type2==HudWarningPointType.none){
+        if(type2==HudWarningPointType.none&&HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
             //如果能够大图标显示被允许并且，如果能够一个图标显示大图标,并且第二个图标是空或者隐藏
             HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
         }else {
@@ -345,7 +345,6 @@ public class HudEvent implements HudEventImp {
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,HudTurnType.none,0);
         }
-
     }
 
     @Override

@@ -1,17 +1,4 @@
-package com.nrmyw.hud_data_event_lib.manager;
-
-import android.graphics.Bitmap;
-import android.util.ArrayMap;
-import android.util.Log;
-
-import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
-import com.nrmyw.hud_data_lib.type.HudCmdType;
-import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
-import com.nrmyw.hud_data_lib.type.image.HudImageType;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+package com.nrmyw.hud_data_event_lib.manager.image;
 
 public class HudImageManeger {
 

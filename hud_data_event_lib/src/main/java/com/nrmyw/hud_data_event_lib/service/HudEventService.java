@@ -16,21 +16,20 @@ import com.nrmyw.ble_event_lib.statu.BleStatu;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventObserver;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 
-import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
 import com.nrmyw.hud_data_event_lib.base.BaseService;
 
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
-import com.nrmyw.hud_data_event_lib.manager.HudImageManeger;
-import com.nrmyw.hud_data_event_lib.manager.HudSendImageManager;
+import com.nrmyw.hud_data_event_lib.manager.image.HudImageManeger;
+import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
-import com.nrmyw.hud_data_event_lib.manager.HudSendTurnTypeManager;
-import com.nrmyw.hud_data_event_lib.manager.HudTimeManager;
+import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
+import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
+import com.nrmyw.hud_data_event_lib.manager.time.HudTimeManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageShowType;
-import com.nrmyw.hud_data_lib.type.image.HudImageType;
-import com.nrmyw.hud_data_lib.type.image.HudSendImageType;
+
 import java.util.Date;
 
 public class HudEventService extends BaseService {
@@ -43,6 +42,7 @@ public class HudEventService extends BaseService {
 
         @Override
         public void nowMustSetImageHide() {
+            handler.removeMessages(HudEventServiceMsgType.HIDE_IMAGE.ordinal());
             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IMAGE.ordinal(),1000);
         }
     };
@@ -51,12 +51,26 @@ public class HudEventService extends BaseService {
         @Override
         public void initTime() {
             handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
-            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),1000);
+            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),1688);
         }
 
         @Override
         public void stopTime() {
             handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
+        }
+    };
+
+    private HudIntervalSpeedManager.Listen intervalSpeedListen=new HudIntervalSpeedManager.Listen() {
+        @Override
+        public void nowIsShow() {
+                handler.removeMessages(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal());
+                handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),10*1000);
+        }
+
+        @Override
+        public void nowIsHide() {
+                handler.removeMessages(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal());
+                handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
         }
     };
 
@@ -69,7 +83,6 @@ public class HudEventService extends BaseService {
             try {
                 switch (bleStatu){
                     case CONNECTING:
-
                         break;
                     case CONNECTED:
                         HudTimeManager.getInstance().setTimeStart(true);
@@ -81,7 +94,6 @@ public class HudEventService extends BaseService {
 //                    HudImageManeger.getInstance().setSendImageIsStart(true);
                         HudSendImageManager.getInstance().setIsSend(true);
                         doSendImageStartThing((BleSendImageStartInfoBean) objects[0]);
-
                         break;
                     case SEND_IMAGE_END:
                         doSendImageEndThing((BleSendImageEndInfoBean) objects[0]);
@@ -133,11 +145,7 @@ public class HudEventService extends BaseService {
                     BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
                 }
             }
-
-
         }
-
-
     };
 
 
@@ -148,11 +156,10 @@ public class HudEventService extends BaseService {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             try {
+                handler.removeMessages(msg.what);
                 HudEventServiceMsgType msgType=HudEventServiceMsgType.values()[msg.what];
                 switch (msgType){
                     case SEND_TIME:
-
-                        handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
                         if(!HudTimeManager.getInstance().getTimeIsStart()){
                             return;
                         }
@@ -170,6 +177,12 @@ public class HudEventService extends BaseService {
                         HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
                         if(HudImageManeger.getInstance().getHideNumb()>0){
                             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IMAGE.ordinal(),1000);
+                        }
+                        break;
+                    case HIDE_IntervalSpeed:
+                        if(HudIntervalSpeedManager.getInstance().getHideNumb()>0){
+                            HudIntervalSpeedManager.getInstance().sendHideCmd();
+                            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
                         }
                         break;
                 }
@@ -190,6 +203,7 @@ public class HudEventService extends BaseService {
         BleStatuEventSubscriptionSubject.getInstance().attach(bleStatuEventObserver);
         HudTimeManager.getInstance().setListen(timeListen);
         HudImageManeger.getInstance().setListen(imageListen);
+        HudIntervalSpeedManager.getInstance().setListen(intervalSpeedListen);
     }
 
     @Override
