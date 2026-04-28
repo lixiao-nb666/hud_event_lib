@@ -9,31 +9,7 @@ public class HudSetConfig {
     private static HudSetConfig hudSetConfig;
 
     private HudDeviceSendDataType deviceSendDataType=HudDeviceSendDataType.T700_GUI3;
-    private int imageMaxW=200;
-    private int imageMaxH=260;
-
-    private int progressMaxW=22;
-    private int progressMaxH=260;
-
-    private boolean isNeedBigWarningPoint=true;
-
-    private boolean autoHideIntervalSpeed=true;
-
-    private boolean autoChangerTrunTypeOldAndNew;
-
-    private boolean isOneShowBigWarningPoint;
-
-    private boolean canNotShowProgress;
-
-    private boolean hideIntervalSpeedUseWarningPointCmd;
-
-
-
-
-    private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
-
-    private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
-    private long timeDifference;
+    private HudSetBean hudSetBean=new HudSetBean();
     private HudSetConfig(){}
 
     public static HudSetConfig getInstance(){
@@ -45,86 +21,6 @@ public class HudSetConfig {
             }
         }
         return hudSetConfig;
-    }
-
-
-
-    public void setTimeDifference(long timeDifference) {
-        this.timeDifference=timeDifference;
-    }
-
-    public long getTimeDifference() {
-        return timeDifference;
-    }
-
-    public int getImageMaxW() {
-        return imageMaxW;
-    }
-
-    public void setImageMaxW(int imageMaxW) {
-        this.imageMaxW = imageMaxW;
-    }
-
-    public int getImageMaxH() {
-        return imageMaxH;
-    }
-
-    public void setImageMaxH(int imageMaxH) {
-        this.imageMaxH = imageMaxH;
-    }
-
-    public BleSendBitmapQualityType getBleSendBitmapQualityType() {
-        return bleSendBitmapQualityType;
-    }
-
-    public void setBleSendBitmapQualityType(BleSendBitmapQualityType bleSendBitmapQualityType) {
-        if(null==bleSendBitmapQualityType){
-            return;
-        }
-        this.bleSendBitmapQualityType = bleSendBitmapQualityType;
-    }
-
-    public BleSendBitmapQualityType getBleSendProgressQualityType() {
-        return bleSendProgressQualityType;
-    }
-
-    public void setBleSendProgressQualityType(BleSendBitmapQualityType bleSendProgressQualityType) {
-        if(null==bleSendProgressQualityType){
-            return;
-        }
-        this.bleSendProgressQualityType = bleSendProgressQualityType;
-    }
-
-    public int getProgressMaxW() {
-        return progressMaxW;
-    }
-
-    public void setProgressMaxW(int progressMaxW) {
-        this.progressMaxW = progressMaxW;
-    }
-
-    public int getProgressMaxH() {
-        return progressMaxH;
-    }
-
-    public void setProgressMaxH(int progressMaxH) {
-        this.progressMaxH = progressMaxH;
-    }
-
-    public boolean isAutoChangerTrunTypeOldAndNew() {
-        return autoChangerTrunTypeOldAndNew;
-    }
-
-    public boolean isOneShowBigWarningPoint() {
-        return isOneShowBigWarningPoint;
-    }
-
-    public void setOneShowBigWarningPoint(boolean oneShowBigWarningPoint) {
-        isOneShowBigWarningPoint = oneShowBigWarningPoint;
-    }
-
-    public void setAutoChangerTrunTypeOldAndNew(boolean autoChangerTrunTypeOldAndNew) {
-        this.autoChangerTrunTypeOldAndNew = autoChangerTrunTypeOldAndNew;
     }
 
     public HudDeviceSendDataType getDeviceSendDataType() {
@@ -141,55 +37,139 @@ public class HudSetConfig {
         this.deviceSendDataType = deviceSendDataType;
     }
 
+    public HudSetBean getHudSetBean(){
+        return hudSetBean;
+    }
+
+    public void getHudSetBean(HudSetBean hudSetBean){
+        if(null==hudSetBean){
+            return;
+        }
+        this.hudSetBean=hudSetBean;
+    }
+
+    public void setTimeDifference(long timeDifference) {
+        hudSetBean.setTimeDifference(timeDifference);
+
+    }
+
+    public long getTimeDifference() {
+        return hudSetBean.getTimeDifference();
+    }
+
+    public int getImageMaxW() {
+        return hudSetBean.getImageMaxW();
+    }
+
+    public void setImageMaxW(int imageMaxW) {
+        hudSetBean.setImageMaxW(imageMaxW);
+
+    }
+
+    public int getImageMaxH() {
+        return hudSetBean.getImageMaxH();
+    }
+
+    public void setImageMaxH(int imageMaxH) {
+
+        hudSetBean.setImageMaxH(imageMaxH);
+    }
+
+    public BleSendBitmapQualityType getBleSendBitmapQualityType() {
+        return hudSetBean.getBleSendBitmapQualityType();
+    }
+
+    public void setBleSendBitmapQualityType(BleSendBitmapQualityType bleSendBitmapQualityType) {
+
+        hudSetBean.setBleSendBitmapQualityType(bleSendBitmapQualityType);
+
+    }
+
+    public BleSendBitmapQualityType getBleSendProgressQualityType() {
+        return hudSetBean.getBleSendProgressQualityType();
+    }
+
+    public void setBleSendProgressQualityType(BleSendBitmapQualityType bleSendProgressQualityType) {
+        hudSetBean.setBleSendProgressQualityType(bleSendProgressQualityType);
+
+    }
+
+    public int getProgressMaxW() {
+        return hudSetBean.getProgressMaxW();
+    }
+
+    public void setProgressMaxW(int progressMaxW) {
+        hudSetBean.setProgressMaxW(progressMaxW);
+
+    }
+
+    public int getProgressMaxH() {
+        return hudSetBean.getProgressMaxH();
+    }
+
+    public void setProgressMaxH(int progressMaxH) {
+        this.hudSetBean.setProgressMaxH(progressMaxH);
+
+    }
+
+    public boolean isAutoChangerTrunTypeOldAndNew() {
+        return hudSetBean.isAutoChangerTrunTypeOldAndNew();
+    }
+
+    public void setAutoChangerTrunTypeOldAndNew(boolean autoChangerTrunTypeOldAndNew) {
+        hudSetBean.setAutoChangerTrunTypeOldAndNew(autoChangerTrunTypeOldAndNew);
+    }
+
+    public boolean isOneShowBigWarningPoint() {
+        return hudSetBean.isOneShowBigWarningPoint();
+    }
+
+    public void setOneShowBigWarningPoint(boolean oneShowBigWarningPoint) {
+     hudSetBean.setOneShowBigWarningPoint(oneShowBigWarningPoint);
+    }
+
+
+
+
+
     public boolean isNeedBigWarningPoint() {
-        return isNeedBigWarningPoint;
+        return hudSetBean.isNeedBigWarningPoint();
     }
 
     public void setNeedBigWarningPoint(boolean needBigWarningPoint) {
-        isNeedBigWarningPoint = needBigWarningPoint;
+        hudSetBean.setNeedBigWarningPoint(needBigWarningPoint);
     }
 
     public boolean isCanNotShowProgress() {
-        return canNotShowProgress;
+        return hudSetBean.isCanNotShowProgress();
     }
 
     public void setCanNotShowProgress(boolean canNotShowProgress) {
-        this.canNotShowProgress = canNotShowProgress;
+        hudSetBean.setCanNotShowProgress(canNotShowProgress);
     }
 
 
     public boolean isHideIntervalSpeedUseWarningPointCmd() {
-        return hideIntervalSpeedUseWarningPointCmd;
+        return hudSetBean.isHideIntervalSpeedUseWarningPointCmd();
     }
 
     public void setHideIntervalSpeedUseWarningPointCmd(boolean hideIntervalSpeedUseWarningPointCmd) {
-        this.hideIntervalSpeedUseWarningPointCmd = hideIntervalSpeedUseWarningPointCmd;
+        hudSetBean.setHideIntervalSpeedUseWarningPointCmd(hideIntervalSpeedUseWarningPointCmd);
     }
 
     public boolean isAutoHideIntervalSpeed() {
-        return autoHideIntervalSpeed;
+        return hudSetBean.isAutoHideIntervalSpeed();
     }
 
     public void setAutoHideIntervalSpeed(boolean autoHideIntervalSpeed) {
-        this.autoHideIntervalSpeed = autoHideIntervalSpeed;
+        hudSetBean.setAutoHideIntervalSpeed(autoHideIntervalSpeed);
     }
 
     @Override
     public String toString() {
         return "HudSetConfig{" +
                 "deviceSendDataType=" + deviceSendDataType +
-                ", imageMaxW=" + imageMaxW +
-                ", imageMaxH=" + imageMaxH +
-                ", progressMaxW=" + progressMaxW +
-                ", progressMaxH=" + progressMaxH +
-                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
-                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
-                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
-                ", canNotShowProgress=" + canNotShowProgress +
-                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
-                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
-                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
-                ", timeDifference=" + timeDifference +
+                ", hudSetBean=" + hudSetBean +
                 '}';
     }
 }

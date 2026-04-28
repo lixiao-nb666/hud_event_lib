@@ -64,7 +64,7 @@ public class HudEventService extends BaseService {
         @Override
         public void nowIsShow() {
                 handler.removeMessages(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal());
-                handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),10*1000);
+                handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),HudSetConfig.getInstance().getHudSetBean().getHideIntervalSpeedTime());
         }
 
         @Override
