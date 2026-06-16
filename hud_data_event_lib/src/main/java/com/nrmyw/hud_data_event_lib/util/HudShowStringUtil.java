@@ -11,8 +11,10 @@ public class HudShowStringUtil {
             return "";
         }
         if(checkStr.length()>minL&&checkStr.length()<maxL){
-            int  needAddNumb=HudSetConfig.getInstance().getHudSetBean().getShowMaxNumb()-checkStr.length();
-            return addEmp(checkStr,needAddNumb);
+
+//            int  needAddNumb=HudSetConfig.getInstance().getHudSetBean().getShowMaxNumb()-checkStr.length();
+//            return addEmp(checkStr,needAddNumb);
+            return checkStr+"         ";
         }
         return checkStr;
     }
