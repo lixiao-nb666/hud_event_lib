@@ -397,6 +397,16 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void hideTurnType() {
+        if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
+            HudSendTurnTypeManager.getInstance().setTureType(HudTurnType.none,0,HudTurnType.none,0);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,HudTurnType.none,0,HudTurnType.none,0);
+        }
+
+    }
+
+    @Override
     public void showBigTurnType() {
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BIG_TURN_TYPE_HIDE_AND_SHOW,HudStatuType.OPEN);
     }

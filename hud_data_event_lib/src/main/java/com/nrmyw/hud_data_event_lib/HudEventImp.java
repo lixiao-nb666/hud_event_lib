@@ -100,6 +100,8 @@ public interface HudEventImp {
 
     public void sendNewTurnType(HudTurnType type1	, int distance1,HudTurnType type2	, int distance2);
 
+    public void hideTurnType();
+
     public void showBigTurnType();
 
     public void hideBigTurnType();
