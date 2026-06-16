@@ -38,10 +38,13 @@ public class HudSetConfig {
     }
 
     public HudSetBean getHudSetBean(){
+        if(null==hudSetBean){
+            hudSetBean=new HudSetBean();
+        }
         return hudSetBean;
     }
 
-    public void getHudSetBean(HudSetBean hudSetBean){
+    public void setHudSetBean(HudSetBean hudSetBean){
         if(null==hudSetBean){
             return;
         }

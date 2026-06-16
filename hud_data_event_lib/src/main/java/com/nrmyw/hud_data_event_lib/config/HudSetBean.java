@@ -17,15 +17,23 @@ public class HudSetBean implements Serializable {
 
     private boolean autoHideIntervalSpeed=true;
 
+    private long hideIntervalSpeedTime;
+
+    private boolean hideIntervalSpeedUseWarningPointCmd;
+
     private boolean autoChangerTrunTypeOldAndNew;
 
     private boolean isOneShowBigWarningPoint;
 
     private boolean canNotShowProgress;
 
-    private boolean hideIntervalSpeedUseWarningPointCmd;
+    private int turnTypeStrMinL=6;
+    private int turnTypeStrMaxL=16;
 
-    private long hideIntervalSpeedTime;
+    private int laneNameStrMinL=8;
+    private int laneNameStrMaxL=16;
+
+    private  int ShowMaxNumb=20;
 
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
@@ -154,6 +162,46 @@ public class HudSetBean implements Serializable {
             return;
         }
         this.hideIntervalSpeedTime = hideIntervalSpeedTime;
+    }
+
+    public int getTurnTypeStrMinL() {
+        return turnTypeStrMinL;
+    }
+
+    public void setTurnTypeStrMinL(int turnTypeStrMinL) {
+        this.turnTypeStrMinL = turnTypeStrMinL;
+    }
+
+    public int getLaneNameStrMaxL() {
+        return laneNameStrMaxL;
+    }
+
+    public void setLaneNameStrMaxL(int laneNameStrMaxL) {
+        this.laneNameStrMaxL = laneNameStrMaxL;
+    }
+
+    public int getLaneNameStrMinL() {
+        return laneNameStrMinL;
+    }
+
+    public void setLaneNameStrMinL(int laneNameStrMinL) {
+        this.laneNameStrMinL = laneNameStrMinL;
+    }
+
+    public int getTurnTypeStrMaxL() {
+        return turnTypeStrMaxL;
+    }
+
+    public void setTurnTypeStrMaxL(int turnTypeStrMaxL) {
+        this.turnTypeStrMaxL = turnTypeStrMaxL;
+    }
+
+    public int getShowMaxNumb() {
+        return ShowMaxNumb;
+    }
+
+    public void setShowMaxNumb(int showMaxNumb) {
+        ShowMaxNumb = showMaxNumb;
     }
 
     @Override

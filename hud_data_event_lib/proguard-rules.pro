@@ -49,4 +49,8 @@
     *(...);
 }
 
+-keep public class com.nrmyw.hud_data_event_lib.config.HudSetBean{
+    *(...);
+}
+
 -flattenpackagehierarchy 'com.nrmyw.hud_data_event_lib'

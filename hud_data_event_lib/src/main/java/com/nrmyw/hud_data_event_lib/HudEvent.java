@@ -16,6 +16,7 @@ import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
+import com.nrmyw.hud_data_event_lib.util.HudShowStringUtil;
 import com.nrmyw.hud_data_lib.bean.HudLaneCountBean;
 import com.nrmyw.hud_data_lib.bean.HudLaneHiPassCountBean;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
@@ -221,6 +222,10 @@ public class HudEvent implements HudEventImp {
         if(null==reachType){
             return;
         }
+        if(reachType==HudReachType.HIDE||distance==0){
+            hideReach();
+            return;
+        }
         distance=HudSendDataCheckUtil.getDis(distance);
         hours= HudSendDataCheckUtil.getTimeH(hours);
         minutes= HudSendDataCheckUtil.getTimeM(minutes);
@@ -341,7 +346,7 @@ public class HudEvent implements HudEventImp {
         }
         distance1=HudSendDataCheckUtil.getDis(distance1);
         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
-            HudSendTurnTypeManager.getInstance().setTureType(type1,distance1);
+            HudSendTurnTypeManager.getInstance().setTureType(type1,distance1,HudTurnType.none,0);
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.TURN_TYPE,type1,distance1,HudTurnType.none,0);
         }
@@ -418,6 +423,8 @@ public class HudEvent implements HudEventImp {
         if(TextUtils.isEmpty(laneName)){
             return;
         }
+        //这里使用转向图标的字符限制长度
+        laneName= HudShowStringUtil.getNeedLString(laneName,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
         HudSendManager.getInstance().sendCmd(HudCmdType.Next_LANE_NAME,laneName);
     }
 
@@ -426,6 +433,8 @@ public class HudEvent implements HudEventImp {
         if(null==nowLaneStrType||TextUtils.isEmpty(laneName)){
             return;
         }
+        //这里使用车道的字符限制长度
+        laneName= HudShowStringUtil.getNeedLString(laneName,HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMinL(),HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMaxL());
         HudSendManager.getInstance().sendCmd(HudCmdType.NOW_LANE_STR,nowLaneStrType,laneName);
     }
 
@@ -775,6 +784,8 @@ public class HudEvent implements HudEventImp {
             return;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
+        //这里也要用turnType的长度
+        notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
     }
 
@@ -790,6 +801,10 @@ public class HudEvent implements HudEventImp {
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
         interval2=HudSendDataCheckUtil.getDis(interval2);
+        //这里也要用turnType的长度
+        notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        //这里也要用turnType的长度
+        notifictionStr2= HudShowStringUtil.getNeedLString(notifictionStr2,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
 
     }
