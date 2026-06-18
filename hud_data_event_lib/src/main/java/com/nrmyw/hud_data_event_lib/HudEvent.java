@@ -186,6 +186,22 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void hideBigBigWarningPoint() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,HudWarningPointType.none,0);
+    }
+
+    @Override
+    public void hideWarningPoint() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0);
+    }
+
+    @Override
+    public void hideAllWarningPoint() {
+        hideBigBigWarningPoint();
+        hideWarningPoint();
+    }
+
+    @Override
     public void sendWarningPoint1TitleStr(String str) {
         if(TextUtils.isEmpty(str)){
             return;
