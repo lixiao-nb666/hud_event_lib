@@ -250,6 +250,17 @@ public class HudEvent implements HudEventImp {
         }
         distance=HudSendDataCheckUtil.getDis(distance);
         hours= HudSendDataCheckUtil.getTimeH(hours);
+        switch (reachType){
+            case AM:
+            case PM:
+            case ARRIVAL_AM:
+            case ARRIVAL_PM:
+                if(hours>12){
+                    hours=hours-12;
+                }
+                break;
+        }
+
         minutes= HudSendDataCheckUtil.getTimeM(minutes);
         HudSendManager.getInstance().sendCmd(HudCmdType.REACH_INFO,distance,hours,minutes,reachType);
     }
