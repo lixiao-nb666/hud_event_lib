@@ -112,6 +112,10 @@ public interface HudEventImp {
 
     public void hideBigTurnType();
 
+    public void showTurnMsgKorean();
+
+    public void hideTurnMsgKorean();
+
     public void setTurnBj(HudTurnBjType turnBj);
 
     public void sendNextLaneName(String laneName);

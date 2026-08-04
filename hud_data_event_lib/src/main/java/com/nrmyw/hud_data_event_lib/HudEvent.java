@@ -77,11 +77,17 @@ public class HudEvent implements HudEventImp {
     }
 
 
-
+    private int lastSpeed;
+    private long lastSendSpeedTime;
     @Override
     public void sendNowSpeed(int nowSpeed) {
         nowSpeed= HudSendDataCheckUtil.getSpeed(nowSpeed);
+        if(lastSendSpeedTime!=0&&lastSpeed==nowSpeed&&System.currentTimeMillis()-lastSendSpeedTime<3000){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SPEED,nowSpeed);
+        lastSpeed=nowSpeed;
+        lastSendSpeedTime=System.currentTimeMillis();
     }
 
     @Override
@@ -430,6 +436,16 @@ public class HudEvent implements HudEventImp {
     @Override
     public void hideBigTurnType() {
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BIG_TURN_TYPE_HIDE_AND_SHOW,HudStatuType.CLOSE);
+    }
+
+    @Override
+    public void showTurnMsgKorean() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.TURN_MSG_KOREAN,HudStatuType.OPEN);
+    }
+
+    @Override
+    public void hideTurnMsgKorean() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.TURN_MSG_KOREAN,HudStatuType.CLOSE);
     }
 
     @Override
