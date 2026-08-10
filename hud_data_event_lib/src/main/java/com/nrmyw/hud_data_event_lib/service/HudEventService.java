@@ -47,11 +47,14 @@ public class HudEventService extends BaseService {
         }
     };
 
+    private boolean isFirstSendTime;
     private HudTimeManager.Listen timeListen=new HudTimeManager.Listen() {
         @Override
         public void initTime() {
+            isFirstSendTime=true;
             handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
-            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),1688);
+            handler.sendEmptyMessage(HudEventServiceMsgType.SEND_TIME.ordinal());
+
         }
 
         @Override
@@ -167,6 +170,12 @@ public class HudEventService extends BaseService {
                         long nowTime=System.currentTimeMillis();
                         Date date = new Date(nowTime);
                         int needS=60-date.getSeconds();
+                        if(isFirstSendTime){
+                            isFirstSendTime=false;
+                            if(needS>5){
+                                needS=5;
+                            }
+                        }
                         handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),needS*1000);
                         break;
                     case HIDE_IMAGE:
