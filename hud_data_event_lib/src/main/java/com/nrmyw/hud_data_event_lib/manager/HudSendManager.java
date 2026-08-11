@@ -193,6 +193,7 @@ public class HudSendManager {
                 body=HudCmdSendDataUtil.getNotificationIcon(objects);
                 break;
             case LUMINANCE_PERCENT:
+            case BRIGHTNESS_CONTROL:
                 body =HudCmdSendDataUtil.getLuminancePercentV(objects);
                 break;
             case CHANGE_MODE:

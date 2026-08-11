@@ -557,6 +557,11 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void factoryTest() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.FACTORY_AGING_MODE);
+    }
+
+    @Override
     public void sendGpsStatu(HudGpsStatuType gpsStatuType) {
         if(null==gpsStatuType){
             return;
@@ -913,6 +918,11 @@ public class HudEvent implements HudEventImp {
         lowV=HudSendDataCheckUtil.getLuminancePercentV(lowV);
         hightV=HudSendDataCheckUtil.getLuminancePercentV(hightV);
         HudSendManager.getInstance().sendCmd(HudCmdType.LUMINANCE_PERCENT,lowV,hightV);
+    }
+
+    @Override
+    public void setLuminanceTestMode(int luminanceMold, int luminanceV) {
+        HudSendManager.getInstance().sendCmd(HudCmdType.BRIGHTNESS_CONTROL,luminanceMold,luminanceV);
     }
 
 

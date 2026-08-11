@@ -195,6 +195,8 @@ public interface HudEventImp {
     public void setDisplayRect(HudSetDisplayDirectionType setDisplayDirectionType,int value);
 
     public void setLuminancePercent(int lowV,int hightV);
+
+    public void setLuminanceTestMode(int luminanceMold,int luminanceV);
     public void notifictionMsg(String notifictionStr1,int interval1);
 
 
@@ -224,5 +226,8 @@ public interface HudEventImp {
     public void sendHintBarStr(String hintBarStr);
 
     public void functionSelect(HudFunctionType nowType,HudFunctionType lastType,HudFunctionType nextType,String nowTypeStr);
+
+    public void factoryTest();
+
 
 }
