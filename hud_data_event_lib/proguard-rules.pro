@@ -53,7 +53,7 @@
     *(...);
 }
 
--keep public class com.nrmyw.hud_data_event_lib.service.HudEventServiceMsgType{
+-keep public interface com.nrmyw.hud_data_event_lib.service.HudEventServiceMsgType{
     *(...);
 }
 
