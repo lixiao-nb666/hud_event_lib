@@ -53,4 +53,8 @@
     *(...);
 }
 
+-keep public class com.nrmyw.hud_data_event_lib.service.HudEventServiceMsgType{
+    *(...);
+}
+
 -flattenpackagehierarchy 'com.nrmyw.hud_data_event_lib'

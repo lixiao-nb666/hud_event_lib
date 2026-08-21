@@ -177,6 +177,7 @@ public class HudEventService extends BaseService {
                             }
                         }
                         handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),needS*1000);
+
                         break;
                     case HIDE_IMAGE:
                         if(HudImageManeger.getInstance().isImageCanShow()){
@@ -195,6 +196,7 @@ public class HudEventService extends BaseService {
                         }
                         break;
                 }
+                BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.USER_DO,msgType);
             }catch (Exception e){}
         }
     };
