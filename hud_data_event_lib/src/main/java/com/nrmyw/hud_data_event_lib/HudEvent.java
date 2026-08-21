@@ -491,6 +491,23 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.NOW_LANE_STR,nowLaneStrType,laneName);
     }
 
+
+    @Override
+    public void openOrCloseTranslationUi(HudStatuType statuType) {
+        if(null==statuType){
+            statuType=HudStatuType.CLOSE;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.OPEN_OR_CLOSE_TRANSLATION_UI,statuType);
+    }
+
+    @Override
+    public void sendTranslationAtoBName(String aAndBStr) {
+        if(TextUtils.isEmpty(aAndBStr)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATION_A_TO_B_NAME,aAndBStr);
+    }
+
     @Override
     public void sendTranslationing(String str) {
         if(TextUtils.isEmpty(str)){
@@ -523,13 +540,7 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONED_RESULT,str);
     }
 
-    @Override
-    public void sendTranslationAtoBName(String aAndBStr) {
-        if(TextUtils.isEmpty(aAndBStr)){
-            return;
-        }
-        HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATION_A_TO_B_NAME,aAndBStr);
-    }
+
 
     @Override
     public void sendHintBarStr(String hintBarStr) {
@@ -559,6 +570,14 @@ public class HudEvent implements HudEventImp {
     @Override
     public void factoryTest() {
         HudSendManager.getInstance().sendCmd(HudCmdType.FACTORY_AGING_MODE);
+    }
+
+    @Override
+    public void openOrCloseHotport(HudStatuType statuType) {
+            if(null==statuType){
+                statuType=HudStatuType.CLOSE;
+            }
+            HudSendManager.getInstance().sendCmd(HudCmdType.OPEN_OR_CLOSE_HOTPORT,statuType);
     }
 
     @Override
@@ -909,6 +928,8 @@ public class HudEvent implements HudEventImp {
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.CHANGE_MODE,hudShowModel,titleStr);
     }
+
+
 
     @Override
     public void setLuminancePercent(int lowV, int hightV) {

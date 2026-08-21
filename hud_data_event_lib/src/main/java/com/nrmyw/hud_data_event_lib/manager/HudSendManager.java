@@ -178,6 +178,8 @@ public class HudSendManager {
             case SET_DEVICE_SOUND_STATU:
             case SET_DAYLIGHTING_SHOW_STATU:
             case SET_BIG_TURN_TYPE_HIDE_AND_SHOW:
+            case OPEN_OR_CLOSE_HOTPORT:
+            case OPEN_OR_CLOSE_TRANSLATION_UI:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
             case SET_UI:

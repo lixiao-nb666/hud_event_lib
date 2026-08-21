@@ -216,12 +216,15 @@ public interface HudEventImp {
 
     public void changeShowModel(HudShowModel hudShowModel,String titleStr);
 
+
+    public void openOrCloseTranslationUi(HudStatuType statuType);
+    public void sendTranslationAtoBName(String aAndBStr);
     public void sendTranslationing(String str);
     public void sendTranslationingResult(String str);
     public void sendTranslationed(String str);
     public void sendTranslationedResult(String str);
 
-    public void sendTranslationAtoBName(String aAndBStr);
+
 
     public void sendHintBarStr(String hintBarStr);
 
@@ -229,5 +232,7 @@ public interface HudEventImp {
 
     public void factoryTest();
 
+
+    public void openOrCloseHotport(HudStatuType statuType);
 
 }
