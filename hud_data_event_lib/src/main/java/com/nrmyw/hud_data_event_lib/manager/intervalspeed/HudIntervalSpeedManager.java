@@ -2,12 +2,14 @@ package com.nrmyw.hud_data_event_lib.manager.intervalspeed;
 
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 
 public class HudIntervalSpeedManager {
     private static HudIntervalSpeedManager hudIntervalSpeedManager;
     private Listen listen;
+    private boolean nowIsShow;
     private HudIntervalSpeedManager(){}
 
     public static HudIntervalSpeedManager getInstance(){
@@ -32,6 +34,11 @@ public class HudIntervalSpeedManager {
         }
         hideNumb=3;
         listen.nowIsShow();
+        if(!nowIsShow){
+            nowIsShow=true;
+            HudWarningPointManager.getInstance().nowNeedReShow();
+        }
+
     }
 
     public void nowIsHide(){
@@ -40,7 +47,10 @@ public class HudIntervalSpeedManager {
         }
         hideNumb=2;
         listen.nowIsHide();
-
+        if(nowIsShow){
+            nowIsShow=false;
+            HudWarningPointManager.getInstance().nowNeedReShow();
+        }
     }
 
     public void sendHideCmd(){

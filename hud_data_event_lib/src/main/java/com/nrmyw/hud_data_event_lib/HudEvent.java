@@ -14,6 +14,7 @@ import com.nrmyw.hud_data_event_lib.manager.notifiction.HudNotifictionManager;
 import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_event_lib.util.HudShowStringUtil;
@@ -148,63 +149,41 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendWarningPoint(HudWarningPointType type1, int distance1) {
-        if(null==type1){
-            return;
-        }
-        distance1=HudSendDataCheckUtil.getDis(distance1);
-        if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
-            //如果能够大图标显示被允许并且，如果能够一个图标显示大图标
-            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
-        }else {
-            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
-        }
+        HudWarningPointManager.getInstance().addWarningPoint(type1,distance1);
+
 
     }
 
     @Override
     public void sendWarningPoint(HudWarningPointType type1, int distance1, HudWarningPointType type2, int distance2) {
-        if(null==type1||null==type2){
-            return;
-        }
-        distance1=HudSendDataCheckUtil.getDis(distance1);
-        distance2=HudSendDataCheckUtil.getDis(distance2);
-        if(type2==HudWarningPointType.none&&HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
-            //如果能够大图标显示被允许并且，如果能够一个图标显示大图标,并且第二个图标是空或者隐藏
-            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
-        }else {
-            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
-        }
+        HudWarningPointManager.getInstance().addWarningPoint(type1,distance1,type2,distance2);
+
 
     }
 
     @Override
     public void sendBigWarningPoint(HudWarningPointType type1, int distance1) {
-        if(null==type1){
-            return;
-        }
-        distance1=HudSendDataCheckUtil.getDis(distance1);
-        if(HudSetConfig.getInstance().isNeedBigWarningPoint()){
-            HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
-        }else {
-            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
-        }
+        HudWarningPointManager.getInstance().addBigWarningPoint(type1,distance1);
+
 
     }
 
     @Override
     public void hideBigBigWarningPoint() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,HudWarningPointType.none,0);
+        HudWarningPointManager.getInstance().hideBigBigWarningPoint();
+
     }
 
     @Override
     public void hideWarningPoint() {
-        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0);
+        HudWarningPointManager.getInstance().hideWarningPoint();
+
     }
 
     @Override
     public void hideAllWarningPoint() {
-        hideBigBigWarningPoint();
-        hideWarningPoint();
+        HudWarningPointManager.getInstance().hideBigBigWarningPoint();
+        HudWarningPointManager.getInstance().hideWarningPoint();
     }
 
     @Override
@@ -472,13 +451,15 @@ public class HudEvent implements HudEventImp {
 
 
     @Override
-    public void sendNextLaneName(String laneName) {
-        if(TextUtils.isEmpty(laneName)){
+    public void sendNextLaneName(String nextLaneName) {
+        if(TextUtils.isEmpty(nextLaneName)){
             return;
         }
         //这里使用转向图标的字符限制长度
-        laneName= HudShowStringUtil.getNeedLString(laneName,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
-        HudSendManager.getInstance().sendCmd(HudCmdType.Next_LANE_NAME,laneName);
+        if(HudSetConfig.getInstance().getHudSetBean().isTurnStrAddNull()){
+            nextLaneName= HudShowStringUtil.getNeedLString(nextLaneName,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.Next_LANE_NAME,nextLaneName);
     }
 
     @Override
@@ -487,7 +468,9 @@ public class HudEvent implements HudEventImp {
             return;
         }
         //这里使用车道的字符限制长度
-        laneName= HudShowStringUtil.getNeedLString(laneName,HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMinL(),HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMaxL());
+        if(HudSetConfig.getInstance().getHudSetBean().isNowLaneStrAddNull()){
+            laneName= HudShowStringUtil.getNeedLString(laneName,HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMinL(),HudSetConfig.getInstance().getHudSetBean().getLaneNameStrMaxL());
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.NOW_LANE_STR,nowLaneStrType,laneName);
     }
 
@@ -697,6 +680,7 @@ public class HudEvent implements HudEventImp {
     public void showImage() {
         HudImageManeger.getInstance().setImageCanShow(true);
         HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
+
     }
 
     @Override
@@ -705,6 +689,7 @@ public class HudEvent implements HudEventImp {
         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
             HudSendTurnTypeManager.getInstance().setImageIsHide();
         }
+        HudWarningPointManager.getInstance().nowNeedReShow();
     }
 
     @Override
@@ -862,7 +847,10 @@ public class HudEvent implements HudEventImp {
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
         //这里也要用turnType的长度
-        notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        if(HudSetConfig.getInstance().getHudSetBean().isNotifictionStrAddNull()){
+            notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        }
+
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
     }
 
@@ -878,10 +866,12 @@ public class HudEvent implements HudEventImp {
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
         interval2=HudSendDataCheckUtil.getDis(interval2);
-        //这里也要用turnType的长度
-        notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
-        //这里也要用turnType的长度
-        notifictionStr2= HudShowStringUtil.getNeedLString(notifictionStr2,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        if(HudSetConfig.getInstance().getHudSetBean().isNotifictionStrAddNull()){
+            //这里也要用turnType的长度
+            notifictionStr1= HudShowStringUtil.getNeedLString(notifictionStr1,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+            //这里也要用turnType的长度
+            notifictionStr2= HudShowStringUtil.getNeedLString(notifictionStr2,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
+        }
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
 
     }
@@ -889,7 +879,7 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionMsgHide() {
         HudNotifictionManager.getInstance().setMsg("",0,"",0);
-
+        HudWarningPointManager.getInstance().nowNeedReShow();
 
     }
 

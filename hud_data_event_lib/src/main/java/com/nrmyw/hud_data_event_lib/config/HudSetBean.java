@@ -32,9 +32,14 @@ public class HudSetBean implements Serializable {
 
     private int laneNameStrMinL=8;
     private int laneNameStrMaxL=16;
-
     private  int ShowMaxNumb=20;
 
+    private boolean turnStrAddNull=true;
+    private boolean notifictionStrAddNull=false;
+
+    private boolean nowLaneStrAddNull=true;
+
+    private boolean needReShowWarningPoint=true;
     private BleSendBitmapQualityType bleSendBitmapQualityType=BleSendBitmapQualityType.ULTRA_LOW;
 
     private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
@@ -204,6 +209,38 @@ public class HudSetBean implements Serializable {
         ShowMaxNumb = showMaxNumb;
     }
 
+    public boolean isNotifictionStrAddNull() {
+        return notifictionStrAddNull;
+    }
+
+    public void setNotifictionStrAddNull(boolean notifictionStrAddNull) {
+        this.notifictionStrAddNull = notifictionStrAddNull;
+    }
+
+    public boolean isTurnStrAddNull() {
+        return turnStrAddNull;
+    }
+
+    public void setTurnStrAddNull(boolean turnStrAddNull) {
+        this.turnStrAddNull = turnStrAddNull;
+    }
+
+    public boolean isNowLaneStrAddNull() {
+        return nowLaneStrAddNull;
+    }
+
+    public void setNowLaneStrAddNull(boolean nowLaneStrAddNull) {
+        this.nowLaneStrAddNull = nowLaneStrAddNull;
+    }
+
+    public boolean isNeedReShowWarningPoint() {
+        return needReShowWarningPoint;
+    }
+
+    public void setNeedReShowWarningPoint(boolean needReShowWarningPoint) {
+        this.needReShowWarningPoint = needReShowWarningPoint;
+    }
+
     @Override
     public String toString() {
         return "HudSetBean{" +
@@ -214,11 +251,20 @@ public class HudSetBean implements Serializable {
                 ", progressMaxH=" + progressMaxH +
                 ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
                 ", autoHideIntervalSpeed=" + autoHideIntervalSpeed +
+                ", hideIntervalSpeedTime=" + hideIntervalSpeedTime +
+                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
                 ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
                 ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
                 ", canNotShowProgress=" + canNotShowProgress +
-                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
-                ", hideIntervalSpeedTime=" + hideIntervalSpeedTime +
+                ", turnTypeStrMinL=" + turnTypeStrMinL +
+                ", turnTypeStrMaxL=" + turnTypeStrMaxL +
+                ", laneNameStrMinL=" + laneNameStrMinL +
+                ", laneNameStrMaxL=" + laneNameStrMaxL +
+                ", ShowMaxNumb=" + ShowMaxNumb +
+                ", turnStrAddNull=" + turnStrAddNull +
+                ", notifictionStrAddNull=" + notifictionStrAddNull +
+                ", nowLaneStrAddNull=" + nowLaneStrAddNull +
+                ", needReShowWarningPoint=" + needReShowWarningPoint +
                 ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
                 ", bleSendProgressQualityType=" + bleSendProgressQualityType +
                 '}';
