@@ -22,9 +22,9 @@ public class HudYellowStatuManager {
         return hudYellowStatuManager;
     }
 
-    private boolean canShowTwo=true;
-    public void reShow(boolean canShowTwo){
-            this.canShowTwo=canShowTwo;
+    private boolean onlyShowOne;
+    public void reShow(boolean onlyShowOne){
+            this.onlyShowOne=onlyShowOne;
             if(null==bjType1){
                 bjType1=HudYellowStatuBjType.HIDE;
             }
@@ -35,14 +35,15 @@ public class HudYellowStatuManager {
             if(bjType1==HudYellowStatuBjType.HIDE&&bjType2==HudYellowStatuBjType.HIDE){
                 return;
             }
-            if(canShowTwo){
-                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, bjType1, bjType2);
-            }else {
+            if(onlyShowOne){
                 if(bjType1!=HudYellowStatuBjType.HIDE){
                     HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, HudYellowStatuBjType.HIDE, bjType1);
                 }else {
                     HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, bjType1, bjType2);
                 }
+
+            }else {
+                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, bjType1, bjType2);
             }
 
     }
@@ -51,7 +52,7 @@ public class HudYellowStatuManager {
 
     public void showYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
         if(null==hudYellowStatuBjType){
-            return;
+            hudYellowStatuBjType=HudYellowStatuBjType.HIDE;
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType);
         bjType1=hudYellowStatuBjType;
@@ -60,19 +61,23 @@ public class HudYellowStatuManager {
 
 
     public void showYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1, HudYellowStatuBjType hudYellowStatuBjType2) {
-        if (null == hudYellowStatuBjType1 && null != hudYellowStatuBjType2) {
-            return;
+        if(null==hudYellowStatuBjType1){
+            hudYellowStatuBjType1=HudYellowStatuBjType.HIDE;
+        }
+        if(null==hudYellowStatuBjType2){
+            hudYellowStatuBjType2=HudYellowStatuBjType.HIDE;
         }
         bjType1=hudYellowStatuBjType1;
         bjType2=hudYellowStatuBjType2;
-        if(canShowTwo){
-            HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType1, hudYellowStatuBjType2);
-        }else {
+        if(onlyShowOne){
             if(bjType1!=HudYellowStatuBjType.HIDE){
                 HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, HudYellowStatuBjType.HIDE, bjType1);
             }else {
                 HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, bjType1, bjType2);
             }
+
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType1, hudYellowStatuBjType2);
 
         }
 

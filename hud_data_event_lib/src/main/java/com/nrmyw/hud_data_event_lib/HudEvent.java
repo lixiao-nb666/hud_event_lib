@@ -690,7 +690,7 @@ public class HudEvent implements HudEventImp {
         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
             HudSendTurnTypeManager.getInstance().setImageIsHide();
         }
-        HudWarningPointManager.getInstance().nowNeedReShow(true);
+        HudWarningPointManager.getInstance().nowNeedReShow(false);
     }
 
     @Override
@@ -853,7 +853,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
         if(!notifictionIsShow){
             notifictionIsShow=true;
-            HudWarningPointManager.getInstance().nowNeedReShow(false);
+            HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
     }
 
@@ -878,7 +878,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
         if(!notifictionIsShow){
             notifictionIsShow=true;
-            HudWarningPointManager.getInstance().nowNeedReShow(false);
+            HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
 
     }
@@ -886,7 +886,7 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionMsgHide() {
         HudNotifictionManager.getInstance().setMsg("",0,"",0);
-        HudWarningPointManager.getInstance().nowNeedReShow(true);
+        HudWarningPointManager.getInstance().nowNeedReShow(false);
 
     }
 

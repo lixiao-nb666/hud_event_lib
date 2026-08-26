@@ -36,7 +36,7 @@ public class HudIntervalSpeedManager {
         listen.nowIsShow();
         if(!nowIsShow){
             nowIsShow=true;
-            HudWarningPointManager.getInstance().nowNeedReShow(false);
+            HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
 
     }
@@ -49,7 +49,7 @@ public class HudIntervalSpeedManager {
         listen.nowIsHide();
         if(nowIsShow){
             nowIsShow=false;
-            HudWarningPointManager.getInstance().nowNeedReShow(true);
+            HudWarningPointManager.getInstance().nowNeedReShow(false);
         }
     }
 
