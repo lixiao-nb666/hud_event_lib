@@ -15,6 +15,7 @@ import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
+import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_event_lib.util.HudShowStringUtil;
@@ -689,7 +690,7 @@ public class HudEvent implements HudEventImp {
         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
             HudSendTurnTypeManager.getInstance().setImageIsHide();
         }
-        HudWarningPointManager.getInstance().nowNeedReShow();
+        HudWarningPointManager.getInstance().nowNeedReShow(true);
     }
 
     @Override
@@ -703,18 +704,14 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
-        if(null==hudYellowStatuBjType){
-            return;
-        }
-        HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType);
+        HudYellowStatuManager.getInstance().showYellowStatu(hudYellowStatuBjType);
+
     }
 
     @Override
     public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1, HudYellowStatuBjType hudYellowStatuBjType2) {
-        if(null==hudYellowStatuBjType1&&null!=hudYellowStatuBjType2){
-            return;
-        }
-        HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, hudYellowStatuBjType1,hudYellowStatuBjType2);
+        HudYellowStatuManager.getInstance().showYellowStatu(hudYellowStatuBjType1,hudYellowStatuBjType2);
+
     }
 
 
@@ -839,6 +836,8 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_DISPLAY_RECT_SIZE,setDisplayDirectionType,value);
     }
 
+
+    private boolean notifictionIsShow=false;
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1) {
         if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
@@ -852,6 +851,10 @@ public class HudEvent implements HudEventImp {
         }
 
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
+        if(!notifictionIsShow){
+            notifictionIsShow=true;
+            HudWarningPointManager.getInstance().nowNeedReShow(false);
+        }
     }
 
     @Override
@@ -873,13 +876,17 @@ public class HudEvent implements HudEventImp {
             notifictionStr2= HudShowStringUtil.getNeedLString(notifictionStr2,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
         }
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
+        if(!notifictionIsShow){
+            notifictionIsShow=true;
+            HudWarningPointManager.getInstance().nowNeedReShow(false);
+        }
 
     }
 
     @Override
     public void notifictionMsgHide() {
         HudNotifictionManager.getInstance().setMsg("",0,"",0);
-        HudWarningPointManager.getInstance().nowNeedReShow();
+        HudWarningPointManager.getInstance().nowNeedReShow(true);
 
     }
 
@@ -891,6 +898,12 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionIconHide() {
         HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
+    }
+
+    @Override
+    public void notifictionHide() {
+        notifictionIconHide();
+        notifictionMsgHide();
     }
 
     @Override

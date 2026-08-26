@@ -25,6 +25,7 @@ import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.time.HudTimeManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_event_lib.util.HudCmdRetrunDataUtil;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
@@ -146,6 +147,7 @@ public class HudEventService extends BaseService {
                 if(HudImageManeger.getInstance().isImageCanShow()){
                     byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
                     BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
+                    HudWarningPointManager.getInstance().nowNeedReShow(false);
                 }
             }
         }

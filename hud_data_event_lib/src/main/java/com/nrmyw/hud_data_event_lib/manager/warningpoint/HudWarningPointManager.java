@@ -2,6 +2,7 @@ package com.nrmyw.hud_data_event_lib.manager.warningpoint;
 
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
@@ -96,11 +97,12 @@ public class HudWarningPointManager {
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0);
     }
 
-    public void nowNeedReShow(){
+    public void nowNeedReShow(boolean canShowTwo){
         if(!HudSetConfig.getInstance().getHudSetBean().isNeedReShowWarningPoint()){
             return;
         }
 
+        HudYellowStatuManager.getInstance().reShow(canShowTwo);
 
         if(null==lastType1||lastType1==HudWarningPointType.none){
             hideWarningPoint();

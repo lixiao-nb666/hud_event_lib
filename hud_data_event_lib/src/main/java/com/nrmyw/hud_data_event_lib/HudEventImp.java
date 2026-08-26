@@ -208,6 +208,7 @@ public interface HudEventImp {
 
     public void notifictionIconHide();
 
+    public void notifictionHide();
 
     public void clearNavi();
 
