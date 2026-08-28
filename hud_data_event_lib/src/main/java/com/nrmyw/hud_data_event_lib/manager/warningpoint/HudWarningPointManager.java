@@ -52,7 +52,12 @@ public class HudWarningPointManager {
             distance1=HudSendDataCheckUtil.getDis(distance1);
             distance2=HudSendDataCheckUtil.getDis(distance2);
             if(type1==HudWarningPointType.none&&HudSetConfig.getInstance().getHudSetBean().isIfNoneWarningPointOnlyShowFirst()){
-                addWarningPoint(type2,distance2);
+                if(HudSetConfig.getInstance().isOneShowBigWarningPoint()){
+                    addBigWarningPoint(type2,distance2);
+                }else {
+                    addWarningPoint(type2,distance2);
+                }
+
                 return;
             }
             if(type2==HudWarningPointType.none&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
