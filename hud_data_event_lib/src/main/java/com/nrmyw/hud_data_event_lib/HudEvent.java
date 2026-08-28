@@ -656,9 +656,7 @@ public class HudEvent implements HudEventImp {
         if(null==hudImageType){
             hudImageType=HudImageType.IMAGE;
         }
-//        if(hudImageType==HudImageType.IMAGE){
-//
-//        }
+
         if(HudSetConfig.getInstance().isCanNotShowProgress()&&hudImageType==HudImageType.PROGRESS_BAR){
             //因为不能显示进度条，所以直接返回了
             return;

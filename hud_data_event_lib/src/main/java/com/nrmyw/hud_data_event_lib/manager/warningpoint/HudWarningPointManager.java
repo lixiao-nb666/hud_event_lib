@@ -51,16 +51,20 @@ public class HudWarningPointManager {
             }
             distance1=HudSendDataCheckUtil.getDis(distance1);
             distance2=HudSendDataCheckUtil.getDis(distance2);
+            if(type1==HudWarningPointType.none&&HudSetConfig.getInstance().getHudSetBean().isIfNoneWarningPointOnlyShowFirst()){
+                addWarningPoint(type2,distance2);
+                return;
+            }
+            if(type2==HudWarningPointType.none&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
+                addBigWarningPoint(type1,distance1);
+                return;
+            }
             lastType1=type1;
             lastDistance1=distance1;
             lastType2=type2;
             lastDistance2=distance2;
-            if(type2==HudWarningPointType.none&&HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
-                //如果能够大图标显示被允许并且，如果能够一个图标显示大图标,并且第二个图标是空或者隐藏
-                HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
-            }else {
-                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
-            }
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,type2,distance2);
+
     }
 
     public void addBigWarningPoint(HudWarningPointType type1, int distance1){
