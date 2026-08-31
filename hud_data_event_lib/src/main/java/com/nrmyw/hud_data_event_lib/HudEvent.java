@@ -524,6 +524,37 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.TRANSLATIONED_RESULT,str);
     }
 
+    @Override
+    public void sendHintLastStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.HINT_LAST_STR,str);
+    }
+
+    @Override
+    public void sendHintStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.HINT_STR,str);
+    }
+
+    @Override
+    public void sendHudHintLastStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.HINT_LAST_STR_HUD,str);
+    }
+
+    @Override
+    public void sendHudHintStr(String str) {
+        if(TextUtils.isEmpty(str)){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.HINT_STR_HUD,str);
+    }
 
 
     @Override
@@ -927,7 +958,7 @@ public class HudEvent implements HudEventImp {
         if(TextUtils.isEmpty(titleStr)){
             titleStr="";
         }
-        HudSendManager.getInstance().sendCmd(HudCmdType.CHANGE_MODE,hudShowModel,titleStr);
+        HudSendManager.getInstance().sendCmd(HudCmdType.CHANGE_SHOW_MODE,hudShowModel,titleStr);
     }
 
 

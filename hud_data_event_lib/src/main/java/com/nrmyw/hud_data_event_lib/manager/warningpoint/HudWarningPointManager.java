@@ -40,7 +40,6 @@ public class HudWarningPointManager {
                 HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
 
             }else {
-
                 HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
             }
     }

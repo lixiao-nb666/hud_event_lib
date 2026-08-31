@@ -140,7 +140,10 @@ public class HudSendManager {
             case TRANSLATIONED:
             case TRANSLATIONED_RESULT:
             case TRANSLATION_A_TO_B_NAME:
+            case HINT_LAST_STR:
             case HINT_STR:
+            case HINT_LAST_STR_HUD:
+            case HINT_STR_HUD:
                 body = HudCmdSendDataUtil.getStr(objects);
                 break;
             case NOW_LANE_STR:
@@ -198,7 +201,7 @@ public class HudSendManager {
             case BRIGHTNESS_CONTROL:
                 body =HudCmdSendDataUtil.getLuminancePercentV(objects);
                 break;
-            case CHANGE_MODE:
+            case CHANGE_SHOW_MODE:
                 body =HudCmdSendDataUtil.getChangeModle(objects);
                 break;
             case FUNCTION_SELECT:

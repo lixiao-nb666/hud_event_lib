@@ -225,7 +225,13 @@ public interface HudEventImp {
     public void sendTranslationed(String str);
     public void sendTranslationedResult(String str);
 
+    public void sendHintLastStr(String str);
 
+    public void sendHintStr(String str);
+
+    public void sendHudHintLastStr(String str);
+
+    public void sendHudHintStr(String str);
 
     public void sendHintBarStr(String hintBarStr);
 
