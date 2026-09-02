@@ -242,4 +242,11 @@ public interface HudEventImp {
 
     public void openOrCloseHotport(HudStatuType statuType);
 
+
+    public void takePhoto();
+
+    public void takeVideo(HudStatuType statuType);
+
+
+
 }

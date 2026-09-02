@@ -596,6 +596,19 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void takePhoto() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.TAKE_PHOTO);
+    }
+
+    @Override
+    public void takeVideo(HudStatuType statuType) {
+        if(null==statuType){
+            statuType=HudStatuType.CLOSE;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.TAKE_VIDEO,statuType);
+    }
+
+    @Override
     public void sendGpsStatu(HudGpsStatuType gpsStatuType) {
         if(null==gpsStatuType){
             return;
