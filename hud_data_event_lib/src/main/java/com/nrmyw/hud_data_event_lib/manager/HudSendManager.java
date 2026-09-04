@@ -184,6 +184,7 @@ public class HudSendManager {
             case OPEN_OR_CLOSE_HOTPORT:
             case OPEN_OR_CLOSE_TRANSLATION_UI:
             case WARNING_POINT_PASSING:
+            case TAKE_PHOTO:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
             case SET_UI:
