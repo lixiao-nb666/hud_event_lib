@@ -188,6 +188,19 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
+    public void setWarningPointPass(HudStatuType statuType1, HudStatuType statuType2, HudStatuType statuType3) {
+        if(null==statuType1||null==statuType2||null==statuType3){
+            return;
+        }
+        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType1,statuType2,statuType3);
+    }
+
+    @Override
+    public void hideWarningPointPass() {
+        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,HudStatuType.CLOSE,HudStatuType.CLOSE,HudStatuType.CLOSE);
+    }
+
+    @Override
     public void sendWarningPoint1TitleStr(String str) {
         if(TextUtils.isEmpty(str)){
             return;

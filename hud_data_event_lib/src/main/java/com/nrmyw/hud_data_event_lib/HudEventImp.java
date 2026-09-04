@@ -65,6 +65,9 @@ public interface HudEventImp {
 
     public void hideAllWarningPoint();
 
+    public void setWarningPointPass(HudStatuType statuType1,HudStatuType statuType2,HudStatuType statuType3);
+    public void hideWarningPointPass();
+
     public void sendWarningPoint1TitleStr(String str);
 
     public void sendWarningPoint1BodyStr(String str);

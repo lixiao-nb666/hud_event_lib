@@ -183,6 +183,7 @@ public class HudSendManager {
             case SET_BIG_TURN_TYPE_HIDE_AND_SHOW:
             case OPEN_OR_CLOSE_HOTPORT:
             case OPEN_OR_CLOSE_TRANSLATION_UI:
+            case WARNING_POINT_PASSING:
                 body = HudCmdSendDataUtil.getStatu(objects);
                 break;
             case SET_UI:
