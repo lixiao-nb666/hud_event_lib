@@ -111,7 +111,6 @@ public class HudWarningPointManager {
         }
 
         HudYellowStatuManager.getInstance().reShow(onlyShowOne);
-
         if(null==lastType1||lastType1==HudWarningPointType.none){
             hideWarningPoint();
             return;
