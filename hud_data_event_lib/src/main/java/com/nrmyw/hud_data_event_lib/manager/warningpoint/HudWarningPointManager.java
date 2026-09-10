@@ -1,9 +1,11 @@
 package com.nrmyw.hud_data_event_lib.manager.warningpoint;
 
+import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
+import com.nrmyw.hud_data_lib.config.HudConfig;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 
@@ -35,13 +37,15 @@ public class HudWarningPointManager {
             lastDistance1=distance1;
             lastType2=HudWarningPointType.none;
             lastDistance2=0;
-            if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()){
-                //如果能够大图标显示被允许并且，如果能够一个图标显示大图标
-                HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
-
-            }else {
-                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
+            if(HudSetConfig.getInstance().isNeedBigWarningPoint()){
+                //如果能够大图标显示被允许并且
+                if(HudSetConfig.getInstance().isOneShowBigWarningPoint()){
+                    //如果能够一个图标显示大图标
+                    HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
+                    return;
+                }
             }
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
     }
 
     public void addWarningPoint(HudWarningPointType type1, int distance1, HudWarningPointType type2, int distance2){
@@ -81,6 +85,7 @@ public class HudWarningPointManager {
             lastType2=HudWarningPointType.none;
             lastDistance2=0;
             if(HudSetConfig.getInstance().isNeedBigWarningPoint()){
+                //如果能显示大图标直接发， 不能显示就发普通的
                 HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT,type1,distance1);
             }else {
                 HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,type1,distance1,HudWarningPointType.none,0);
@@ -88,7 +93,10 @@ public class HudWarningPointManager {
     }
 
 
-    public void hideBigBigWarningPoint() {
+    public void hideBigWarningPoint() {
+        if(!HudSetConfig.getInstance().isNeedBigWarningPoint()){
+            return;
+        }
         lastType1=HudWarningPointType.none;
         lastDistance1=0;
         lastType2=HudWarningPointType.none;

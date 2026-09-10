@@ -170,8 +170,8 @@ public class HudEvent implements HudEventImp {
     }
 
     @Override
-    public void hideBigBigWarningPoint() {
-        HudWarningPointManager.getInstance().hideBigBigWarningPoint();
+    public void hideBigWarningPoint() {
+        HudWarningPointManager.getInstance().hideBigWarningPoint();
 
     }
 
@@ -183,7 +183,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void hideAllWarningPoint() {
-        HudWarningPointManager.getInstance().hideBigBigWarningPoint();
+        HudWarningPointManager.getInstance().hideBigWarningPoint();
         HudWarningPointManager.getInstance().hideWarningPoint();
     }
 
@@ -192,7 +192,7 @@ public class HudEvent implements HudEventImp {
         if(null==statuType1||null==statuType2||null==statuType3){
             return;
         }
-        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType1,statuType2,statuType3);
+        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType2,statuType3);
     }
 
     @Override
@@ -434,11 +434,17 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void showBigTurnType() {
+        if(!HudSetConfig.getInstance().getHudSetBean().isCanShowBigTurnType()){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BIG_TURN_TYPE_HIDE_AND_SHOW,HudStatuType.OPEN);
     }
 
     @Override
     public void hideBigTurnType() {
+        if(!HudSetConfig.getInstance().getHudSetBean().isCanShowBigTurnType()){
+            return;
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.SET_BIG_TURN_TYPE_HIDE_AND_SHOW,HudStatuType.CLOSE);
     }
 

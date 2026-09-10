@@ -59,7 +59,7 @@ public interface HudEventImp {
 
     public void sendBigWarningPoint(HudWarningPointType type1	, int distance1);
 
-    public void hideBigBigWarningPoint();
+    public void hideBigWarningPoint();
 
     public void hideWarningPoint();
 

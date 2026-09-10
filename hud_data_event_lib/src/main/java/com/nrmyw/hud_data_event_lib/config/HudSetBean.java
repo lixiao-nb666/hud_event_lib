@@ -55,6 +55,8 @@ public class HudSetBean implements Serializable {
 
     private BleSendBitmapQualityType bleSendProgressQualityType=BleSendBitmapQualityType.PROGRESS;
 
+    private boolean canShowBigTurnType;
+
 
     public long getTimeDifference() {
         return timeDifference;
@@ -104,36 +106,6 @@ public class HudSetBean implements Serializable {
 
     public boolean isOneShowBigWarningPoint() {
         return isOneShowBigWarningPoint;
-    }
-
-    @Override
-    public String toString() {
-        return "HudSetBean{" +
-                "timeDifference=" + timeDifference +
-                ", imageMaxW=" + imageMaxW +
-                ", imageMaxH=" + imageMaxH +
-                ", progressMaxW=" + progressMaxW +
-                ", progressMaxH=" + progressMaxH +
-                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
-                ", autoHideIntervalSpeed=" + autoHideIntervalSpeed +
-                ", hideIntervalSpeedTime=" + hideIntervalSpeedTime +
-                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
-                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
-                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
-                ", ifNoneWarningPointOnlyShowFirst=" + ifNoneWarningPointOnlyShowFirst +
-                ", canNotShowProgress=" + canNotShowProgress +
-                ", turnTypeStrMinL=" + turnTypeStrMinL +
-                ", turnTypeStrMaxL=" + turnTypeStrMaxL +
-                ", laneNameStrMinL=" + laneNameStrMinL +
-                ", laneNameStrMaxL=" + laneNameStrMaxL +
-                ", ShowMaxNumb=" + ShowMaxNumb +
-                ", turnStrAddNull=" + turnStrAddNull +
-                ", notifictionStrAddNull=" + notifictionStrAddNull +
-                ", nowLaneStrAddNull=" + nowLaneStrAddNull +
-                ", needReShowWarningPoint=" + needReShowWarningPoint +
-                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
-                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
-                '}';
     }
 
     public void setOneShowBigWarningPoint(boolean oneShowBigWarningPoint) {
@@ -282,4 +254,42 @@ public class HudSetBean implements Serializable {
         this.needReShowWarningPoint = needReShowWarningPoint;
     }
 
+    public boolean isCanShowBigTurnType() {
+        return canShowBigTurnType;
+    }
+
+    public void setCanShowBigTurnType(boolean canShowBigTurnType) {
+        this.canShowBigTurnType = canShowBigTurnType;
+    }
+
+    @Override
+    public String toString() {
+        return "HudSetBean{" +
+                "timeDifference=" + timeDifference +
+                ", imageMaxW=" + imageMaxW +
+                ", imageMaxH=" + imageMaxH +
+                ", progressMaxW=" + progressMaxW +
+                ", progressMaxH=" + progressMaxH +
+                ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
+                ", autoHideIntervalSpeed=" + autoHideIntervalSpeed +
+                ", hideIntervalSpeedTime=" + hideIntervalSpeedTime +
+                ", hideIntervalSpeedUseWarningPointCmd=" + hideIntervalSpeedUseWarningPointCmd +
+                ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
+                ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
+                ", ifNoneWarningPointOnlyShowFirst=" + ifNoneWarningPointOnlyShowFirst +
+                ", canNotShowProgress=" + canNotShowProgress +
+                ", turnTypeStrMinL=" + turnTypeStrMinL +
+                ", turnTypeStrMaxL=" + turnTypeStrMaxL +
+                ", laneNameStrMinL=" + laneNameStrMinL +
+                ", laneNameStrMaxL=" + laneNameStrMaxL +
+                ", ShowMaxNumb=" + ShowMaxNumb +
+                ", turnStrAddNull=" + turnStrAddNull +
+                ", notifictionStrAddNull=" + notifictionStrAddNull +
+                ", nowLaneStrAddNull=" + nowLaneStrAddNull +
+                ", needReShowWarningPoint=" + needReShowWarningPoint +
+                ", bleSendBitmapQualityType=" + bleSendBitmapQualityType +
+                ", bleSendProgressQualityType=" + bleSendProgressQualityType +
+                ", canShowBigTurnType=" + canShowBigTurnType +
+                '}';
+    }
 }
