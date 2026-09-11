@@ -118,12 +118,15 @@ public class HudWarningPointManager {
             return;
         }
 
+        if(lastType1IsNull()&&lastType2IsNull()){
+            return;
+        }
         HudYellowStatuManager.getInstance().reShow(onlyShowOne);
-        if(null==lastType1||lastType1==HudWarningPointType.none){
+        if(lastType1IsNull()){
             hideWarningPoint();
             return;
         }
-        if(null==lastType2||lastType2==HudWarningPointType.none){
+        if(lastType2IsNull()){
             HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,lastType1,lastDistance1,HudWarningPointType.none,0);
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,lastType1,lastDistance1,lastType2,lastDistance2);
@@ -131,6 +134,12 @@ public class HudWarningPointManager {
 
     }
 
+    private boolean lastType1IsNull(){
+       return null==lastType1||lastType1==HudWarningPointType.none ;
+    }
 
+    private boolean lastType2IsNull(){
+        return null==lastType1||lastType1==HudWarningPointType.none ;
+    }
 
 }
