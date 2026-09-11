@@ -81,7 +81,7 @@ public class HudSendManager {
 //        }
     }
 
-    public byte[] getAllByte(HudCmdType cmdType,Object... objects){
+    public synchronized byte[] getAllByte(HudCmdType cmdType,Object... objects){
         byte title=cmdType.getTitle();
         byte[] body=useObjectSSetBody(cmdType,objects);
         return HudBleByteUtil.useTitleAndBodyGetAllCmdBytes(title,body);
