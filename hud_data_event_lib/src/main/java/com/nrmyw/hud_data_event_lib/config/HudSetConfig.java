@@ -153,11 +153,11 @@ public class HudSetConfig {
 
 
     public boolean isHideIntervalSpeedUseWarningPointCmd() {
-        return hudSetBean.isHideIntervalSpeedUseWarningPointCmd();
+        return hudSetBean.isDJ();
     }
 
     public void setHideIntervalSpeedUseWarningPointCmd(boolean hideIntervalSpeedUseWarningPointCmd) {
-        hudSetBean.setHideIntervalSpeedUseWarningPointCmd(hideIntervalSpeedUseWarningPointCmd);
+        hudSetBean.setDJ(hideIntervalSpeedUseWarningPointCmd);
     }
 
     public boolean isAutoHideIntervalSpeed() {
