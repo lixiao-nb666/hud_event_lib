@@ -193,7 +193,7 @@ public class HudEventService extends BaseService {
                         break;
                     case HIDE_IntervalSpeed:
                         if(HudIntervalSpeedManager.getInstance().getHideNumb()>0){
-                            HudIntervalSpeedManager.getInstance().sendHideCmd();
+                            HudIntervalSpeedManager.getInstance().setHide();
                             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
                         }
                         break;
