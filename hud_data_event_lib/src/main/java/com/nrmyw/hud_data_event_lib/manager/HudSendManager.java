@@ -177,17 +177,6 @@ public class HudSendManager {
                 body=HudCmdSendDataUtil.getYellowStatu(objects);
                 break;
 
-            case ICON_FLICKER:
-            case SET_DEVICE_SOUND_STATU:
-            case SET_DAYLIGHTING_SHOW_STATU:
-            case SET_BIG_TURN_TYPE_HIDE_AND_SHOW:
-            case OPEN_OR_CLOSE_HOTPORT:
-            case OPEN_OR_CLOSE_TRANSLATION_UI:
-            case WARNING_POINT_PASSING:
-            case TAKE_VIDEO:
-            case TURN_MSG_KOREAN:
-                body = HudCmdSendDataUtil.getStatu(objects);
-                break;
             case SET_UI:
                 body = HudCmdSendDataUtil.getUI(objects);
                 break;
@@ -210,6 +199,20 @@ public class HudSendManager {
             case FUNCTION_SELECT:
                 body =HudCmdSendDataUtil.getFunctionSelect(objects);
                 break;
+
+            case ICON_FLICKER:
+            case SET_DEVICE_SOUND_STATU:
+            case SET_DAYLIGHTING_SHOW_STATU:
+            case SET_BIG_TURN_TYPE_HIDE_AND_SHOW:
+            case OPEN_OR_CLOSE_HOTPORT:
+            case OPEN_OR_CLOSE_TRANSLATION_UI:
+            case WARNING_POINT_PASSING:
+            case TAKE_VIDEO:
+            case TURN_MSG_KOREAN:
+            default:
+                body = HudCmdSendDataUtil.getStatu(objects);
+                break;
+
         }
         return body;
     }
