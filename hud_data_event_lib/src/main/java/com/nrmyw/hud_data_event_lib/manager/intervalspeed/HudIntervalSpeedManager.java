@@ -53,8 +53,8 @@ public class HudIntervalSpeedManager {
         }
     }
 
-    public void sendHideCmd(){
-        if(HudSetConfig.getInstance().isHideIntervalSpeedUseWarningPointCmd()){
+    public void setHide(){
+        if(HudSetConfig.getInstance().getHudSetBean().isDJ()){
             //如果是T800就用这个指令
             HudSendManager.getInstance().sendCmd(HudCmdType.BIG_WARNING_POINT, HudWarningPointType.none,0);
         }else {

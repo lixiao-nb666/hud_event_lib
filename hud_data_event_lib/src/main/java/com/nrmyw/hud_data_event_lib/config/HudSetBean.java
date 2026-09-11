@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 public class HudSetBean implements Serializable {
 
+    private boolean isDJ;
     private long timeDifference;
     private int imageMaxW=200;
     private int imageMaxH=260;
@@ -57,6 +58,14 @@ public class HudSetBean implements Serializable {
 
     private boolean canShowBigTurnType;
 
+
+    public boolean isDJ() {
+        return isDJ;
+    }
+
+    public void setDJ(boolean DJ) {
+        isDJ = DJ;
+    }
 
     public long getTimeDifference() {
         return timeDifference;
@@ -265,7 +274,8 @@ public class HudSetBean implements Serializable {
     @Override
     public String toString() {
         return "HudSetBean{" +
-                "timeDifference=" + timeDifference +
+                "isDJ=" + isDJ +
+                ", timeDifference=" + timeDifference +
                 ", imageMaxW=" + imageMaxW +
                 ", imageMaxH=" + imageMaxH +
                 ", progressMaxW=" + progressMaxW +

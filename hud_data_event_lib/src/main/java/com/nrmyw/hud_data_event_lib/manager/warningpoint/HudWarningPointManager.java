@@ -117,10 +117,6 @@ public class HudWarningPointManager {
         if(!HudSetConfig.getInstance().getHudSetBean().isNeedReShowWarningPoint()){
             return;
         }
-
-        if(lastType1IsNull()&&lastType2IsNull()){
-            return;
-        }
         HudYellowStatuManager.getInstance().reShow(onlyShowOne);
         if(lastType1IsNull()){
             hideWarningPoint();

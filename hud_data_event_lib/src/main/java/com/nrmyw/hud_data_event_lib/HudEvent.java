@@ -134,7 +134,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void hideIntervalSpeed() {
-        HudIntervalSpeedManager.getInstance().sendHideCmd();
+        HudIntervalSpeedManager.getInstance().setHide();
         if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
             HudIntervalSpeedManager.getInstance().nowIsHide();
         }
