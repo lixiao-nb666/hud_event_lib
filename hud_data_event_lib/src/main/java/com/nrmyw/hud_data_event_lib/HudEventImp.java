@@ -164,7 +164,7 @@ public interface HudEventImp {
     public void setWarningPointYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1,HudYellowStatuBjType hudYellowStatuBjType2);
 
 
-
+    public void hideYellowStatu();
     public void sendYellowStatuStr(String yellowStatuStr);
 
     public void iconFlicherOpen();
