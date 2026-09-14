@@ -419,18 +419,14 @@ public class HudCmdSendDataUtil {
         if (null == objects || objects.length < 1) {
             return null;
         }
-        HudYellowStatuBjType statuType = (HudYellowStatuBjType) objects[0];
-        if(objects.length>=2){
-            HudYellowStatuBjType statuType2 = (HudYellowStatuBjType) objects[1];
-            return new byte[]{
-                    statuType.getType(),
-                    statuType2.getType()
-            };
-        }else {
-            return new byte[]{
-                    statuType.getType()
-            };
+        byte[] bytes=new byte[objects.length];
+        for(int i=0;i<objects.length;i++){
+            HudYellowStatuBjType statuType = (HudYellowStatuBjType) objects[i];
+            bytes[i]=statuType.getType();
         }
+        return bytes;
+
+
 
 
     }

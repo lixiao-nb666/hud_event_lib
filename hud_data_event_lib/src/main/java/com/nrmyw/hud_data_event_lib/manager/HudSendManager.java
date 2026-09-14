@@ -174,6 +174,8 @@ public class HudSendManager {
                 body = HudCmdSendDataUtil.getFactroySet();
                 break;
             case YELLOW_STATU:
+            case WARNING_POINT_YELLOW_STATU:
+            case TITLE_YELLOW_STATU:
                 body=HudCmdSendDataUtil.getYellowStatu(objects);
                 break;
 
