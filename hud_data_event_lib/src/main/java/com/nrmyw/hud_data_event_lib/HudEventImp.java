@@ -159,9 +159,11 @@ public interface HudEventImp {
 
     public void hideProgressBar();
 
-    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
+    public void setTitleYellowStatu(HudYellowStatuBjType hudYellowStatuBjType);
 
-    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1,HudYellowStatuBjType hudYellowStatuBjType2);
+    public void setWarningPointYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1,HudYellowStatuBjType hudYellowStatuBjType2);
+
+
 
     public void sendYellowStatuStr(String yellowStatuStr);
 

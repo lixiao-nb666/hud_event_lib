@@ -4,11 +4,11 @@ plugins {
 
 android {
     namespace 'com.nrmyw.hud_data_event_lib'
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 33
     }
 
 
@@ -34,6 +34,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.lixiao-nb666:hud_data_lib:1.0.51'
+    implementation 'com.github.lixiao-nb666:hud_data_lib:1.0.53'
     implementation 'com.github.lixiao-nb666:ble_event:1.0.38'
 }

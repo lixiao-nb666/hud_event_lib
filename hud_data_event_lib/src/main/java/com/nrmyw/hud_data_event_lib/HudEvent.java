@@ -764,16 +764,17 @@ public class HudEvent implements HudEventImp {
 
 
     @Override
-    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
-        HudYellowStatuManager.getInstance().showYellowStatu(hudYellowStatuBjType);
+    public void setTitleYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
+        HudYellowStatuManager.getInstance().showTitleYellowStatu(hudYellowStatuBjType);
 
     }
 
     @Override
-    public void setYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1, HudYellowStatuBjType hudYellowStatuBjType2) {
-        HudYellowStatuManager.getInstance().showYellowStatu(hudYellowStatuBjType1,hudYellowStatuBjType2);
-
+    public void setWarningPointYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1, HudYellowStatuBjType hudYellowStatuBjType2) {
+        HudYellowStatuManager.getInstance().showWarningPointYellowStatu(hudYellowStatuBjType1,hudYellowStatuBjType2);
     }
+
+
 
 
     @Override
