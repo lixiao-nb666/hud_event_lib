@@ -55,7 +55,8 @@ public class HudNotifictionManager {
     }
 
     public void hide(){
-        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.HIDE_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
+
+        BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
         setMsg("",0,"",0);
         HudWarningPointManager.getInstance().nowNeedReShow(false);
     }

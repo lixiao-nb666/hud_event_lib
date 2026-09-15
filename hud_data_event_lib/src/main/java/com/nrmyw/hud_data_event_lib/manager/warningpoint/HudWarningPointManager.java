@@ -112,7 +112,7 @@ public class HudWarningPointManager {
         lastDistance1=0;
         lastType2=HudWarningPointType.none;
         lastDistance2=0;
-        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.HIDE_WP.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0));
+        BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_WP.name(), HudSendManager.getInstance().getAllByte(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0));
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0);
     }
 

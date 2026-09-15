@@ -91,7 +91,7 @@ public class HudEventService extends BaseService {
                         break;
                     case CONNECTED:
                         HudTimeManager.getInstance().setTimeStart(true);
-                   
+
                         break;
                     case DISCONNECTED:
                         HudTimeManager.getInstance().setTimeStart(false);

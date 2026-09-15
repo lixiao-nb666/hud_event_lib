@@ -793,13 +793,13 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void iconFlicherOpen() {
-        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.ICON_FLICKER.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.OPEN));
+        BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.ICON_FLICKER.name(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.OPEN));
         HudSendManager.getInstance().sendCmd(HudCmdType.ICON_FLICKER, HudStatuType.OPEN);
     }
 
     @Override
     public void iconFlicherClose() {
-        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.ICON_FLICKER.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.CLOSE));
+        BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.ICON_FLICKER.name(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.CLOSE));
         HudSendManager.getInstance().sendCmd(HudCmdType.ICON_FLICKER, HudStatuType.CLOSE);
     }
 
@@ -922,7 +922,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
         if(!notifictionIsShow){
             notifictionIsShow=true;
-            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0));
+            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0));
             HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
     }
@@ -958,7 +958,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
         if(!notifictionIsShow){
             notifictionIsShow=true;
-            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
+            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
             HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
 
