@@ -922,6 +922,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
         if(!notifictionIsShow){
             notifictionIsShow=true;
+            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
             HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
     }
@@ -957,6 +958,7 @@ public class HudEvent implements HudEventImp {
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
         if(!notifictionIsShow){
             notifictionIsShow=true;
+            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
             HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
 

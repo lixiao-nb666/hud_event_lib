@@ -55,7 +55,7 @@ public class HudNotifictionManager {
         }
         if(isFirstShow&&!TextUtils.isEmpty(notifictionStr1)){
             isFirstShow=false;
-            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
+
         }
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
     }
