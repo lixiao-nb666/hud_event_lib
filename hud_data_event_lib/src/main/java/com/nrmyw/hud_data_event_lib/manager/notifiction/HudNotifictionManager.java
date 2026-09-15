@@ -25,10 +25,7 @@ public class HudNotifictionManager {
         return hudNotifictionManager;
     }
 
-    private boolean isFirstShow;
-    public void setNowIsConnect(){
-        isFirstShow=true;
-    }
+
 
 
     public void setMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
@@ -53,10 +50,7 @@ public class HudNotifictionManager {
         if(needChange){
             HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
         }
-        if(isFirstShow&&!TextUtils.isEmpty(notifictionStr1)){
-            isFirstShow=false;
 
-        }
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
     }
 
