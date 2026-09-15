@@ -1,9 +1,11 @@
 package com.nrmyw.hud_data_event_lib.manager.warningpoint;
 
+import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.HudEvent;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
+import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_lib.config.HudConfig;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
@@ -110,6 +112,7 @@ public class HudWarningPointManager {
         lastDistance1=0;
         lastType2=HudWarningPointType.none;
         lastDistance2=0;
+        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.HIDE_WP.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0));
         HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT,HudWarningPointType.none,0,HudWarningPointType.none,0);
     }
 

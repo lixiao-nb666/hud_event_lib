@@ -16,6 +16,7 @@ import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
+import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudSendDataCheckUtil;
 import com.nrmyw.hud_data_event_lib.util.HudShowStringUtil;
@@ -792,11 +793,13 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void iconFlicherOpen() {
+        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.ICON_FLICKER.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.OPEN));
         HudSendManager.getInstance().sendCmd(HudCmdType.ICON_FLICKER, HudStatuType.OPEN);
     }
 
     @Override
     public void iconFlicherClose() {
+        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.ICON_FLICKER.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.ICON_FLICKER, HudStatuType.CLOSE));
         HudSendManager.getInstance().sendCmd(HudCmdType.ICON_FLICKER, HudStatuType.CLOSE);
     }
 
@@ -907,7 +910,7 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1) {
         if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
-            HudNotifictionManager.getInstance().setMsg("",0,"",0);
+            notifictionMsgHide();
             return;
         }
         interval1=HudSendDataCheckUtil.getDis(interval1);
@@ -926,13 +929,23 @@ public class HudEvent implements HudEventImp {
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2) {
         if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
-            notifictionStr1="";
-            interval1=0;
+            if(TextUtils.isEmpty(notifictionStr2)||interval2==0){
+                notifictionMsgHide();
+                return;
+            }else {
+                notifictionStr1=notifictionStr2;
+                interval1=interval2;
+                notifictionStr2="";
+                interval2=0;
+            }
+
+        }else {
+            if(TextUtils.isEmpty(notifictionStr2)||interval2==0){
+                notifictionStr2="";
+                interval2=0;
+            }
         }
-        if(TextUtils.isEmpty(notifictionStr2)||interval2==0){
-            notifictionStr2="";
-            interval2=0;
-        }
+
         interval1=HudSendDataCheckUtil.getDis(interval1);
         interval2=HudSendDataCheckUtil.getDis(interval2);
         if(HudSetConfig.getInstance().getHudSetBean().isNotifictionStrAddNull()){
@@ -951,8 +964,8 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionMsgHide() {
-        HudNotifictionManager.getInstance().setMsg("",0,"",0);
-        HudWarningPointManager.getInstance().nowNeedReShow(false);
+        notifictionIsShow=false;
+        HudNotifictionManager.getInstance().hide();
 
     }
 

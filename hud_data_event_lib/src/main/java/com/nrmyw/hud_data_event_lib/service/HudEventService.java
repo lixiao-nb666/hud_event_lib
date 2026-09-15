@@ -23,6 +23,7 @@ import com.nrmyw.hud_data_event_lib.manager.image.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
+import com.nrmyw.hud_data_event_lib.manager.notifiction.HudNotifictionManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.time.HudTimeManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
@@ -90,6 +91,7 @@ public class HudEventService extends BaseService {
                         break;
                     case CONNECTED:
                         HudTimeManager.getInstance().setTimeStart(true);
+                        HudNotifictionManager.getInstance().setNowIsConnect();
                         break;
                     case DISCONNECTED:
                         HudTimeManager.getInstance().setTimeStart(false);

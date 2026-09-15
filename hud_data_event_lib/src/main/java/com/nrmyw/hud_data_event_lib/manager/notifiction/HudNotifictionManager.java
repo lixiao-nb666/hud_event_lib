@@ -2,7 +2,10 @@ package com.nrmyw.hud_data_event_lib.manager.notifiction;
 
 import android.text.TextUtils;
 
+import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
+import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 
@@ -22,18 +25,25 @@ public class HudNotifictionManager {
         return hudNotifictionManager;
     }
 
+    private boolean isFirstShow;
+    public void setNowIsConnect(){
+        isFirstShow=true;
+    }
+
 
     public void setMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
         //这里不要加判断为空，因为外面已经判断了
         //下面加个判断，看ICON是否在显示
         boolean needChange=false;
         if(TextUtils.isEmpty(notifictionStr1)){
+            interval1=0;
             if(getIconType1()!=HudNotificationIconType.HIDE){
                 iconType1=HudNotificationIconType.HIDE;
                 needChange=true;
             }
         }
         if(TextUtils.isEmpty(notifictionStr2)){
+            interval2=0;
             if(getIconType2()!=HudNotificationIconType.HIDE){
                 iconType2=HudNotificationIconType.HIDE;
                 needChange=true;
@@ -43,8 +53,17 @@ public class HudNotifictionManager {
         if(needChange){
             HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
         }
+        if(isFirstShow&&!TextUtils.isEmpty(notifictionStr1)){
+            isFirstShow=false;
+            BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
+        }
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
+    }
 
+    public void hide(){
+        BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(HudSendTwoTimeType.HIDE_EXIT_MSG.getCmdIndex(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
+        setMsg("",0,"",0);
+        HudWarningPointManager.getInstance().nowNeedReShow(false);
     }
 
 
