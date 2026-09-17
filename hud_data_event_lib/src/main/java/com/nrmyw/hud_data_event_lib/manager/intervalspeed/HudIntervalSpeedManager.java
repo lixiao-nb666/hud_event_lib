@@ -27,6 +27,9 @@ public class HudIntervalSpeedManager {
         this.listen=listen;
     }
 
+
+
+
     private int hideNumb;
     public void nowShow(){
         if(null==listen){
