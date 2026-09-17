@@ -15,11 +15,16 @@ public class HudSendDataCheckUtil {
     public static int getDis(int  dis){
         if(dis<0){
             return 0;
-        }else if(dis>9999000){
-            return 9999000;
-        }else {
-            return dis;
         }
+        if(dis>9999000){
+            return 9999000;
+        }
+        if(dis>1000000){
+            int km=(int)dis/1000;
+
+            return km*1000;
+        }
+        return dis;
     }
 
 
