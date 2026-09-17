@@ -131,11 +131,10 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin);
        if(!intervalSpeedIsShow){
            intervalSpeedIsShow=true;
+           HudWarningPointManager.getInstance().nowNeedReShow(true);
            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.IntervalSpeed.name(), HudSendManager.getInstance().getAllByte(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin));
 
        }
-
-
         if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
             HudIntervalSpeedManager.getInstance().nowShow();
         }
@@ -144,6 +143,7 @@ public class HudEvent implements HudEventImp {
     @Override
     public void hideIntervalSpeed() {
         intervalSpeedIsShow=false;
+        HudWarningPointManager.getInstance().nowNeedReShow(false);
         HudIntervalSpeedManager.getInstance().setHide();
         if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
             HudIntervalSpeedManager.getInstance().nowIsHide();
