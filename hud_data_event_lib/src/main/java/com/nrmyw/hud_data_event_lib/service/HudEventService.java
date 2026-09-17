@@ -149,7 +149,6 @@ public class HudEventService extends BaseService {
                 if(HudImageManeger.getInstance().isImageCanShow()){
                     byte[] showBytes = HudSendManager.getInstance().getAllByte(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
                     BleEventSubscriptionSubject.getInstance().sendBytesIndexCmd(endInfoBean.getIndex(), showBytes);
-                    HudWarningPointManager.getInstance().nowNeedReShow(true);
                 }
             }
         }

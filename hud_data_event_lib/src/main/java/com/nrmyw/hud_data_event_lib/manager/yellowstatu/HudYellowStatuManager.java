@@ -37,11 +37,10 @@ public class HudYellowStatuManager {
             }
             if(onlyShowOne){
                 if(wpBjType1!=HudYellowStatuBjType.HIDE){
-                    HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, HudYellowStatuBjType.HIDE, wpBjType1);
-                }else {
-                    HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, wpBjType1, wpBjType2);
+                    HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU,  wpBjType1, wpBjType1);
+                }else if(wpBjType2!=HudYellowStatuBjType.HIDE){
+                    HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, wpBjType2, wpBjType2);
                 }
-
             }else {
                 HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, wpBjType1, wpBjType2);
             }
@@ -70,9 +69,9 @@ public class HudYellowStatuManager {
         wpBjType2=hudYellowStatuBjType2;
         if(onlyShowOne){
             if(wpBjType1!=HudYellowStatuBjType.HIDE){
-                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, HudYellowStatuBjType.HIDE, wpBjType1);
-            }else {
-                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, wpBjType1, wpBjType2);
+                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU,  wpBjType1, wpBjType1);
+            }else if(wpBjType2!=HudYellowStatuBjType.HIDE){
+                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, wpBjType2, wpBjType2);
             }
 
         }else {

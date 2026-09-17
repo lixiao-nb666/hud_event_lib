@@ -741,7 +741,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void showImage() {
-        HudImageManeger.getInstance().setImageCanShow(true);
+
         HudSendManager.getInstance().sendCmd(HudCmdType.SHOW_IMAGE, HudImageShowType.SHOW);
 
     }
@@ -752,7 +752,7 @@ public class HudEvent implements HudEventImp {
         if(HudSetConfig.getInstance().isAutoChangerTrunTypeOldAndNew()){
             HudSendTurnTypeManager.getInstance().setImageIsHide();
         }
-        HudWarningPointManager.getInstance().nowNeedReShow(false);
+
     }
 
     @Override
@@ -906,7 +906,7 @@ public class HudEvent implements HudEventImp {
     }
 
 
-    private boolean notifictionIsShow=false;
+
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1) {
         if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
@@ -920,11 +920,7 @@ public class HudEvent implements HudEventImp {
         }
 
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,"",0);
-        if(!notifictionIsShow){
-            notifictionIsShow=true;
-            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,"",0));
-            HudWarningPointManager.getInstance().nowNeedReShow(true);
-        }
+
     }
 
     @Override
@@ -956,17 +952,13 @@ public class HudEvent implements HudEventImp {
             notifictionStr2= HudShowStringUtil.getNeedLString(notifictionStr2,HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMinL(),HudSetConfig.getInstance().getHudSetBean().getTurnTypeStrMaxL());
         }
         HudNotifictionManager.getInstance().setMsg(notifictionStr1,interval1,notifictionStr2,interval2);
-        if(!notifictionIsShow){
-            notifictionIsShow=true;
-            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
-            HudWarningPointManager.getInstance().nowNeedReShow(true);
-        }
+
 
     }
 
     @Override
     public void notifictionMsgHide() {
-        notifictionIsShow=false;
+
         HudNotifictionManager.getInstance().hide();
 
     }

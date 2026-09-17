@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.image.HudImageType;
 import com.nrmyw.hud_data_lib.type.turn.HudTurnType;
@@ -39,6 +40,7 @@ public class HudSendTurnTypeManager {
         }
         if(hudImageType== HudImageType.IMAGE){
             imageIsshow=true;
+            HudWarningPointManager.getInstance().nowNeedReShow(true);
         }
         Log.i("shifouzoulexinde","shifouzoulexinde1:"+imageIsshow);
     }
@@ -46,6 +48,7 @@ public class HudSendTurnTypeManager {
     public void setImageIsHide(){
         Log.i("shifouzoulexinde","shifouzoulexinde2:"+imageIsshow);
         imageIsshow=false;
+        HudWarningPointManager.getInstance().nowNeedReShow(false);
     }
 
     public void setTureType(HudTurnType type1, int distance1){

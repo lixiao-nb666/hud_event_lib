@@ -26,7 +26,7 @@ public class HudNotifictionManager {
     }
 
 
-
+    private boolean notifictionIsShow=false;
 
     public void setMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
         //这里不要加判断为空，因为外面已经判断了
@@ -50,12 +50,22 @@ public class HudNotifictionManager {
         if(needChange){
             HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
         }
-
+        checkIsFirstr(notifictionStr1,interval1,notifictionStr2,interval2);
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
+
+    }
+
+
+    private void checkIsFirstr(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
+        if(!notifictionIsShow){
+            notifictionIsShow=true;
+            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
+            HudWarningPointManager.getInstance().nowNeedReShow(true);
+        }
     }
 
     public void hide(){
-
+        notifictionIsShow=false;
         BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
         setMsg("",0,"",0);
         HudWarningPointManager.getInstance().nowNeedReShow(false);
