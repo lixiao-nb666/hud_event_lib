@@ -57,7 +57,7 @@ public class HudWarningPointReShowManager {
             HudWarningPointManager.getInstance().reShow();
 //
         }
-//        HudYellowStatuManager.getInstance().reShow(nowOlnyCanShowOne);
+        HudYellowStatuManager.getInstance().reShow(nowOlnyCanShowOne);
 //
 
 
