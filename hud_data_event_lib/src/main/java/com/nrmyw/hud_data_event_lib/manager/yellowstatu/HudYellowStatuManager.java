@@ -47,7 +47,7 @@ public class HudYellowStatuManager {
 
     }
 
-    private HudYellowStatuBjType wpBjType1,wpBjType2;
+    private HudYellowStatuBjType wpBjType1=HudYellowStatuBjType.HIDE,wpBjType2=HudYellowStatuBjType.HIDE;
 
     public void showTitleYellowStatu(HudYellowStatuBjType hudYellowStatuBjType) {
         if(null==hudYellowStatuBjType){
@@ -58,6 +58,8 @@ public class HudYellowStatuManager {
     }
 
 
+
+    private long lastSendTime;
     public void showWarningPointYellowStatu(HudYellowStatuBjType hudYellowStatuBjType1, HudYellowStatuBjType hudYellowStatuBjType2) {
         if(null==hudYellowStatuBjType1){
             hudYellowStatuBjType1=HudYellowStatuBjType.HIDE;
@@ -65,6 +67,18 @@ public class HudYellowStatuManager {
         if(null==hudYellowStatuBjType2){
             hudYellowStatuBjType2=HudYellowStatuBjType.HIDE;
         }
+        if(null==wpBjType1){
+            wpBjType1=HudYellowStatuBjType.HIDE;
+        }
+        if(null==wpBjType2){
+            wpBjType2=HudYellowStatuBjType.HIDE;
+        }
+        long nowTime=System.currentTimeMillis();
+        if(wpBjType1==hudYellowStatuBjType1&&wpBjType2==hudYellowStatuBjType2&&nowTime-lastSendTime<5*1000){
+            return;
+        }
+
+        lastSendTime=nowTime;
         wpBjType1=hudYellowStatuBjType1;
         wpBjType2=hudYellowStatuBjType2;
         if(onlyShowOne){
@@ -73,11 +87,11 @@ public class HudYellowStatuManager {
             }else if(wpBjType2!=HudYellowStatuBjType.HIDE){
                 HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU, wpBjType2, wpBjType2);
             }
-
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, hudYellowStatuBjType1, hudYellowStatuBjType2);
-
         }
 
     }
+
+
 }
