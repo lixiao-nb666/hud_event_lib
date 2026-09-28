@@ -689,7 +689,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void rewriteSN(String sn) {
-        Log.i("looksncode","looksncode:---"+sn);
+
         if(TextUtils.isEmpty(sn)){
             return;
         }
@@ -722,7 +722,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void sendImage(Bitmap bitmap, HudImageType hudImageType) {
-        Log.i("kankanfasongtupianshuju","kankanfasongtupianshuju------2:"+hudImageType);
+
         if(null==bitmap||bitmap.isRecycled()){
             return;
         }
@@ -824,7 +824,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setOtaMustHaveFilePermission(String otaFilePath) {
-        BleEventSubscriptionSubject.getInstance().sendCmd(HudBleByteUtil.startOTA());
+        HudSendManager.getInstance().sendCmdByte(HudBleByteUtil.startOTA());
         BleSendOtaInfoBean otaInfoBean=new BleSendOtaInfoBean();
         otaInfoBean.setFilePath(otaFilePath);
         BleEventSubscriptionSubject.getInstance().sendOta(otaInfoBean);
@@ -934,7 +934,10 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2) {
-        if(TextUtils.isEmpty(notifictionStr1)||interval1==0){
+
+
+
+        if(TextUtils.isEmpty(notifictionStr1)||interval1== 0){
             if(TextUtils.isEmpty(notifictionStr2)||interval2==0){
                 notifictionMsgHide();
                 return;
@@ -967,9 +970,7 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void notifictionMsgHide() {
-
         HudNotifictionManager.getInstance().hide();
-
     }
 
     @Override

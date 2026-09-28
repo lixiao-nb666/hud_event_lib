@@ -3,6 +3,7 @@ package com.nrmyw.hud_data_event_lib.manager.notifiction;
 import android.text.TextUtils;
 
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
+import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
 import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
@@ -11,7 +12,7 @@ import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
 
 public class HudNotifictionManager {
     private static HudNotifictionManager hudNotifictionManager;
-
+    private Listen listen;
     private HudNotifictionManager(){}
 
     public static HudNotifictionManager getInstance(){
@@ -25,34 +26,42 @@ public class HudNotifictionManager {
         return hudNotifictionManager;
     }
 
+    public void setListen(Listen listen){
+        this.listen=listen;
+    }
 
+
+    private int hideNumb;
     private boolean notifictionIsShow=false;
 
     public void setMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
         //这里不要加判断为空，因为外面已经判断了
         //下面加个判断，看ICON是否在显示
-        boolean needChange=false;
-        if(TextUtils.isEmpty(notifictionStr1)){
-            interval1=0;
-            if(getIconType1()!=HudNotificationIconType.HIDE){
-                iconType1=HudNotificationIconType.HIDE;
-                needChange=true;
-            }
-        }
-        if(TextUtils.isEmpty(notifictionStr2)){
-            interval2=0;
-            if(getIconType2()!=HudNotificationIconType.HIDE){
-                iconType2=HudNotificationIconType.HIDE;
-                needChange=true;
-            }
-        }
-        //为了最后一条返回指令不出错，只能先调隐藏
-        if(needChange){
-            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
-        }
+//        boolean needChange=false;
+//        if(TextUtils.isEmpty(notifictionStr1)){
+//            interval1=0;
+//            if(getIconType1()!=HudNotificationIconType.HIDE){
+//                iconType1=HudNotificationIconType.HIDE;
+//                needChange=true;
+//            }
+//        }
+//        if(TextUtils.isEmpty(notifictionStr2)){
+//            interval2=0;
+//            if(getIconType2()!=HudNotificationIconType.HIDE){
+//                iconType2=HudNotificationIconType.HIDE;
+//                needChange=true;
+//            }
+//        }
+//        //为了最后一条返回指令不出错，只能先调隐藏
+//        if(needChange){
+//            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
+//        }
         checkIsFirstr(notifictionStr1,interval1,notifictionStr2,interval2);
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
-
+        if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
+            hideNumb=3;
+            listen.nowIsShow();
+        }
     }
 
 
@@ -64,11 +73,34 @@ public class HudNotifictionManager {
         }
     }
 
+    public void setOnlyHide(){
+        if(notifictionIsShow){
+            hide();
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+        }
+
+
+
+    }
+
     public void hide(){
         notifictionIsShow=false;
         BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
-        setMsg("",0,"",0);
+        HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+        HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
         HudWarningPointManager.getInstance().nowNeedReShow(false);
+        if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
+            hideNumb=2;
+            listen.nowIsHide();
+        }
+    }
+
+    public int getHideNumb(){
+        if(hideNumb>0){
+            hideNumb--;
+        }
+        return hideNumb;
     }
 
 
@@ -99,6 +131,13 @@ public class HudNotifictionManager {
         this.iconType1=iconType1;
         this.iconType2=iconType2;
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
+    }
+
+
+    public interface Listen{
+        public void nowIsShow();
+
+        public void nowIsHide();
     }
 
 }

@@ -6,4 +6,5 @@ public enum HudEventServiceMsgType {
     SEND_TIME,
     HIDE_IMAGE,
     HIDE_IntervalSpeed,
+    HIDE_NOTIFICTION,
 }

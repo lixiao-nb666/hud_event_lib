@@ -78,6 +78,19 @@ public class HudEventService extends BaseService {
                 handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
         }
     };
+    private HudNotifictionManager.Listen notifictionListen =new HudNotifictionManager.Listen() {
+        @Override
+        public void nowIsShow() {
+            handler.removeMessages(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal());
+            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal(),HudSetConfig.getInstance().getHudSetBean().getHideIntervalSpeedTime());
+        }
+
+        @Override
+        public void nowIsHide() {
+            handler.removeMessages(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal());
+            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal(),1555);
+        }
+    }
 
 
 
@@ -198,6 +211,13 @@ public class HudEventService extends BaseService {
                             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
                         }
                         break;
+                    case HIDE_NOTIFICTION:
+                        if(HudNotifictionManager.getInstance().getHideNumb()>0){
+                            HudNotifictionManager.getInstance().setOnlyHide();
+                            handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal(),1555);
+                        }
+                        break;
+
                 }
                 BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.USER_DO,msgType);
             }catch (Exception e){}
@@ -218,6 +238,7 @@ public class HudEventService extends BaseService {
         HudTimeManager.getInstance().setListen(timeListen);
         HudImageManeger.getInstance().setListen(imageListen);
         HudIntervalSpeedManager.getInstance().setListen(intervalSpeedListen);
+        HudNotifictionManager.getInstance().setListen(notifictionListen);
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.nrmyw.ble_event_lib.bean.BleSendImageInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
 import com.nrmyw.ble_event_lib.type.BleSendBitmapQualityType;
+import com.nrmyw.ble_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
 import com.nrmyw.hud_data_event_lib.util.HudCmdSendDataUtil;
@@ -42,6 +43,7 @@ public class HudSendManager {
 //        }else {
 //
 //        }
+        Log.i("ble_code_check",  "ble_code_check  send cmd bytes String "+ BleByteUtil.parseByte2HexStr(bytes));
         BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
@@ -55,7 +57,9 @@ public class HudSendManager {
 //        }else {
 //
 //        }
-        BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
+        sendCmdByte(bytes);
+
+//        BleEventSubscriptionSubject.getInstance().sendCmd(bytes);
     }
 
     public void sendBitmap(Bitmap bitmap, HudImageType imageType){

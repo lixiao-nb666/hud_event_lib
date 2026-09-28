@@ -18,6 +18,8 @@ public class HudSetBean implements Serializable {
 
     private boolean autoHideIntervalSpeed=true;
 
+    private boolean autoHideNotifiction=true;
+
     private long hideIntervalSpeedTime;
 
 
@@ -119,6 +121,14 @@ public class HudSetBean implements Serializable {
         isOneShowBigWarningPoint = oneShowBigWarningPoint;
     }
 
+    public boolean isAutoHideNotifiction() {
+        return autoHideNotifiction;
+    }
+
+    public void setAutoHideNotifiction(boolean autoHideNotifiction) {
+        this.autoHideNotifiction = autoHideNotifiction;
+    }
+
     @Override
     public String toString() {
         return "HudSetBean{" +
@@ -130,6 +140,7 @@ public class HudSetBean implements Serializable {
                 ", progressMaxH=" + progressMaxH +
                 ", isNeedBigWarningPoint=" + isNeedBigWarningPoint +
                 ", autoHideIntervalSpeed=" + autoHideIntervalSpeed +
+                ", autoHideNotifiction=" + autoHideNotifiction +
                 ", hideIntervalSpeedTime=" + hideIntervalSpeedTime +
                 ", autoChangerTrunTypeOldAndNew=" + autoChangerTrunTypeOldAndNew +
                 ", isOneShowBigWarningPoint=" + isOneShowBigWarningPoint +
