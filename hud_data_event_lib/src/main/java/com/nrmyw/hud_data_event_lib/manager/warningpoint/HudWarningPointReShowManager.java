@@ -44,8 +44,9 @@ public class HudWarningPointReShowManager {
             //隐藏图片
             HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
             //隐藏通知栏
-            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
             HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON, HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
+            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
+
             //隐藏区间限速
             HudSendManager.getInstance().sendCmd(HudCmdType.HIDE_INTERVAL_SPEED);
             if(HudSetConfig.getInstance().isNeedBigWarningPoint()){
@@ -57,10 +58,14 @@ public class HudWarningPointReShowManager {
             HudWarningPointManager.getInstance().reShow();
 //
         }
-        HudYellowStatuManager.getInstance().reShow(nowOlnyCanShowOne);
+//        HudYellowStatuManager.getInstance().reShow(nowOlnyCanShowOne);
 //
 
 
 
+    }
+
+    public boolean getNowCanShowWpIsOne(){
+        return HudImageManeger.getInstance().isImageCanShow()|| HudIntervalSpeedManager.getInstance().isNowIsShow()|| HudNotifictionManager.getInstance().isNotifictionIsShow();
     }
 }

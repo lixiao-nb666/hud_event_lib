@@ -202,7 +202,14 @@ public class HudEvent implements HudEventImp {
         if(null==statuType1||null==statuType2||null==statuType3){
             return;
         }
-        HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType2,statuType3);
+        if(HudWarningPointReShowManager.getInstance().getNowCanShowWpIsOne()){
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType1,statuType3);
+        }else {
+            HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_PASSING,statuType1,statuType2,statuType3);
+        }
+
+
+
     }
 
     @Override

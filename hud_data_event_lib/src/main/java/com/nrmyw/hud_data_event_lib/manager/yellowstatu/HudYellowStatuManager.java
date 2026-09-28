@@ -2,6 +2,7 @@ package com.nrmyw.hud_data_event_lib.manager.yellowstatu;
 
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.notifiction.HudNotifictionManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointReShowManager;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
 
@@ -22,26 +23,26 @@ public class HudYellowStatuManager {
         return hudYellowStatuManager;
     }
 
-    private boolean onlyShowOne;
-    public void reShow(boolean onlyShowOne){
-            this.onlyShowOne=onlyShowOne;
-            if(null==wpBjType1){
-                wpBjType1=HudYellowStatuBjType.HIDE;
-            }
-            if(null==wpBjType2){
-                wpBjType2=HudYellowStatuBjType.HIDE;
-            }
-
-            if(wpBjType1==HudYellowStatuBjType.HIDE&&wpBjType2==HudYellowStatuBjType.HIDE){
-                return;
-            }
-            if(onlyShowOne){
-                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU,  wpBjType1, wpBjType1);
-            }else {
-                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, wpBjType1, wpBjType2);
-            }
-
-    }
+//    private boolean onlyShowOne;
+//    public void reShow(boolean onlyShowOne){
+//            this.onlyShowOne=onlyShowOne;
+//            if(null==wpBjType1){
+//                wpBjType1=HudYellowStatuBjType.HIDE;
+//            }
+//            if(null==wpBjType2){
+//                wpBjType2=HudYellowStatuBjType.HIDE;
+//            }
+//
+//            if(wpBjType1==HudYellowStatuBjType.HIDE&&wpBjType2==HudYellowStatuBjType.HIDE){
+//                return;
+//            }
+//            if(onlyShowOne){
+//                HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU,  wpBjType1, wpBjType1);
+//            }else {
+//                HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, wpBjType1, wpBjType2);
+//            }
+//
+//    }
 
     private HudYellowStatuBjType wpBjType1=HudYellowStatuBjType.HIDE,wpBjType2=HudYellowStatuBjType.HIDE;
 
@@ -78,7 +79,7 @@ public class HudYellowStatuManager {
         wpBjType1=hudYellowStatuBjType1;
         wpBjType2=hudYellowStatuBjType2;
 
-        if(onlyShowOne){
+        if(HudWarningPointReShowManager.getInstance().getNowCanShowWpIsOne()){
             HudSendManager.getInstance().sendCmd(HudCmdType.YELLOW_STATU,  wpBjType1, wpBjType1);
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, wpBjType1, wpBjType2);
