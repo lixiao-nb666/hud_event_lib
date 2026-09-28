@@ -90,7 +90,7 @@ public class HudEventService extends BaseService {
             handler.removeMessages(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal());
             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal(),1555);
         }
-    }
+    };
 
 
 
