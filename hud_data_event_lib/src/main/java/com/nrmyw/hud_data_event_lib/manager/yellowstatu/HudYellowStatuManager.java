@@ -71,7 +71,7 @@ public class HudYellowStatuManager {
             wpBjType2=HudYellowStatuBjType.HIDE;
         }
         long nowTime=System.currentTimeMillis();
-        if(wpBjType1==hudYellowStatuBjType1&&wpBjType2==hudYellowStatuBjType2&&nowTime-lastSendTime<5*1000){
+        if(wpBjType1==hudYellowStatuBjType1&&wpBjType2==hudYellowStatuBjType2&&nowTime-lastSendTime<3*1000){
             return;
         }
 
