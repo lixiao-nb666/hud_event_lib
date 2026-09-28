@@ -4,9 +4,9 @@ public enum HudSendTwoTimeType {
     ICON_FLICKER,
     HIDE_WP,
 
-    FRIST_SHOW_EXIT_MSG,
+//    FRIST_SHOW_EXIT_MSG,
     HIDE_EXIT_MSG,
-    IntervalSpeed,
+//    IntervalSpeed,
     ;
 
     public int getCmdIndex(){

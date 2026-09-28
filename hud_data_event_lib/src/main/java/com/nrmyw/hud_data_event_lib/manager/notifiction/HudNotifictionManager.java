@@ -56,8 +56,9 @@ public class HudNotifictionManager {
 //        if(needChange){
 //            HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION_ICON,this.iconType1,this.iconType2);
 //        }
-        checkIsFirstr(notifictionStr1,interval1,notifictionStr2,interval2);
+
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2);
+        checkIsFirstr(notifictionStr1,interval1,notifictionStr2,interval2);
         if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
             hideNumb=3;
             listen.nowIsShow();
@@ -68,7 +69,7 @@ public class HudNotifictionManager {
     private void checkIsFirstr(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
         if(!notifictionIsShow){
             notifictionIsShow=true;
-            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
+//            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
             HudWarningPointReShowManager.getInstance().nowNeedReshow();
         }
     }
@@ -85,7 +86,7 @@ public class HudNotifictionManager {
         notifictionIsShow=false;
         BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
-        HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
+        setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
         HudWarningPointReShowManager.getInstance().nowNeedReshow();
         if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
             hideNumb=2;

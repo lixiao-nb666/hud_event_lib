@@ -218,14 +218,14 @@ public class HudSetBean implements Serializable {
     }
 
     public long getHideIntervalSpeedTime() {
-        if(hideIntervalSpeedTime<10*1000){
-            hideIntervalSpeedTime=10*1000;
+        if(hideIntervalSpeedTime<30*1000){
+            hideIntervalSpeedTime=30*1000;
         }
         return hideIntervalSpeedTime;
     }
 
     public void setHideIntervalSpeedTime(long hideIntervalSpeedTime) {
-        if(hideIntervalSpeedTime<10*1000){
+        if(hideIntervalSpeedTime<5*1000){
             return;
         }
         this.hideIntervalSpeedTime = hideIntervalSpeedTime;
