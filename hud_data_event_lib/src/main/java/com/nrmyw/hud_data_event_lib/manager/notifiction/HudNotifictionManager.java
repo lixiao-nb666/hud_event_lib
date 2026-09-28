@@ -6,6 +6,7 @@ import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointReShowManager;
 import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
 import com.nrmyw.hud_data_lib.type.HudCmdType;
 import com.nrmyw.hud_data_lib.type.notification.HudNotificationIconType;
@@ -30,8 +31,7 @@ public class HudNotifictionManager {
         this.listen=listen;
     }
 
-
-    private int hideNumb;
+        private int hideNumb;
     private boolean notifictionIsShow=false;
 
     public void setMsg(String notifictionStr1, int interval1, String notifictionStr2, int interval2){
@@ -69,7 +69,7 @@ public class HudNotifictionManager {
         if(!notifictionIsShow){
             notifictionIsShow=true;
             BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
-            HudWarningPointManager.getInstance().nowNeedReShow(true);
+            HudWarningPointReShowManager.getInstance().nowNeedReshow();
         }
     }
 
@@ -79,9 +79,6 @@ public class HudNotifictionManager {
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
         }
-
-
-
     }
 
     public void hide(){
@@ -89,11 +86,16 @@ public class HudNotifictionManager {
         BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
         HudNotifictionManager.getInstance().setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
-        HudWarningPointManager.getInstance().nowNeedReShow(false);
+        HudWarningPointReShowManager.getInstance().nowNeedReshow();
         if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
             hideNumb=2;
             listen.nowIsHide();
         }
+    }
+
+
+    public boolean isNotifictionIsShow() {
+        return notifictionIsShow;
     }
 
     public int getHideNumb(){

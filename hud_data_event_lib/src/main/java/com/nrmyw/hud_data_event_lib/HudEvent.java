@@ -15,6 +15,7 @@ import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointManager;
+import com.nrmyw.hud_data_event_lib.manager.warningpoint.HudWarningPointReShowManager;
 import com.nrmyw.hud_data_event_lib.manager.yellowstatu.HudYellowStatuManager;
 import com.nrmyw.hud_data_event_lib.type.HudSendTwoTimeType;
 import com.nrmyw.hud_data_event_lib.util.HudBleByteUtil;
@@ -131,9 +132,8 @@ public class HudEvent implements HudEventImp {
         HudSendManager.getInstance().sendCmd(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin);
        if(!intervalSpeedIsShow){
            intervalSpeedIsShow=true;
-           HudWarningPointManager.getInstance().nowNeedReShow(true);
            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.IntervalSpeed.name(), HudSendManager.getInstance().getAllByte(HudCmdType.INTERVAL_SPEED,intervalSpeed,interval,averageSpeed,timeHours,timeMin));
-
+           HudWarningPointReShowManager.getInstance().nowNeedReshow();
        }
         if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
             HudIntervalSpeedManager.getInstance().nowShow();
@@ -143,11 +143,11 @@ public class HudEvent implements HudEventImp {
     @Override
     public void hideIntervalSpeed() {
         intervalSpeedIsShow=false;
-        HudWarningPointManager.getInstance().nowNeedReShow(false);
         HudIntervalSpeedManager.getInstance().setHide();
         if(HudSetConfig.getInstance().isAutoHideIntervalSpeed()){
             HudIntervalSpeedManager.getInstance().nowIsHide();
         }
+        HudWarningPointReShowManager.getInstance().nowNeedReshow();
     }
 
 

@@ -14,7 +14,7 @@ public class HudSetBean implements Serializable {
     private int progressMaxW=22;
     private int progressMaxH=260;
 
-    private boolean isNeedBigWarningPoint=true;
+    private boolean isNeedBigWarningPoint=false;
 
     private boolean autoHideIntervalSpeed=true;
 

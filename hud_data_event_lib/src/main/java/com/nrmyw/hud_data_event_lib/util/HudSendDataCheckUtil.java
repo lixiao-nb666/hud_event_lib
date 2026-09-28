@@ -19,7 +19,7 @@ public class HudSendDataCheckUtil {
         if(dis>9999000){
             return 9999000;
         }
-        if(dis>1000000){
+        if(dis>100000){
             int km=(int)dis/1000;
 
             return km*1000;

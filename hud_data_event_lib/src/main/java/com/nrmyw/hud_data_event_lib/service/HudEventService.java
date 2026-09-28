@@ -56,9 +56,7 @@ public class HudEventService extends BaseService {
             isFirstSendTime=true;
             handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
             handler.sendEmptyMessage(HudEventServiceMsgType.SEND_TIME.ordinal());
-
         }
-
         @Override
         public void stopTime() {
             handler.removeMessages(HudEventServiceMsgType.SEND_TIME.ordinal());
@@ -83,6 +81,7 @@ public class HudEventService extends BaseService {
         public void nowIsShow() {
             handler.removeMessages(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal());
             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_NOTIFICTION.ordinal(),HudSetConfig.getInstance().getHudSetBean().getHideIntervalSpeedTime());
+
         }
 
         @Override
@@ -193,7 +192,6 @@ public class HudEventService extends BaseService {
                             }
                         }
                         handler.sendEmptyMessageDelayed(HudEventServiceMsgType.SEND_TIME.ordinal(),needS*1000);
-
                         break;
                     case HIDE_IMAGE:
                         if(HudImageManeger.getInstance().isImageCanShow()){

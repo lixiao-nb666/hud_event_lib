@@ -44,6 +44,11 @@ public class HudIntervalSpeedManager {
 
     }
 
+
+    public boolean isNowIsShow() {
+        return nowIsShow;
+    }
+
     public void nowIsHide(){
         if(null==listen){
             return;
