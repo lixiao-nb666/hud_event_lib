@@ -41,7 +41,7 @@ public class HudSendTurnTypeManager {
         }
         if(hudImageType== HudImageType.IMAGE){
             imageIsshow=true;
-            HudWarningPointReShowManager.getInstance().nowNeedReshow();
+            HudWarningPointReShowManager.getInstance().nowNeedReshow(HudWarningPointReShowManager.ReShowType.SHOW_IMAGE);
         }
         Log.i("shifouzoulexinde","shifouzoulexinde1:"+imageIsshow);
     }
@@ -49,7 +49,7 @@ public class HudSendTurnTypeManager {
     public void setImageIsHide(){
         Log.i("shifouzoulexinde","shifouzoulexinde2:"+imageIsshow);
         imageIsshow=false;
-        HudWarningPointReShowManager.getInstance().nowNeedReshow();
+        HudWarningPointReShowManager.getInstance().nowNeedReshow(HudWarningPointReShowManager.ReShowType.HIDE_IMAGE);
     }
 
     public void setTureType(HudTurnType type1, int distance1){

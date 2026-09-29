@@ -70,7 +70,7 @@ public class HudNotifictionManager {
         if(!notifictionIsShow){
             notifictionIsShow=true;
 //            BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.FRIST_SHOW_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,notifictionStr1,interval1,notifictionStr2,interval2));
-            HudWarningPointReShowManager.getInstance().nowNeedReshow();
+            HudWarningPointReShowManager.getInstance().nowNeedReshow(HudWarningPointReShowManager.ReShowType.SHOW_EXIT);
         }
     }
 
@@ -87,7 +87,7 @@ public class HudNotifictionManager {
         BleEventSubscriptionSubject.getInstance().sendCmdByKStr(HudSendTwoTimeType.HIDE_EXIT_MSG.name(), HudSendManager.getInstance().getAllByte(HudCmdType.NOTIFICATION,"",0,"",0));
         HudSendManager.getInstance().sendCmd(HudCmdType.NOTIFICATION,"",0,"",0);
         setIcon(HudNotificationIconType.HIDE,HudNotificationIconType.HIDE);
-        HudWarningPointReShowManager.getInstance().nowNeedReshow();
+        HudWarningPointReShowManager.getInstance().nowNeedReshow(HudWarningPointReShowManager.ReShowType.HIDE_EXIT);
         if(HudSetConfig.getInstance().getHudSetBean().isAutoHideNotifiction()&&null!=listen){
             hideNumb=2;
             listen.nowIsHide();
