@@ -3,6 +3,9 @@ package com.nrmyw.hud_data_event_lib.util;
 
 import android.util.Log;
 
+import com.nrmyw.ble_event_lib.config.NewBeeBleConfig;
+import com.nrmyw.ble_event_lib.statu.BleStatu;
+import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 import com.nrmyw.ble_event_lib.util.BleByteUtil;
 import com.nrmyw.hud_data_lib.event.retrun.HudRetrunEventSubscriptionSubject;
 import com.nrmyw.hud_data_lib.type.HudCmdRetrunType;
@@ -75,7 +78,7 @@ public class HudCmdRetrunDataUtil {
                     HudRetrunEventSubscriptionSubject.getInstence().getDeviceSoundStatu(deviceSoundType);
                     break;
                 case BUTTON_RESTART:
-                    HudRetrunEventSubscriptionSubject.getInstence().nowIsButtonRestart();
+                    BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.CONNECTED, "BUTTON_RESTART");
                     break;
                 case NONE:
                 default:
