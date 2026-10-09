@@ -23,6 +23,7 @@ import com.nrmyw.hud_data_event_lib.manager.image.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.image.HudSendImageManager;
 import com.nrmyw.hud_data_event_lib.manager.HudSendManager;
 import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
+import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedSendManager;
 import com.nrmyw.hud_data_event_lib.manager.notifiction.HudNotifictionManager;
 import com.nrmyw.hud_data_event_lib.manager.turn.HudSendTurnTypeManager;
 import com.nrmyw.hud_data_event_lib.manager.time.HudTimeManager;
@@ -198,14 +199,15 @@ public class HudEventService extends BaseService {
                             return;
                         }
                         Log.i("kaishiyincangtupian","kaishiyincangtupian");
-                        HudSendManager.getInstance().sendCmd(HudCmdType. SHOW_IMAGE, HudImageShowType.HIDE);
+
                         if(HudImageManeger.getInstance().getHideNumb()>0){
+                            HudSendImageManager.getInstance().hideImage();
                             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IMAGE.ordinal(),1000);
                         }
                         break;
                     case HIDE_IntervalSpeed:
                         if(HudIntervalSpeedManager.getInstance().getHideNumb()>0){
-                            HudIntervalSpeedManager.getInstance().setHide();
+                            HudIntervalSpeedSendManager.getInstance().hideIntervalSpeed();
                             handler.sendEmptyMessageDelayed(HudEventServiceMsgType.HIDE_IntervalSpeed.ordinal(),1555);
                         }
                         break;
