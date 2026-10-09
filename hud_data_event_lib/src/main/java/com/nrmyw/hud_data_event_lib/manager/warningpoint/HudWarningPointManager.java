@@ -110,7 +110,6 @@ public class HudWarningPointManager {
 
     public void reShow(){
         if(lastType1IsNull()){
-
             return;
         }
         if(HudSetConfig.getInstance().isNeedBigWarningPoint()&&HudSetConfig.getInstance().isOneShowBigWarningPoint()&&lastType2IsNull()){

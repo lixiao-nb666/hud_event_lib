@@ -84,8 +84,6 @@ public class HudYellowStatuManager {
         }else {
             HudSendManager.getInstance().sendCmd(HudCmdType.WARNING_POINT_YELLOW_STATU, wpBjType1, wpBjType2);
         }
-
-
     }
 
 
