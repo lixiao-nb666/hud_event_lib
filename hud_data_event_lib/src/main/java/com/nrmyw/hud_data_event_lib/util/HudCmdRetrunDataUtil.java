@@ -74,8 +74,9 @@ public class HudCmdRetrunDataUtil {
                     int deviceSoundType =data[0];
                     HudRetrunEventSubscriptionSubject.getInstence().getDeviceSoundStatu(deviceSoundType);
                     break;
-
-
+                case BUTTON_RESTART:
+                    HudRetrunEventSubscriptionSubject.getInstence().nowIsButtonRestart();
+                    break;
                 case NONE:
                 default:
                     HudRetrunEventSubscriptionSubject.getInstence().none(receiveData);
