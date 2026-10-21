@@ -7,8 +7,10 @@ import com.nrmyw.ble_event_lib.config.NewBeeBleConfig;
 import com.nrmyw.ble_event_lib.statu.BleStatu;
 import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 import com.nrmyw.ble_event_lib.util.BleByteUtil;
+import com.nrmyw.hud_data_lib.event.ar.ArRetrunEventSubscriptionSubject;
 import com.nrmyw.hud_data_lib.event.retrun.HudRetrunEventSubscriptionSubject;
 import com.nrmyw.hud_data_lib.type.HudCmdRetrunType;
+import com.nrmyw.hud_data_lib.type.ar_mold.ArMoldType;
 
 import java.nio.charset.StandardCharsets;
 
@@ -79,6 +81,15 @@ public class HudCmdRetrunDataUtil {
                     break;
                 case BUTTON_RESTART:
                     BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.CONNECTED, "BUTTON_RESTART");
+                    break;
+                case AR_GLASSES_DEF_MOLD:
+                    ArRetrunEventSubscriptionSubject.getInstence().getNowMold(ArMoldType.DEF_MOLD);
+                    break;
+                case AR_GLASSES_RECORD_MOLD:
+                    ArRetrunEventSubscriptionSubject.getInstence().getNowMold(ArMoldType.RECORD_MOLD);
+                    break;
+                case AR_GLASSES_HOTSPOT_MOLD:
+                    ArRetrunEventSubscriptionSubject.getInstence().getNowMold(ArMoldType.HOTSPOT_MOLD);
                     break;
                 case NONE:
                 default:
