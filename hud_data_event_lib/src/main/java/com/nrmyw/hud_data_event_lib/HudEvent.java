@@ -7,6 +7,8 @@ import android.util.Log;
 import com.nrmyw.ble_event_lib.bean.BleSendOtaInfoBean;
 import com.nrmyw.ble_event_lib.send.BleEventSubscriptionSubject;
 
+import com.nrmyw.ble_event_lib.statu.BleStatu;
+import com.nrmyw.ble_event_lib.statu.BleStatuEventSubscriptionSubject;
 import com.nrmyw.hud_data_event_lib.config.HudSetConfig;
 import com.nrmyw.hud_data_event_lib.manager.image.HudImageManeger;
 import com.nrmyw.hud_data_event_lib.manager.intervalspeed.HudIntervalSpeedManager;
@@ -46,6 +48,8 @@ import com.nrmyw.hud_data_lib.type.type.HudStatuType;
 import com.nrmyw.hud_data_lib.type.ui.HudUiType;
 import com.nrmyw.hud_data_lib.type.warningproint.HudWarningPointType;
 import com.nrmyw.hud_data_lib.type.yellow_statu.HudYellowStatuBjType;
+
+import java.io.File;
 
 public class HudEvent implements HudEventImp {
     private static HudEvent hudEvent;
@@ -814,10 +818,19 @@ public class HudEvent implements HudEventImp {
 
     @Override
     public void setOtaMustHaveFilePermission(String otaFilePath) {
-        HudSendManager.getInstance().sendCmdByte(HudBleByteUtil.startOTA());
-        BleSendOtaInfoBean otaInfoBean=new BleSendOtaInfoBean();
-        otaInfoBean.setFilePath(otaFilePath);
-        BleEventSubscriptionSubject.getInstance().sendOta(otaInfoBean);
+        try {
+            File file=new File(otaFilePath);
+            if(!file.exists()){
+                BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.SEND_OTA_ERR,"file is null !");
+            }
+            HudSendManager.getInstance().sendCmdByte(HudBleByteUtil.startOTA());
+            BleSendOtaInfoBean otaInfoBean=new BleSendOtaInfoBean();
+            otaInfoBean.setFileName(file.getName());
+            otaInfoBean.setFilePath(otaFilePath);
+            BleEventSubscriptionSubject.getInstance().sendOta(otaInfoBean);
+        } catch (Exception e) {
+            BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.SEND_OTA_ERR,"setOtaMustHaveFilePermission  err  :"+e.toString());
+        }
     }
 
     @Override
