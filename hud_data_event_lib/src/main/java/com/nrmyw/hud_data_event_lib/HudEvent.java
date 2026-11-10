@@ -824,7 +824,7 @@ public class HudEvent implements HudEventImp {
                 BleStatuEventSubscriptionSubject.getInstance().sendBleStatu(BleStatu.SEND_OTA_ERR,"file is null !");
                 return;
             }
-            HudSendManager.getInstance().sendCmdByte(HudBleByteUtil.startOTA());
+//            HudSendManager.getInstance().sendCmdByte(HudBleByteUtil.startOTA());
             BleSendOtaInfoBean otaInfoBean=new BleSendOtaInfoBean();
             otaInfoBean.setFileName(file.getName());
             otaInfoBean.setFilePath(otaFilePath);
