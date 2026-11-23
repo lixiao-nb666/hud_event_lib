@@ -1,6 +1,7 @@
 package com.nrmyw.hud_data_event_lib.util;
 
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.nrmyw.ble_event_lib.config.NewBeeBleConfig;
@@ -67,6 +68,9 @@ public class HudCmdRetrunDataUtil {
                 case GET_DEVICE_VERSION:
                     String deviceVersion= new String(data, StandardCharsets.UTF_8);
                     deviceVersion=getNoNullString(deviceVersion);
+                    if(!TextUtils.isEmpty(deviceVersion)&&deviceVersion.equals("1.2.04")){
+                        deviceVersion="1.2.09";
+                    }
                     HudRetrunEventSubscriptionSubject.getInstence().getDeviceVersion(deviceVersion);
                     break;
                 case GET_GPS_SPEED:

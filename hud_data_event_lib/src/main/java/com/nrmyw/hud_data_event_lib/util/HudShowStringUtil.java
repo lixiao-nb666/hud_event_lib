@@ -14,16 +14,6 @@ public class HudShowStringUtil {
         Log.i("kankangaibianchangewei","kankangaibianchangewei0");
         if(checkStr.length()>minL&&checkStr.length()<maxL){
             return checkStr+"                ";
-//            if(checkStr.length()<12){
-//                Log.i("kankangaibianchangewei","kankangaibianchangewei1");
-//
-//            }else {
-//                Log.i("kankangaibianchangewei","kankangaibianchangewei2");
-//                return checkStr+"         ";
-//            }
-//            int  needAddNumb=HudSetConfig.getInstance().getHudSetBean().getShowMaxNumb()-checkStr.length();
-//            return addEmp(checkStr,needAddNumb);
-
         }
         return checkStr;
     }
@@ -45,7 +35,6 @@ public class HudShowStringUtil {
         }catch (Exception e){
             return ss+"   ";
         }
-
     }
 
 }
